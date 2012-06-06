@@ -17,7 +17,7 @@ class Post_model extends MY_Model
 	 */
 	public function my_posts($user)
 	{
-		$this->db->where('user_id',$user);
+		$this->db->where('posts.user_id',$user);
 		return $this;
 	}
 
@@ -37,7 +37,7 @@ class Post_model extends MY_Model
 		->select('posts.*,image,product_desc,product_name,photo,caption,sum(order_details.quantity) as total_weight')
 		->join('products','products.id = posts.product_id')
 		->join('order_details','posts.id = order_details.post_id')
-		->join('photos','photos.post_id = posts.id','left');
+		->join('photos','photos.post_id = posts.id');
 		return $this;
 	}
 	/**

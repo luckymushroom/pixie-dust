@@ -499,7 +499,7 @@ class MY_Model extends CI_Model
 
     public function deleted($status = FALSE)
     {
-        $this->db->where('deleted', $status);
+        $this->db->where($this->_table.'.deleted', $status);
         return $this;
     }
 
