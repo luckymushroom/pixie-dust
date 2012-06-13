@@ -59,8 +59,10 @@ class MY_Controller extends CI_Controller
 	  $this->load->helper(array('mfarm','date','inflector'));
 	  $this->current_user = $this->session->userdata('user_id');
 	  $this->data['code'] = '';
+	  $this->admin_group = $this->config->item('admin_group','ion_auth');
 	  $this->farmer_group = $this->config->item('default_group','ion_auth');
 	  $this->buyer_group = $this->config->item('buyers_group','ion_auth');
+	  $this->admin_template = $this->config->item('admin_template','ion_auth');
 	  $this->farmer_template = $this->config->item('farmer_template','ion_auth');
 	  $this->buyer_template = $this->config->item('buyer_template','ion_auth');
 
@@ -133,11 +135,15 @@ class MY_Controller extends CI_Controller
 				}
 				else
 				{
-					if ($this->ion_auth->in_group($this->farmer_group))
+					if ($this->ion_auth->in_group($this->admin_group))
+					{
+						$layout = 'layouts/'.$this->admin_template;
+					}
+					elseif ($this->ion_auth->in_group($this->farmer_group))
 					{
 						$layout = 'layouts/'.$this->farmer_template;
 					}
-					else if($this->ion_auth->in_group($this->buyer_group))
+					elseif($this->ion_auth->in_group($this->buyer_group))
 					{
 						$layout = 'layouts/'.$this->buyer_template;
 					}
