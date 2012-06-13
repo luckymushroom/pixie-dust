@@ -137,6 +137,8 @@ $autoload['language'] = array('mfarm_sms');
 
 $autoload['model'] = array('price_model');
 
+$autoload['sparks'] = array('php-activerecord/0.0.2');
+
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
