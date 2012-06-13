@@ -22,7 +22,7 @@ class Sms_model extends CI_Model
 	 * @param  int $location location id
 	 * @return array
 	 */
-	public function get_crop_details($crop,$location)
+	public function get_crop_details($crop,$location = NULL)
 	{
 		$this->db->select('products.id,product_name,crop_weight,crop_unit,crop_price,crop_date,
 		location,location_name,locations.id');
@@ -40,10 +40,10 @@ class Sms_model extends CI_Model
 		{ 
 			$this->db->like('location_alias', $location); 
 		}
-		$this->db->group_by('product_id,crop_date');
+		$this->db->group_by('products.id,crop_date');
+		$this->db->order_by('products.id');
 		$this->db->order_by('crop_date','DESC');
 		$this->db->order_by('crop_price','DESC');
-		$this->db->order_by('products.id','DESC');
 		$response = $this->db->get('prices',4)->result();
 		if ($response) 
 		{
@@ -227,6 +227,13 @@ class Sms_model extends CI_Model
 			$location_id = $this->db->insert_id();
 			return $location_id;
 		}
+	}
+
+	public function get_product_id($product_name)
+	{
+		$this->db->or_like('product_name', $product_name);
+		$this->db->or_like('product_alias', $product_name);
+		return $this->db->get('products')->row();
 	}
 }
 
