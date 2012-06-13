@@ -25,7 +25,9 @@
 <link href="<?php echo base_url();?>media/site/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/custom-style.css" rel="stylesheet" type="text/css" />
-<link href="<?=base_url();?>media/site/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<?php if (!$this->uri->segment(1) == 'contact'): ?>
+    <link href="<?=base_url();?>media/site/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<?php endif ?>
 
 
 <!-- ////////////////////////////////// -->
