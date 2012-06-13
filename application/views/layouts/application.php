@@ -126,7 +126,7 @@
                     <div id="righttop-header">
                         <div id="top-social">             
                             <ul>
-                                <li><a class="" href="<?php echo base_url();?>members" title="login here"><img src="<?php echo base_url();?>media/site/images/top-login.png" alt="Login into the app" /></a></li>
+                                <li><a class="" href="<?php echo base_url();?>auth" title="login here"><img src="<?php echo base_url();?>media/site/images/top-login.png" alt="Login into the app" /></a></li>
                                 <li><a href="https://www.facebook.com/pages/M-Farm/168567086502534" target="_blank" title="facebook"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social1.png" alt="mfarm-facebook" /></a></li>
                                 <li><a href="https://plus.google.com/105305873259684952530?prsrc=3" target="_blank" title="g+"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social2.png" alt="mfarm-google+" /></a></li>
                                 <li><a href="https://twitter.com/#!/mfarm_ke" target="_blank" title="twitter"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social3.png" alt="mfarm-twitter" /></a></li>
