@@ -24,3 +24,16 @@ class Alerts {
 	  	log_message('debug', 'Alerts Class Initialized');
 	}
 
+	public function event($type, $settings)
+	{
+		# code...
+		if($settings)
+		{
+			self::send_.$type($message);
+		}
+		else
+		{
+			self::
+		}
+	}
+

@@ -1,6 +1,5 @@
 <div class="span5 offset3">
 <!-- Login Form here -->
-<h2>Login In</h2>
 <legend>Have an Account? Sign In Here</legend>
 <form action="<?=base_url();?>auth/login" autocomplete="off" method="post" class="well" id="login">
 	<input type="text" name="email" value="<?=set_value('email');?>" placeholder="Email" rel="popover" data-content="Enter your email address." data-original-title="Email" required="required" class="input-xlarge">
