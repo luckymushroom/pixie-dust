@@ -12,11 +12,12 @@
  */
 class Orders extends MY_Controller
 {
-	protected $models = array('order','order_detail','post','user');
+	protected $models = array('order','order_detail','post','user','outgoing_text');
 	public function __construct()
 	{
 		parent::__construct();
 		//Load Dependencies
+		$this->mobile_number = preg_replace('/-/', '', $this->user->get($this->current_user)->phone);
 	}
 
 	// List all your items
@@ -67,6 +68,8 @@ class Orders extends MY_Controller
 			$_POST['units'] = $post->units;
 			$_POST['order_id'] = $order_id;
 			$add_order = $this->order_detail->insert($this->input->post());
+			// Send notification to user
+			self::send_notification($settings,$this->input->post());
 			$this->session->set_flashdata('message','Item has been added to your Order.');
 			redirect('orders/order_details/'.$order_id, 'refresh');
 		}
@@ -141,6 +144,89 @@ class Orders extends MY_Controller
 	public function post_details($post_id)
 	{
 		return $this->post->get_by('posts.id',$post_id);
+	}
+	/**
+	 * Split incoming message if more than 160 characters and send.
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param string $text
+	 * @return 
+	 */
+	public function split_message($text='')
+	{
+		$this->view = false;
+		// Breakdown text into arrays and loop
+		$texts = str_split($text,160);
+		for ($i=0; $i <= (sizeof($texts)-1); $i++) 
+		{ 
+			self::send_sms_notification($texts[$i]);
+		}	
+	}
+
+	/**
+	 * Encode text for sending over Shujaa Server
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param  string $text message to be sent
+	 * @return string status Message from shujaa
+	 * @link http://sms.shujaa.mobi
+	 */
+	public function send_sms_notification($text)
+	{
+		$network = 'Safaricom Bulk';
+		$network = ($network == 'Safaricom Bulk' || $network == 'Safaricom Short Code') ? 'safaricom' : 'airtel' ;
+
+		// Start session (also wipes existing/previous sessions)
+		$this->curl->create(TARGET_URL);
+
+		// Options
+		$this->curl->options(array(CURLOPT_BUFFERSIZE => 10, CURLOPT_POST => true));
+
+		// Login to HTTP user authentication
+		$this->curl->http_login(SMS_USER, SMS_PASS);
+
+		// Post - If you do not use post, it will just run a GET request
+		$post = array(
+			'username'    => SMS_USER,
+			'password'    => SMS_PASS,
+			'account'     =>'live',
+			'source'      => 3555,
+			'destination' => $this->mobile_number,
+			'message'     => $text,
+			'network'     => $network
+			);
+		// Save Outgoing text
+		self::save_outgoing_sms($post);
+
+		$this->curl->post($post);
+		// Execute - returns response
+		echo $this->curl->execute(); exit;
+	}
+
+	/**
+	 * Save outgoing messages
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param array outgoing_text outgoing message
+	 */
+	private function save_outgoing_sms($post)
+	{
+		$save = array(
+			'destination' => element('destination',$post),
+			'message'     => element('message',$post),
+			'network'     => element('network', $post)
+			);
+		$this->outgoing_text->insert($save);
+	}
+
+	public function sms_order_template($order_details_id = 1,$event='')
+	{
+		$this->view = FALSE;
+		$order_details = $this->order_details->get($order_detail_id);
+		// $order_no,$product_name,$amount,$date_created,unit_price,$unit_weight
+		$sms_template = 'Your order #{$order_details->number} of {$order_details->product_name}, 
+		weight: {$order_details->unit_weight}, for {$order_details->unit_price} has been successfully {$event}';
+		echo strlen($sms_template);
 	}
 
 }
