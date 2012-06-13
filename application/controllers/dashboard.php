@@ -10,7 +10,7 @@ class Dashboard extends MY_Controller {
 	}
 	public function index()
 	{
-
+		$this->data['page_title'] = 'Dashboard';
 	}
 
 }
