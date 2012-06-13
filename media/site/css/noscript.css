@@ -1,0 +1,45 @@
+@charset "utf-8";
+/*----------------------------------------------------
+            MFarm no script  - CSS File
+------------------------------------------------------*/
+
+#slideshow ul, #slidenav, .roundabout ul, .pix_diapo{
+	display:none;
+}
+#slideshow{
+	width:960px;
+	height:443px;
+	margin:0px;
+	background-image:url(../images/diapo-slide/bg-noscript.jpg);
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;	
+	float:left;
+}
+#slideshow-container-roundabout, #slideshow-container-diapo{
+	width:960px;
+	height:443px;
+	margin:37px auto 48px auto;
+	background-image:url(../images/diapo-slide/bg-noscript.jpg);
+	border: 1px solid #dddddd;
+	border-bottom: 1px solid #aeafb1;
+	border-right: 1px solid #aeafb1;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.no-script{
+	display:none;
+}
+.message-noscript{
+	display:block;
+}
+.twitter-box .message-noscript{
+	padding:10px 20px 0px 20px;
+}	
+#mainmenu li:hover ul{
+	display:block;		
+}
+	
+	
+	

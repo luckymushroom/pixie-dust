@@ -1,0 +1,8 @@
+Change log:
+
+2012-06-12
+==========
+* Moved Users and data to database zeamays
+* Created Admin Section Template
+* Updated ion-auth library to user codeigniter super global instance __get($var)
+* 

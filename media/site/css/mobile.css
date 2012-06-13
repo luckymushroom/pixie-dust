@@ -1,0 +1,68 @@
+/* 
+    Document   : main
+    Created on : Oct 11, 2011, 9:47:43 PM
+    Author     : jay
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+body,p {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size:1em
+}
+h1, h2 {
+color:#306824;
+border-bottom: 1px #000000 solid
+}
+h1 {
+font-size:1.4em
+}
+h2 {
+font-size:1.2em
+}
+img {
+border: none
+}
+.error {
+color:#CC0000;
+border: 1px #FF0000 solid;
+font-size: 0.8em;
+padding-left: 20px;
+background: left no-repeat url(error.gif)
+#FFFF99
+}
+.button {
+border: none;
+background-color:#306824;
+font-size: 1em;
+font-weight: bold;
+margin-top: 0.5em;
+padding-left: 1em;
+padding-right: 1em;
+color:white;
+}
+a {
+border: none;
+font-size: 1em;
+margin-top: 0.5em;
+padding-right: 1em;
+color:#306824;
+}
+
+.even { background-color:#d0e67b;}
+.odd { background-color:#FFF; }
+
+.footer {
+	padding:10px;
+	background: #306824;
+	margin-top:5px;
+}
+.footer a {
+	color:white;
+}
+

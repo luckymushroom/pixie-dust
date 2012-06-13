@@ -1,0 +1,12 @@
+#top-container{
+	width:100%;
+	background:url(../images/bg-template/bg-template1.jpg) center 210px repeat-x;  /*you can change this image with : bg-template1.jpg, bg-template2.jpg, bg-template3.jpg, bg-template4.jpg, etc until bg-template20.jpg*/
+	/*background-attachment:fixed;*/
+	height:784px;
+}
+#header-container{
+	width:100%;
+	height:210px;
+	background:#ffffff; /* you can change this background color with your own hexadecimal color */
+	background:url(../images/bg-pattern/bg-pattern1.png) repeat; /* you can change this image with : bg-pattern1.png, bg-pattern2.png, bg-pattern3.png, bg-pattern4.png, etc until bg-pattern20.png */	
+}
