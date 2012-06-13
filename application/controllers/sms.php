@@ -157,7 +157,7 @@ class SMS extends MY_Controller {
 					{
 						foreach($rows as $row)
 						{
-							$reply = "{$row->product_name} Kshs {$row->crop_price} per {$row->crop_weight} {$row->crop_unit}. powered by samsung.";
+							$reply = "{$row->product_name} Kshs {$row->crop_price} per {$row->crop_weight} {$row->crop_unit} on {$this->date} in {$row->location}. powered by samsung.";
 						}
 					}
 					else
@@ -212,10 +212,11 @@ class SMS extends MY_Controller {
 			{
 				$reply = $this->lang->line('error_message_subscribe');
 			}
-			else{
+			else
+			{
 				$user_id = $subscriber->id; //select subscribers id
 				//get crop and location details from user defined
-				$row = $this->sms->get_crop_details($crop,$location);
+				$product_id = $this->sms->get_product_id($crop)->id;
 				if(strtoupper($keyword) == 'SELL')
 				{
 					if($crop =='' OR $weight =='' OR $price =='')
@@ -224,15 +225,19 @@ class SMS extends MY_Controller {
 					}
 					else
 					{
-						$units = preg_replace('#[^a-z]#','',$weight);
+						$units    = preg_replace('#[^a-z]#','',$weight);
 						$quantity = preg_replace('#[^0-9]#','',$weight);
+						$currency = preg_replace('#[^a-z]#','',$price);
+						$price    = preg_replace('#[^0-9]#','',$price);
 						//sellers details data array
 						$data = array(
-							'user_id'     => $user_id,
-							'product_id' => $row->commodity_id,
-							'quantity'   => $quantity,
-							'units'      => $units,
-							'unit_price' => $price
+							'user_id'        => $user_id,
+							'product_id'     => $product_id,
+							'product_weight' => $quantity,
+							'units'          => $units,
+							'unit_price'     => $price,
+							'currency'       => strtoupper($currency),
+							'date_added'     => date('Y-m-d H:i:s')
 						);
 						$reponse = $this->sms->add_post($data);
 						//update incomingsms table
@@ -299,7 +304,7 @@ class SMS extends MY_Controller {
 		}
 		$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
 		self::save_outgoing_sms($post);
-		self::send_sms( $reply );
+		self::send_sms($reply);
 	}
 
 	/**
@@ -319,7 +324,7 @@ class SMS extends MY_Controller {
 		$account_exists = self::_check_account($email);
 		if($account_exists)
 		{
-			$text = "You account is already active. Your username is {$email}";
+			$reply = "You account is already active. Your username/email is {$email}.Sign in at www.mfarm.co.ke. Powered by Samsung.";
 		}
 		else
 		{
@@ -332,11 +337,11 @@ class SMS extends MY_Controller {
 				$additional_data = array('first_name'=>$firstname,'last_name'=>$lastname,'group'=>2,'phone'=>$phone);
 				$registration = $this->ion_auth->register($username, $password, $email, $additional_data);
 			}
-			$text = "Thank you for Joining Mfarm. Your username is {$email} and password: {$password} Keep them safe.";
+			$reply = "Thank you for Joining Mfarm. Your username is {$email} and password: {$password}. Powered by Samsung.";
 		}
 		$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
 		self::save_outgoing_sms($post);
-		self::send_sms($text);
+		self::send_sms($reply);
 	}
 	/**
 	 * Aggregation SMS for crops
@@ -348,16 +353,13 @@ class SMS extends MY_Controller {
 	public function aggregate_sms($message)
 	{
 		# code...
-		$text = urlencode('Aggregation functions will go here');
+		$text = 'Aggregation functions will go here';
 		self::send_sms($text);
 	}
 
 	public function default_sms($message)
 	{
-		$text = 'To join send: join firstname secondname location
-				 to check price send: price crop location
-				 to sell produce send:sell crop quantity price
-				 Call 0707 933 993 for help.';
+		$text = 'To join send: join firstname secondname location. To check price send: price crop location. To sell produce send:sell crop quantity price. Call 0707933993 for more.';
 		self::send_sms($text);
 	}
 	/**
@@ -422,8 +424,8 @@ class SMS extends MY_Controller {
 	 */
 	private function _check_account($email)
 	{
-		$check = $this->user->get_by('email',$email);
-		return ($check) ? TRUE : FALSE;
+		$check_account = $this->user->get_by('email',$email);
+		return $check_account;
 	}
 
 	/**
