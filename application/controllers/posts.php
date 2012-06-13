@@ -30,14 +30,12 @@ class Posts extends MY_Controller
 	public function index()
 	{
 		// List Posts
-		$posts = $this->post->my_posts($this->current_user)->deleted()->order_by('date_modified')->get_all();
+		$posts = $this->post->my_posts($this->current_user)->deleted('posts.deleted')->order_by('date_created')->get_all();
 		// There is a funny bug here that generates a null array if this check is not in place.
-		$this->data['posts'] = ($posts == NULL) ? $posts : FALSE ;
+		$this->data['posts'] = (empty($posts)) ? $posts : FALSE ;
 	}
 
-	public function new_post() 
-	{
-	}
+	public function new_post() {}
 
 	public function price_feed($crop=44)
 	{
