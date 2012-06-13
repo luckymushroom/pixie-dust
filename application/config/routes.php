@@ -64,8 +64,17 @@
 |
 */
 
-$route['default_controller'] = 'posts';
+$route['default_controller'] = 'site';
 $route['404_override'] = '';
+
+$route['index'] = 'site/index';
+$route['stories'] = 'site/stories';
+$route['prices'] = 'site/prices';
+$route['press'] = 'site/press';
+$route['about'] = 'site/about';
+$route['team'] = 'site/team';
+$route['services'] = 'site/services';
+$route['contact'] = 'site/contact';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
