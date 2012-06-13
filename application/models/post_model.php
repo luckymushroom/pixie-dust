@@ -2,12 +2,26 @@
 
 class Post_model extends MY_Model
 {
-	public $before_get = array('join_tables');
-	public $after_get = array('amount_available');
+	public $before_create = array('date_created');
+	public $before_update = array('date_modified');
 	public function __construct()
 	{
 	   parent::__construct();
 	   //Do your magic here
+	}
+	/**
+	 * Timestamp on Create
+	 */
+	function date_created($post)
+	{
+		$post['date_created'] = date('Y-m-d H:i:s'); return $post;
+	}
+	/**
+	 * Timestamp on Update
+	 */
+	function date_modified($post)
+	{
+		$post['date_modified'] = date('Y-m-d H:i:s'); return $post;
 	}
 
 	/**
@@ -26,18 +40,28 @@ class Post_model extends MY_Model
 		$this->db->order_by('posts.id','DESC')->limit($limit);
 		return $this;
 	}
-	/**
-	 * @author mogetutu
-	 * @access public
-	 * Join tables
-	 */
-	public function join_tables()
+
+	public function with_order_details()
 	{
-		$this->db
-		->select('posts.*,image,product_desc,product_name,photo,caption,sum(order_details.quantity) as total_weight')
-		->join('products','products.id = posts.product_id')
-		->join('order_details','posts.id = order_details.post_id')
-		->join('photos','photos.post_id = posts.id');
+		$this->db->join('order_details','posts.id = order_details.post_id','left');
+		return $this;
+	}
+
+	public function with_photos()
+	{
+		$this->db->join('photos', 'photos.post_id = posts.id','left');
+		return $this;
+	}
+
+	public function match_products()
+	{
+		$this->db->join('products','products.id = posts.product_id','left');
+		return $this;
+	}
+
+	public function with_location()
+	{
+		$this->db->join('locations','locations.id = posts.location_id','left');
 		return $this;
 	}
 	/**
