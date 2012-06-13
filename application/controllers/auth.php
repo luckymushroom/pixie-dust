@@ -29,7 +29,7 @@ class Auth extends MY_Controller
 	//log the user in
 	function login()
 	{
-		$this->data['title'] = "Login";
+		$this->data['page_title'] = 'Welcome - Sign In';
 
 		if ($this->ion_auth->logged_in())
 		{
@@ -51,7 +51,7 @@ class Auth extends MY_Controller
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
                 $this->session->set_flashdata('message','Welcome '.$this->session->userdata('username'));
-				redirect($this->config->item('base_url'), 'refresh');
+				redirect('dashboard', 'refresh');
 			}
 			else
 			{
