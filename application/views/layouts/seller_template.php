@@ -17,6 +17,7 @@
     <link href="<?=base_url();?>media/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=base_url();?>media/css/docs.css" rel="stylesheet">
     <link href="<?=base_url();?>media/css/site.css" rel="stylesheet">
+  
     <!-- jQuery -->
     <script src="<?=base_url();?>media/js/jquery.min.js"></script>
     <script src="<?=base_url();?>media/js/modernizr-2.5.3.min.js"></script>
@@ -55,7 +56,7 @@
               <!-- <li><a href="<?=base_url();?>categories/" title="Categories">Categories</a></li> -->
               <li><a href="<?=base_url();?>products/" title="Products"><i class="icon-tags icon-white"></i>  Products</a></li>
               <li><a href="<?=base_url();?>posts/" title="Posts"><i class="icon-th-list icon-white"></i>  Posts</a></li>
-              <li class="dropdown">
+<!-- Pending till further notice              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Farmers <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="<?=base_url();?>settings/invitations"><i class="icon-plus"></i>  Invite Farmers</a></li>
@@ -63,14 +64,13 @@
                   <li class="divider"></li>
                   <li><a href="<?=base_url();?>farmers/my_farmers"><i class="icon-list-alt"></i>  My Farmers</a></li>
                 </ul>
-              </li>
+              </li> -->
               <li><a href="<?=base_url();?>settings/tips"><i class="icon-leaf icon-white"></i>  Tips</a></li>
               <li><a href="<?=base_url();?>reports/"><i class="icon-print icon-white"></i>  Reports</a></li>
             </ul>
             <ul class="nav pull-right">
               <li><a href="<?=base_url();?>settings/"><i class="icon-cog icon-white"></i>  Settings</a></li>
               <li><a href="<?=base_url();?>auth/logout"><i class="icon-off icon-white"></i>  Logout</a></li>
-              <li class="divider-vertical"></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -86,9 +86,8 @@
         </div>
       <?php endif;?>
       <div class="row">
-        <div class="span3">
-          <div class="well" style="padding: 8px 0;">
-            <ul class="nav nav-list">
+        <div class="span3 sidebar">
+            <ul class="nav nav-list well">
               <li class="nav-header">MFarm</li>
               <li <?php if ( $this->uri->uri_string() == '' ) echo 'class=active'; ?>
                 ><a href="<?=base_url();?>"><i class="icon-home"></i> Home</a></li>
@@ -116,7 +115,6 @@
                 <a href="<?=base_url();?>help/"><i class="icon-flag"></i> Help</a>
               </li>
             </ul>
-          </div> <!-- /well -->
         </div>
         <div class="span9">
           <!-- Yield goes here -->

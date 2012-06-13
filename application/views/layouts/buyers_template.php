@@ -78,9 +78,8 @@
         </div>
       <?php endif;?>
       <div class="row">
-        <div class="span3">
-          <div class="well" style="padding: 8px 0;">
-            <ul class="nav nav-list">
+        <div class="span3 sidebar">
+            <ul class="nav nav-list well">
               <li class="nav-header">MFarm</li>
               <li><a href="<?=base_url();?>"><i class="icon-home"></i> Home</a></li>
               <li <?php if ( $this->uri->uri_string() == 'posts' ) echo 'class=active'; ?> >
@@ -105,7 +104,6 @@
                 <a href="<?=base_url();?>help/"><i class="icon-flag"></i> Help</a>
               </li>
             </ul>
-          </div> <!-- /well -->
         </div>
         <div class="span9">
           <!-- Yield goes here -->

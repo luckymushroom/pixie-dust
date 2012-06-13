@@ -1,106 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>MFarm KE | Connecting Farmers</title>
-    <meta name="description" content="MFarm Application">
-    <meta name="author" content="mogetutu, isaak@mogetutu.com, @mogetutu">
+<!DOCTYPE HTML>
+<html lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="https://plus.google.com/105305873259684952530" rel="publisher" />
+<meta name="description" content="MFarm website homepage">
+<meta name="keywords" content="mfarm,mfarm_ke,m farm,m farm kenya,mobile farmer,mobile farming,kenya mfarm, mfarm kenya,mfarm price">
+<meta name="author" content="jamila,susaneve,linda,mogetutu,melvin">
+<meta name="robots" content="index, follow">
+<!-- Apple iOS and Android stuff -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" href="img/icon.png">
+    <link rel="apple-touch-startup-image" href="img/startup.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting,Empowering &amp; Grouping Farmers | MFarm Kenya</title>
+<!-- ////////////////////////////////// -->
+<!-- //        Favicon Files         // -->
+<!-- ////////////////////////////////// -->
+<link rel="shortcut icon" href="<?php echo base_url();?>media/favicon.ico" />
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<!-- ////////////////////////////////// -->
+<!-- //      Start Stylesheets       // -->
+<!-- ////////////////////////////////// -->
+<link href="<?php echo base_url();?>media/site/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url();?>media/site/css/style.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url();?>media/site/css/custom-style.css" rel="stylesheet" type="text/css" />
+<link href="<?=base_url();?>media/site/css/bootstrap.css" rel="stylesheet" type="text/css" />
 
-    <!-- Le styles -->
-    <style type="text/css">body {padding-top: 60px;padding-bottom: 40px;}</style>
-    <link href="<?=base_url();?>media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>media/css/docs.css" rel="stylesheet">
-    <link href="<?=base_url();?>media/css/site.css" rel="stylesheet">
 
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="<?=base_url();?>media/img/favicon.ico">
-    <link rel="apple-touch-icon" href="<?=base_url();?>media/img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="<?=base_url();?>media/img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="<?=base_url();?>media/img/apple-touch-icon-114x114.png">
-  </head>
+<!-- ////////////////////////////////// -->
+<!-- //      Javascript Files        // -->
+<!-- ////////////////////////////////// -->
+<script type="text/javascript" src="<?php echo base_url();?>media/site/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>media/site/js/dropdown.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>media/site/js/vtip.js"></script>
+<!-- ////////////////////////////////// -->
+<!-- //      Javascript Files        // -->
+<!-- ////////////////////////////////// -->
+<script type="text/javascript" src="<?=base_url();?>media/site/js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/dropdown.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/vtip.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/jquery.twitter.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/jquery.colorbox.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/ddaccordion.js"></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/faq-functions.js" ></script>
+<script type="text/javascript" src="<?=base_url();?>media/site/js/jflickrfeed.min.js"></script>
+<script src="<?=base_url();?>media/site/js/bootstrap-modal.js"></script>
+<script src="<?=base_url();?>media/site/js/quickpager.jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){   
+    
+    //Flickr Jquery Setting
+    <!--
+    $('#cbox').jflickrfeed({
+        limit: 14,
+        qstrings: {
+            id: '69259295@N05'
+        },
+        itemTemplate: '<li>'+
+                        '<a rel="colorbox" href="{{image}}" title="{{title}}">' +
+                            '<img src="{{image_s}}" alt="{{title}}" />' +
+                        '</a>' +
+                      '</li>'
+    }, function(data) {
+        $('#cbox a').colorbox();
+    });
+    // -->
+    
+    //Colorbox Setting
+    $("a[rel='portfolio']").colorbox({transition:"fade"});
+    
+    //Tab Jquery
+    $(".tab_content").hide(); 
+    $("ul.tabs li:first").addClass("active").show(); 
+    $(".tab_content:first").show(); 
+    $("ul.tabs li").click(function() {
+        $("ul.tabs li").removeClass("active");
+        $(this).addClass("active"); 
+        $(".tab_content").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+    
+    //Twitter Jquery Setting
+    $("#twitter").getTwitter({
+        userName: "mfarm_ke",
+        numTweets: 3,
+        loaderText: "Loading tweets...",
+        slideIn: true,
+        slideDuration: 750
+    });
 
-  <body>
+});
+</script>
+<?php if ($this->session->flashdata('message') != ''): ?>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            var $alertdiv = $('<div id = "alertmsg"/>');
+            $alertdiv.text("<?=$this->session->flashdata('message')?>");
+            $alertdiv.bind('click', function() {
+                $(this).slideUp(200);
+            });
+            $(document.body).append($alertdiv);
+            $("#alertmsg").slideDown("slow"); 
+            setTimeout(function() { $alertdiv.slideUp(200) }, 5000);
+        });
+    </script>
+<?php endif; ?>
+</head>
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="<?=base_url();?>">MFarm App</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li><a href="<?=site_url();?>" id="logo"><i class="icon-arrow-left icon-white"></i>  Homepage</a></li>
-              <li style="margin-top:10px;">
-                <!-- <a href="https://twitter.com/mfarm_ke" class="twitter-follow-button" data-show-count="true">Follow @mfarm_ke</a> -->
+<body>  
+  <div id="container"> 
+      <div id="top-container">
+        
+          <!-- BEGIN OF HEADER -->
+            <div id="header-container">
+              <div id="header-box">
+                
+                    <div id="logo">
+                        <a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>media/site/images/logo_xmas.png" alt="Mfarm Logo" /></a>
+                    </div>
+                    <div id="righttop-header">
+                        <div id="top-social">             
+                            <ul>
+                                <li><a class="" href="<?php echo base_url();?>members" title="login here"><img src="<?php echo base_url();?>media/site/images/top-login.png" alt="Login into the app" /></a></li>
+                                <li><a href="https://www.facebook.com/pages/M-Farm/168567086502534" target="_blank" title="facebook"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social1.png" alt="mfarm-facebook" /></a></li>
+                                <li><a href="https://plus.google.com/105305873259684952530?prsrc=3" target="_blank" title="g+"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social2.png" alt="mfarm-google+" /></a></li>
+                                <li><a href="https://twitter.com/#!/mfarm_ke" target="_blank" title="twitter"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social3.png" alt="mfarm-twitter" /></a></li>
+                            </ul>
+                        </div>
+                        <div id="top-slogan">
+                            <h4>Welcome to <span class="title-green">MFarm</span>, you're on the right place to find <br/> many creative agribusiness solutions, because we're a factory of ideas</h4>
+                        </div>
+                        <div id="mainmenu">
+                            <ul id="menu">
+                                <li class="current"><a href="<?=site_url('index');?>">home</a></li>
+                                <li><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
+                                <li><a href="<?=site_url('prices');?>" title="mfarm price information">prices</a></li>
+                                <li><a href="<?=site_url('team');?>" title="mfarm team page">team</a></li>
+                                <li><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
+                                <li><a href="<?=site_url('contact');?>" title="contact mfarm">contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>        
+          <!-- END OF HEADER -->
+            <!-- BEGIN OF PAGE TITLE -->
+            <div id="page-title">
+                <h1><?=$page_title;?></h1>
+                <?php if ($page_subtitle): ?>
+                    <h6><?=$page_subtitle;?></h6>
+                <?php endif ?>
 
-                <script>
-                // !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
-                </script>
-              </li>
-            </ul>
-            <ul class="nav pull-right">
-            <?php if ($this->session->userdata('user_id')): ?>
-                <li><a href="<?=base_url();?>settings/"><i class="icon-cog icon-white"></i>  Settings</a></li>
-                <li><a href="<?=base_url();?>auth/logout">Logout</a></li>
-                <li class="divider-vertical"></li>
-            <?php else: ?>
-                <li><a href="<?=site_url('auth/create_user');?>" title="Register"><i class="icon-cog icon-white"></i>  Register</a></li>
-                <li><a href="<?=site_url('auth/login');?>" title="Sign In"><i class="icon-lock icon-white"></i>  Sign In</a></li>
-            <?php endif ?>
-            </ul>
-          </div><!--/.nav-collapse -->
+                <?php if ($this->uri->segment(1) == 'team'): ?>
+                    <!-- begin of portfolio filter -->                
+                    <ul id="portfolio-filter">
+                        <li><a href="#all" title="">All</a></li>
+                        <li><a href="#founders" title="" rel="founders">Founders</a></li>
+                    </ul>
+                    <!-- end of portfolio filter -->
+                <?php endif ?>
+            </div>
+            <!-- END OF PAGE TITLE -->
+            
+            <!-- BEGIN OF CONTENT -->
+            <div id="content">
+              <!-- Yield goes here -->
+                <?= $yield; ?>
+              <!-- yield end here -->
+            </div>            
+            <!-- END OF CONTENT -->
+            
         </div>
-      </div>
-    </div>
+        
+        <!-- BEGIN OF BOTTOM CONTENT -->
+        <div id="bottom-container">
+          <div id="bottom-content">
+            
+              <div id="client-logo">
+                  <ul>
+                        <li><img src="<?php echo base_url();?>media/site/images/client5.gif" alt="techfortrade.org" /></li>
+                      <li><img src="<?php echo base_url();?>media/site/images/client1.gif" alt="ipo48" /></li>
+                        <li><img src="<?php echo base_url();?>media/site/images/client2.gif" alt="humanipo" /></li>
+                        <li><img src="<?php echo base_url();?>media/site/images/client3.gif" alt="ihub" /></li>
+                        <li><img src="<?php echo base_url();?>media/site/images/client4.gif" alt="mlab" /></li>
+                        <li><img src="<?php echo base_url();?>media/site/images/client6.gif" alt="infodev" /></li>
+                    </ul>
+                </div>
+                <div class="bottom-column1">
+                  <h5>About MFARM</h5>
+                    <p>MFarm Ltd is a software solution and agribusiness company.</p><p> Our main product M-Farm, is a transparency tool for Kenyan farmers where they simply SMS the number 3535 to get information about the retail price of their products, buy their farm inputs directly from manufacturers at favorable prices, and find buyers for their produce.</p>
 
-    <div id='hld'>
-      <div class='container'>
-      <?php if ($this->session->flashdata('message')): ?>
-        <div class="alert alert-success">
-          <a class="close" data-dismiss="alert">&times;</a>
-          <strong>Hey Thea!</strong> <?=$this->session->flashdata('message');?>
+                </div>
+                <div class="bottom-column2">
+                  <h5>Trading Terms</h5>
+                    <p>Read our easy to understand Trading Terms so you know how we do business and what we expect from our clients.</p>
+                    <p><a href="#">Privacy Policy &amp; Disclaimer</a></p>
+                </div>
+                <div class="bottom-column2">
+                  <h4>+254 707 933 993</h4>
+                    <p><?=safe_mailto('info@mfarm.co.ke', 'info@mfarm.co.ke');?></p>
+                    <p>Bishop Mague Centre,Opp. Uchumi Hyper Ng'ong rd.<br/>Nairobi, KENYA</p>
+                </div>                 
+                
+            </div>
+            <div id="footer-wrapper">
+              <div id="footer-content">
+                  <div class="footer-logo">
+                      <img src="<?php echo base_url();?>media/site/images/footer-logo.png" alt="mfarm-footer-logo" />
+                    </div>
+                    <div class="footer-text">
+                      <p>© 2011 MFARM. Developed by Dev Team Mfarm. <br/> Create solutions that empower farmers to work and communicate in new and innovative ways.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      <?php endif;?>
-      <div class="row">
-          <!-- Yield goes here -->
-            <?= $yield; ?>
-          <!-- yield end here -->
-      </div>
+        <!-- END OF BOTTOM CONTENT -->
+    
+    <div class="clear"></div>                                      
     </div>
-    </div>
-  <div class="container">
-    <hr>
-    <!-- Footer
-      ================================================== -->
-      <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a> by <a href="http://twitter.com/mogetutu" target="_blank">@mogetutu</a> and <a href="http://twitter.com/kuljay" target="_blank">@jay</a>.</p>
-        <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
-        </p>
-        <p></p>
-      </footer>
+  <script type="text/javascript">
 
-    </div><!-- /container -->
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-21117757-1']);
+    _gaq.push(['_trackPageview']);
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?=base_url();?>media/js/jquery.min.js"></script>
-    <script src="<?=base_url();?>media/js/bootstrap-datepicker.js"></script>
-    <script src="<?=site_url('media/js/jquery-cookie.js');?>"></script>
-    <script src="<?=base_url();?>media/js/site.js"></script>
-    <script src="<?=base_url();?>media/js/widgets.js"></script>
-    <script src="<?=base_url();?>media/js/bootstrap.min.js"></script>
-    <script src="<?=base_url();?>media/js/jquery.dataTables.js"></script>
-    <script src="<?=base_url();?>media/js/dt_bootstrap.js"></script>
-    <script src="<?=base_url();?>media/js/modernizr-2.5.3.min.js"></script>
-  </body>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>    
+</body>
+
 </html>

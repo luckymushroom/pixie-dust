@@ -41,10 +41,10 @@
 					<label class="control-label">Will you deliver</label>
 					<div class="controls">
 						<label class="radio">
-							<input id="radio-yes" type="radio" name="delivered" value="YES" placeholder="" <?php if ($post->delivered == 'YES'){ echo 'checked'; } ;?>>YES
+							<input id="radio-yes" type="radio" name="delivered" value="YES" placeholder="" <?php if ($post->delivered == TRUE){ echo 'checked'; } ;?>>YES
 						</label>
 						<label class="radio">
-							<input id="radio-no" type="radio" name="delivered" value="NO" placeholder="" <?php if ($post->delivered == 'NO'){ echo 'checked'; } ;?>>NO
+							<input id="radio-no" type="radio" name="delivered" value="NO" placeholder="" <?php if ($post->delivered == FALSE){ echo 'checked'; } ;?>>NO
 						</label>
 					</div>
 				</div>
