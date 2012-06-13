@@ -497,9 +497,10 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-    public function deleted($status = FALSE)
+    public function deleted($column = NULL , $status = FALSE)
     {
-        $this->db->where($this->_table.'.deleted', $status);
+        $column = (is_null($column)) ? $this->_table.'.deleted' : $column ;
+        $this->db->where($column, $status);
         return $this;
     }
 
