@@ -35,14 +35,9 @@
 	$config['admin_email']		   = "info@mfarm.co.ke";
 
 	/**
-	 * Default group, use name
-	 */
-	$config['default_group']      = 'farmers';
-	$config['buyers_group']       = 'buyers';
-
-	/**
 	 * Default Templates for different users
 	 */
+	$config['admin_template'] = 'admin_template';
 	$config['farmer_template'] = 'seller_template';
 	$config['buyer_template'] = 'buyers_template';
 
@@ -50,7 +45,8 @@
 	 * Default administrators group, use name
 	 */
 	$config['admin_group']         = 'admin';
-
+	$config['default_group']      = 'farmers';
+	$config['buyers_group']       = 'buyers';
 	/**
 	 * Users table column and Group table column you want to join WITH.
 	 * Joins from users.id
