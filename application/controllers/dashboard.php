@@ -10,7 +10,15 @@ class Dashboard extends MY_Controller {
 	}
 	public function index()
 	{
-		$this->data['page_title'] = 'Dashboard';
+		$this->data['posts'] = self::posts_count();
+		$this->data['orders'] = 10;
+		$this->data['invites'] = 10;
+	}
+
+	public function posts_count()
+	{
+		$posts = count(Post::find_all_by_user_id($this->current_user));
+		return $posts;
 	}
 
 }
