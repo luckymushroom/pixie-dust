@@ -199,7 +199,7 @@ class Model
 	 *
 	 * This is the opposite of {@link attr_accessible $attr_accessible} and the format
 	 * for defining these are exactly the same.
-	 *
+	 * 
 	 * If the attribute is both accessible and protected, it is treated as protected.
 	 *
 	 * @var array
@@ -503,7 +503,7 @@ class Model
 				$to = $item['to'];
 				if ($this->$to)
 				{
-					$val =& $this->$to->__get($delegated_name);
+					$val =& $this->$to->$delegated_name;
 					return $val;
 				}
 				else
@@ -539,16 +539,6 @@ class Model
 
 		$dirty = array_intersect_key($this->attributes,$this->__dirty);
 		return !empty($dirty) ? $dirty : null;
-	}
-
-	/**
-	 * Check if a particular attribute has been modified since loading the model.
-	 * @param string $attribute	Name of the attribute
-	 * @return boolean TRUE if it has been modified.
-	 */
-	public function attribute_is_dirty($attribute)
-	{
-		return $this->__dirty && $this->__dirty[$attribute] && array_key_exists($attribute, $this->attributes);
 	}
 
 	/**
@@ -821,7 +811,7 @@ class Model
 			$column = $table->get_column_by_inflected_name($pk);
 
 			if ($column->auto_increment || $use_sequence)
-				$this->attributes[$pk] = static::connection()->insert_id($table->sequence);
+				$this->attributes[$pk] = $table->conn->insert_id($table->sequence);
 		}
 
 		$this->invoke_callback('after_create',false);
@@ -859,121 +849,6 @@ class Model
 		}
 
 		return true;
-	}
-
-	/**
-	 * Deletes records matching conditions in $options
-	 *
-	 * Does not instantiate models and therefore does not invoke callbacks
-	 *
-	 * Delete all using a hash:
-	 *
-	 * <code>
-	 * YourModel::delete_all(array('conditions' => array('name' => 'Tito')));
-	 * </code>
-	 *
-	 * Delete all using an array:
-	 *
-	 * <code>
-	 * YourModel::delete_all(array('conditions' => array('name = ?', 'Tito')));
-	 * </code>
-	 *
-	 * Delete all using a string:
-	 *
-	 * <code>
-	 * YourModel::delete_all(array('conditions' => 'name = "Tito"));
-	 * </code>
-	 *
-	 * An options array takes the following parameters:
-	 *
-	 * <ul>
-	 * <li><b>conditions:</b> Conditions using a string/hash/array</li>
-	 * <li><b>limit:</b> Limit number of records to delete (MySQL & Sqlite only)</li>
-	 * <li><b>order:</b> A SQL fragment for ordering such as: 'name asc', 'id desc, name asc' (MySQL & Sqlite only)</li>
-	 * </ul>
-	 *
-	 * @params array $options
-	 * return integer Number of rows affected
-	 */
-	public static function delete_all($options=array())
-	{
-		$table = static::table();
-		$conn = static::connection();
-		$sql = new SQLBuilder($conn, $table->get_fully_qualified_table_name());
-
-		$conditions = is_array($options) ? $options['conditions'] : $options;
-
-		if (is_array($conditions) && !is_hash($conditions))
-			call_user_func_array(array($sql, 'delete'), $conditions);
-		else
-			$sql->delete($conditions);
-
-		if (isset($options['limit']))
-			$sql->limit($options['limit']);
-
-		if (isset($options['order']))
-			$sql->order($options['order']);
-
-		$values = $sql->bind_values();
-		$ret = $conn->query(($table->last_sql = $sql->to_s()), $values);
-		return $ret->rowCount();
-	}
-
-	/**
-	 * Updates records using set in $options
-	 *
-	 * Does not instantiate models and therefore does not invoke callbacks
-	 *
-	 * Update all using a hash:
-	 *
-	 * <code>
-	 * YourModel::update_all(array('set' => array('name' => "Bob")));
-	 * </code>
-	 *
-	 * Update all using a string:
-	 *
-	 * <code>
-	 * YourModel::update_all(array('set' => 'name = "Bob"'));
-	 * </code>
-	 *
-	 * An options array takes the following parameters:
-	 *
-	 * <ul>
-	 * <li><b>set:</b> String/hash of field names and their values to be updated with
-	 * <li><b>conditions:</b> Conditions using a string/hash/array</li>
-	 * <li><b>limit:</b> Limit number of records to update (MySQL & Sqlite only)</li>
-	 * <li><b>order:</b> A SQL fragment for ordering such as: 'name asc', 'id desc, name asc' (MySQL & Sqlite only)</li>
-	 * </ul>
-	 *
-	 * @params array $options
-	 * return integer Number of rows affected
-	 */
-	public static function update_all($options=array())
-	{
-		$table = static::table();
-		$conn = static::connection();
-		$sql = new SQLBuilder($conn, $table->get_fully_qualified_table_name());
-
-		$sql->update($options['set']);
-
-		if (isset($options['conditions']) && ($conditions = $options['conditions']))
-		{
-			if (is_array($conditions) && !is_hash($conditions))
-				call_user_func_array(array($sql, 'where'), $conditions);
-			else
-				$sql->where($conditions);
-		}
-
-		if (isset($options['limit']))
-			$sql->limit($options['limit']);
-
-		if (isset($options['order']))
-			$sql->order($options['order']);
-
-		$values = $sql->bind_values();
-		$ret = $conn->query(($table->last_sql = $sql->to_s()), $values);
-		return $ret->rowCount();
-
 	}
 
 	/**
@@ -1324,7 +1199,7 @@ class Model
 		if (substr($method,0,7) === 'find_by')
 		{
 			$attributes = substr($method,8);
-			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::connection(),$attributes,$args,static::$alias_attribute);
+			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::table()->conn,$attributes,$args,static::$alias_attribute);
 
 			if (!($ret = static::find('first',$options)) && $create)
 				return static::create(SQLBuilder::create_hash_from_underscored_string($attributes,$args,static::$alias_attribute));
@@ -1333,12 +1208,12 @@ class Model
 		}
 		elseif (substr($method,0,11) === 'find_all_by')
 		{
-			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::connection(),substr($method,12),$args,static::$alias_attribute);
+			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::table()->conn,substr($method,12),$args,static::$alias_attribute);
 			return static::find('all',$options);
 		}
 		elseif (substr($method,0,8) === 'count_by')
 		{
-			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::connection(),substr($method,9),$args,static::$alias_attribute);
+			$options['conditions'] = SQLBuilder::create_conditions_from_underscored_string(static::table()->conn,substr($method,9),$args,static::$alias_attribute);
 			return static::count($options);
 		}
 
@@ -1404,7 +1279,7 @@ class Model
 		$options = static::extract_and_validate_options($args);
 		$options['select'] = 'COUNT(*)';
 
-		if (!empty($args) && !is_null($args[0]) && !empty($args[0]))
+		if (!empty($args))
 		{
 			if (is_hash($args[0]))
 				$options['conditions'] = $args[0];
@@ -1415,7 +1290,8 @@ class Model
 		$table = static::table();
 		$sql = $table->options_to_sql($options);
 		$values = $sql->get_where_values();
-		return static::connection()->query_and_fetch_one($sql->to_s(),$values);
+		$table->last_sql = $sql->to_s();
+		return $table->conn->query_and_fetch_one($sql->to_s(),$values);
 	}
 
 	/**
