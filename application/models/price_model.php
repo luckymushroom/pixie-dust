@@ -2,22 +2,59 @@
 
 class Price_model extends MY_Model {
 
-	public $before_create = array('date_created');
-	public $before_update = array('date_modified');
+	public $after_get = array( 'get_username', 'get_product_name', 'get_location_name' );
+	public $before_create = array( 'timestamps' );
+
+    
 	//php 5 constructor
 	function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function date_created($post)
+	/**
+	 * Timestamps on create and update
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param $object price post object
+	 */
+	protected function timestamps($price)
+    {
+        $price['created_at'] = $price['updated_at'] = date('Y-m-d H:i:s');
+        return $price;
+    }
+    /**
+     * @author mogetutu <imogetutu@gmail.com>
+     * @param $result array()
+     * @return $result array()
+     */
+	public function get_location_name($result)
 	{
-		$post['date_created'] = date('Y-m-d H:i:s'); return $post;
+		$result->location = $this->db->where('id',$result->location_id)->get('locations',1)->row()->location_name;
+		return $result;
 	}
-
-	public function date_modified($post)
+	/**
+	 * Get Product name from product_id
+	 * @access public
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @return array result
+	 */
+	public function get_product_name($result)
 	{
-		$post['date_modified'] = date('Y-m-d H:i:s'); return $post;
+		$result->product_name = $this->db->where('id',$result->product_id)->get('products',1)->row()->product_name;
+		return $result;
+	}
+	/**
+	 * Get username for user_id in result array
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param $array result
+	 * @return array alter user_id on the way back from the db
+	 */
+	public function get_username($result)
+	{
+		$result->username = $this->db->where('id',$result->user_id)->get('users',1)->row()->first_name;
+		return $this;
 	}
 
 	/**
@@ -44,28 +81,23 @@ class Price_model extends MY_Model {
 		return $this;
 	}
 
-	public function where_price($operator = '>', $value = 0)
+	public function select($columns)
 	{
-		$this->db->where("crop_price ".$operator."", $value);
+		$this->db->select($columns);
 		return $this;
 	}
 
-	public function status($status = 'live')
+	public function group()
 	{
-		$this->db->where('status', $status);
+		$this->db->group_by(array('product_id','location_name'));
+		$this->db->order_by('prices.id,crop_date','DESC');
 		return $this;
 	}
 
-	public function with_products()
+	public function group_by($column_name)
 	{
-		$this->db->join('products', 'products.id = prices.product_id');
+		$this->db->group_by($column_name);
 		return $this;
-	}
-
-	public function with_locations()
-	{
-		$this->db->join('locations', 'locations.id = prices.location_id');
-		return $this;	
 	}
 
 	public function product($product_id)
@@ -108,12 +140,6 @@ class Price_model extends MY_Model {
 	public function limit($limit)
 	{
 		$this->db->limit($limit);
-		return $this;
-	}
-
-	public function group_by($columns)
-	{
-		$this->db->group_by($columns);
 		return $this;
 	}
 
