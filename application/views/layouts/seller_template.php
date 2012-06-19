@@ -52,7 +52,7 @@
           <a class="brand" href="<?=base_url();?>">MFarm App</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="<?=base_url();?>"><i class="icon-home icon-white"></i>  Dashboard</a></li>
+              <li><a href="<?=site_url('dashboard');?>"><i class="icon-home icon-white"></i>  Dashboard</a></li>
               <!-- <li><a href="<?=base_url();?>categories/" title="Categories">Categories</a></li> -->
               <li><a href="<?=base_url();?>products/" title="Products"><i class="icon-tags icon-white"></i>  Products</a></li>
               <li><a href="<?=base_url();?>posts/" title="Posts"><i class="icon-th-list icon-white"></i>  Posts</a></li>
@@ -89,8 +89,8 @@
         <div class="span3 sidebar">
             <ul class="nav nav-list well">
               <li class="nav-header">MFarm</li>
-              <li <?php if ( $this->uri->uri_string() == '' ) echo 'class=active'; ?>
-                ><a href="<?=base_url();?>"><i class="icon-home"></i> Home</a></li>
+              <li <?php if ( $this->uri->uri_string() == 'dashboard' ) echo 'class=active'; ?>
+                ><a href="<?=site_url('dashboard');?>"><i class="icon-home"></i> Home</a></li>
               <li <?php if ( $this->uri->uri_string() == 'posts' ) echo 'class=active'; ?> >
                 <a href="<?=base_url();?>posts/"><i class="icon-th-list "></i> Posts</a>
               </li>
