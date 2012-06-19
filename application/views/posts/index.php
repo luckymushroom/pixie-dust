@@ -52,13 +52,13 @@
 			<td><?=$post->product_name;?></td>
 			<td><?=$post->product_weight;?> <?=$post->units;?></td>
 			<td>KES <?=$post->unit_price;?></td>
-			<td><?=$post->delivered;?></td>
+			<td><?=($post->delivered) ? 'YES' : 'NO' ;?></td>
 			<?php if ((int)$post->delivery_date): ?>
 			<td><?=relative_time($post->delivery_date);?></td>
 			<?php else: ?>
 			<td>Not Set</td>
 			<?php endif ?>
-			<td><?=twitter_time_format($post->date_added);?></td>
+			<td><?=twitter_time_format($post->date_created);?></td>
 			<td><?=$post->post_status;?></td>
 			<td>
 				<a href="<?=base_url();?>posts/save_post/<?=$post->id;?>" title="edit"><i class="icon-pencil "></i></a>
