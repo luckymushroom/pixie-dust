@@ -25,9 +25,9 @@
 <link href="<?php echo base_url();?>media/site/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/custom-style.css" rel="stylesheet" type="text/css" />
-<?php if (!$this->uri->segment(1) == 'contact'): ?>
+<?php if ($this->uri->segment(1) != 'contact'): ?>
     <link href="<?=base_url();?>media/site/css/bootstrap.css" rel="stylesheet" type="text/css" />
-<?php endif ?>
+<?php endif; ?>
 
 
 <!-- ////////////////////////////////// -->
@@ -139,7 +139,7 @@
                             <ul id="menu">
                                 <li class="current"><a href="<?=site_url('index');?>">home</a></li>
                                 <li><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
-                                <li><a href="<?=site_url('prices');?>" title="mfarm price information">prices</a></li>
+                                <li><a href="<?=site_url('price');?>" title="mfarm price information">prices</a></li>
                                 <li><a href="<?=site_url('team');?>" title="mfarm team page">team</a></li>
                                 <li><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
                                 <li><a href="<?=site_url('contact');?>" title="contact mfarm">contact</a></li>
