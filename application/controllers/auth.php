@@ -35,7 +35,7 @@ class Auth extends MY_Controller
 		if ($this->ion_auth->logged_in())
 		{
 			//already logged in so no need to access this page
-			redirect('/dashboard/', 'refresh');
+			redirect($this->config->item('base_url'), 'refresh');
 		}
 
 		//validate form input
@@ -262,8 +262,12 @@ class Auth extends MY_Controller
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Mobile Phone Number', 'required|xss_clean|min_length[10]|max_length[12]');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+		$this->form_validation->set_rules('phone1', 'First Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
+		$this->form_validation->set_rules('phone2', 'Second Part of Phone', 'required|xss_clean|min_length[3]|max_length[3]');
+		$this->form_validation->set_rules('phone3', 'Third Part of Phone', 'required|xss_clean|min_length[4]|max_length[6]');
+		$this->form_validation->set_rules('company', 'Company Name', 'required|xss_clean');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+		$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'required');
 
 		if ($this->form_validation->run() == true)
 		{
@@ -274,28 +278,25 @@ class Auth extends MY_Controller
 			$additional_data = array('first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name'),
 				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone'),
+				'phone' => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),
 			);
+			if ($this->input->post('group', TRUE))
+			{
+				$group = array($this->input->post('group'));
+			}
 
 		}
-		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
+		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data,$group))
 		{ //check to see if we are creating the user
 			//redirect them back to the admin page
 			$this->session->set_flashdata('message',"Your has been Account Created, Check your email for the Activation Link.");
-			redirect('/auth/login', 'refresh');
+			redirect('/auth/login/', 'refresh');
 		}
 		else
 		{ //display the create user form
 			//set the flash data error message if there is one
-			if ($this->ion_auth->errors()) 
-			{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-			}
-			if(validation_errors())
-			{
-				$this->session->set_flashdata('message', validation_errors());
-			}
-			
+			$this->session->set_flashdata('message', $this->ion_auth->errors());
+			$this->session->set_flashdata('message', validation_errors());
 
 			$this->data['first_name'] = array(
 				'name'  => 'first_name',
@@ -315,18 +316,43 @@ class Auth extends MY_Controller
 				'type'  => 'text',
 				'value' => $this->form_validation->set_value('email'),
 			);
-			$this->data['phone'] = array(
-				'name'  => 'phone',
-				'id'    => 'phone',
-				'class' => 'input-large',
+			$this->data['company'] = array(
+				'name'  => 'company',
+				'id'    => 'company',
 				'type'  => 'text',
-				'value' => $this->form_validation->set_value('phone'),
+				'value' => $this->form_validation->set_value('company'),
+			);
+			$this->data['phone1'] = array(
+				'name'  => 'phone1',
+				'id'    => 'phone1',
+				'class' => 'input-small',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('phone1'),
+			);
+			$this->data['phone2'] = array(
+				'name'  => 'phone2',
+				'id'    => 'phone2',
+				'class' => 'input-small',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('phone2'),
+			);
+			$this->data['phone3'] = array(
+				'name'  => 'phone3',
+				'id'    => 'phone3',
+				'type'  => 'text',
+				'value' => $this->form_validation->set_value('phone3'),
 			);
 			$this->data['password'] = array(
 				'name'  => 'password',
 				'id'    => 'password',
 				'type'  => 'password',
 				'value' => $this->form_validation->set_value('password'),
+			);
+			$this->data['password_confirm'] = array(
+				'name'  => 'password_confirm',
+				'id'    => 'password_confirm',
+				'type'  => 'password',
+				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 		}
 	}
