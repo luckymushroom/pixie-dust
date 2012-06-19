@@ -11,6 +11,10 @@ class Site extends MY_Controller {
 		parent::__construct();
 		$this->data['page_title'] = '';
 		$this->data['page_subtitle'] = '';
+		$this->load->library('user_agent');
+		if ($this->agent->is_mobile()) {
+			redirect('http://m.mfarm.co.ke','refresh');
+		}
 	}
 
 	public function index()
@@ -20,12 +24,12 @@ class Site extends MY_Controller {
 		$this->data['posts'] =$this->post->with_order_details()->match_products()->with_photos()->with_location()->get_all();
 	}
 
-	public function stories()
+	public function faq()
 	{
-		
+		$this->data['page_title'] = 'FAQs';
 	}
 
-	public function prices()
+	public function price()
 	{
 		$this->data['page_title'] = 'Wholesale Market Price Information';
 		$this->data['prices'] = $this->price->get_prices()->get_all();
@@ -33,7 +37,8 @@ class Site extends MY_Controller {
 
 	public function press()
 	{
-		
+		// Stories will be here
+		$this->data['page_title'] = 'Press Page';
 	}
 
 	public function about()
@@ -62,6 +67,18 @@ class Site extends MY_Controller {
 	{
 		$this->data['page_title'] = 'Contact Us';
 		$this->data['page_subtitle'] = 'Well, We want to Hear from You, too!';
+	}
+
+	/**
+	 * Loads feeds
+	 * @return data array
+	 */
+	function ktn()
+	{
+		$this->layout = FALSE;
+		$this->data['xml_start'] = trim("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+		$this->output->set_header("Content-Type: text/xml"); // important!
+		$this->data['feeds'] = $this->price->get_prices()->get_all();
 	}
 }
 
