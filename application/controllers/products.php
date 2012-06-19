@@ -7,7 +7,7 @@ class Products extends MY_Controller {
 	public function __construct()
 	{
 	   parent::__construct();
-	   // $this->ion_auth->logged_in_check();
+	   $this->ion_auth->logged_in_check();
 	}
 
 	/**
@@ -93,6 +93,71 @@ class Products extends MY_Controller {
 			redirect('products/','refresh');
 		}
 
+	}
+	/**
+	 * Manage products
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 */
+	public function manage_products()
+	{
+		// Load products
+		$this->data['products'] = $this->product->deleted()->get_all();
+	}
+
+	/**
+	 * View Product to update
+	 * @author mogetutu <imogetutu@gmail.com>
+	 * @access public
+	 * @param $id integer
+	 * @return object product
+	 */
+	public function view($id, $errors=array())
+	{
+		// Load categories
+		$this->data['options'] = $this->category->dropdown('id','category_name');
+		// Load selected Product
+		$this->data['product'] = $this->product->get($id);
+		if ($errors) {
+			foreach ($errors as $key => $value) {
+				$this->session->set_flashdata('message', $value);
+			}
+		}
+		
+	}
+
+	public function update($id)
+	{
+		$this->form_validation->set_rules('product_name', 'Product Name', 'required|trim');
+		$this->form_validation->set_rules('product_alias', 'Product Alias', 'required|trim');
+		if($this->form_validation->run() == FALSE)
+		{
+			$errors = $this->form_validation->get_errors_array();
+			if ($errors) 
+			{
+				foreach ($errors as $key => $value) 
+				{
+					$this->session->set_flashdata('message', $value);
+				}
+			}
+			redirect("products/view/{$id}", 'location');
+		}
+		else
+		{
+			$data = $this->input->post();
+			// Update record
+			if($this->product->update($id,$data))
+			{
+				$this->session->set_flashdata('message','Product Updated');
+				redirect('products/manage_products', 'refresh');
+			}
+		}
+	}
+
+
+	public function add_category()
+	{
+		$data = $this->input->post();
 	}
 
 }
