@@ -87,13 +87,13 @@
         </div>
       <?php endif;?>
       <div class="row">
-        <div class="span3 sidebar">
+        <div class="span3 hidden-phone">
             <ul class="nav nav-list well">
               <li class="nav-header">MFarm</li>
               <li <?php if ( $this->uri->uri_string() == '' ) echo 'class=active'; ?>
                 ><a href="<?=base_url();?>"><i class="icon-home"></i> Home</a></li>
               <li <?php if ( $this->uri->uri_string() == 'posts' ) echo 'class=active'; ?> >
-                <a href="<?=base_url();?>prices/manage_prices"><i class="icon-th-list "></i> Posts</a>
+                <a href="<?=base_url();?>prices/manage_posts"><i class="icon-th-list "></i> Posts</a>
               </li>
               <li <?php if ( $this->uri->uri_string() == 'orders' ) echo 'class=active'; ?> >
                 <a href="<?=base_url();?>orders/manage_orders"><i class="icon-inbox"></i> Orders</a>
