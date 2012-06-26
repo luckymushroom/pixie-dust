@@ -15,7 +15,7 @@ class Photo_model extends MY_Model {
 	 */
 	protected function timestamps($photo)
     {
-        $photo['created_at'] = $photo['updated_at'] = date('Y-m-d H:i:s');
+        $photo['date_created'] = $photo['date_updated'] = date('Y-m-d H:i:s');
         return $photo;
     }
 
