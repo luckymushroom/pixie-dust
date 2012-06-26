@@ -71,7 +71,8 @@ class Trends extends MY_Controller
 		//init prices array
 		$prices = array();
 		$months = array();
-		foreach ($prices_result as $row) {
+		foreach ($prices_result as $row) 
+		{
 			$prices[] = round($row->avg_price);
 			$months[] = $row->m_date;
 		}
