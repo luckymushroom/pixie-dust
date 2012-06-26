@@ -14,4 +14,10 @@ class Incoming_text_model extends MY_Model {
 		$post['date_created'] = date('Y-m-d H:i:s'); return $post;
 	}
 
+	public function since($date_range)
+	{
+		$this->db->where('date_created >= ', "'".$date_range."'", FALSE);
+		return $this;
+	}
+
 }
