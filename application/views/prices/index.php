@@ -5,13 +5,12 @@
 <!-- ends here -->
 <form name="prices" id="prices" method="post" action="<?=site_url('prices/change_status');?>">
 <?php if ($prices): ?>
-<table class="table table-bordered table-striped" id="example">
+<table class="table table-bordered" id="example">
 	<thead>
 		<tr>
 			<td><input type="checkbox" id="checkall" value="check all"></td>
 			<th>Name</th>
 			<th>Weight</th>
-			<th>Unit</th>
 			<th>Unit Price</th>
 			<th>Date Posted</th>
 			<th>Collector</th>
@@ -25,8 +24,7 @@
 		<tr>
 			<td><input type="checkbox" id="input" name="status[]" value="<?=$price->id;?>"></td>
 			<td><?=$price->product_name;?></td>
-			<td><?=$price->crop_weight;?> KG</td>
-			<td><?=$price->crop_unit;?></td>
+			<td><?=$price->crop_weight;?> <?=$price->crop_unit;?></td>
 			<td><?=$price->crop_price;?></td>
 			<td><?=$price->crop_date;?></td>
 			<td><?=$price->username;?></td>
@@ -55,7 +53,6 @@
 <?php else: ?>
 	<legend align="center">Welcome, No Prices Collected Today.</legend>
 <?php endif; ?>
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
     $('#checkall').toggle(function(){
