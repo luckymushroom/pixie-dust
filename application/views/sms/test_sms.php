@@ -1,4 +1,4 @@
-<form action="http://mogetutu.dev/pixie-dust/sms" class="form-inline well" method="post">
+<form action="<?=site_url('/sms/');?>" class="form-inline well" method="post">
 	<input type="hidden" name="username" value="info@mfarm.co.ke" placeholder="">
 	<input type="hidden" name="password" value="mfarm1" placeholder="">
 	<input type="text" name="source" value="254722286084" placeholder="">
@@ -8,7 +8,7 @@
 	<input type="text" name="network" value="Safaricom Short Code" placeholder="">
 	<input type="submit" value="Price SMS" name="send sms" class="btn btn-primary">
 </form>
-<form action="http://mogetutu.dev/pixie-dust/sms" class="form-inline well" method="post">
+<form action="<?=site_url('/sms/');?>" class="form-inline well" method="post">
 	<input type="hidden" name="username" value="info@mfarm.co.ke" placeholder="">
 	<input type="hidden" name="password" value="mfarm1" placeholder="">
 	<input type="text" name="source" value="254722286084" placeholder="">
@@ -18,7 +18,7 @@
 	<input type="text" name="network" value="Safaricom Short Code" placeholder="">
 	<input type="submit" value="Join SMS" name="send sms" class="btn btn-primary">
 </form>
-<form action="http://mogetutu.dev/pixie-dust/sms" class="form-inline well" method="post">
+<form action="<?=site_url('/sms/');?>" class="form-inline well" method="post">
 	<input type="hidden" name="username" value="info@mfarm.co.ke" placeholder="">
 	<input type="hidden" name="password" value="mfarm1" placeholder="">
 	<input type="text" name="source" value="254722286084" placeholder="">
