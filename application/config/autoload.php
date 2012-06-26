@@ -90,7 +90,7 @@ $autoload['libraries'] = array('database','session','parser','pagination','form_
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','array','form');
+$autoload['helper'] = array('url','array','form','text');
 
 
 /*
