@@ -28,6 +28,14 @@
 				<input type="text" name="units" class="input-xlarge" id="input01" placeholder="eg. KG" required />
 			</div>
 		</div>
+
+		<div class="control-group">
+			<label class="control-label" for="input01">Packaging</label>
+			<div class="controls">
+				<input type="text" name="package" class="input-xlarge" id="input01" placeholder="eg. Bag, Net, Crate" required />
+			</div>
+		</div>
+
 		<div class="control-group">
             <label class="control-label" for="appendedPrependedInput">Unit Price</label>
             <div class="controls">
@@ -91,7 +99,7 @@ $(function() {
 	$("select#product").change(function(event)
 	{
 		var product_id = $(this).find(':selected').val();
- 		$.getJSON('/posts/price_feed/' + product_id, function(data) {
+ 		$.getJSON('price_feed/' + product_id, function(data) {
         $('#prices tr').remove();
         prices = data;
         $.each(prices, function(index, price) {

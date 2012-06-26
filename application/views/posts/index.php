@@ -33,7 +33,7 @@
 </div>
 <!-- ends here -->
 <?php if ($posts): ?>
-<table class="table table-bordered table-striped" id="example">
+<table class="table table-bordered" id="example">
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -50,7 +50,7 @@
 		<?php foreach ($posts as $post): ?>
 		<tr>
 			<td><?=$post->product_name;?></td>
-			<td><?=$post->product_weight;?> <?=$post->units;?></td>
+			<td><?=$post->product_weight;?> <?=$post->weight_unit;?></td>
 			<td>KES <?=$post->unit_price;?></td>
 			<td><?=($post->delivered) ? 'YES' : 'NO' ;?></td>
 			<?php if ((int)$post->delivery_date): ?>
@@ -61,9 +61,9 @@
 			<td><?=twitter_time_format($post->date_created);?></td>
 			<td><?=$post->post_status;?></td>
 			<td>
-				<a href="<?=base_url();?>posts/save_post/<?=$post->id;?>" title="edit"><i class="icon-pencil "></i></a>
+				<a href="<?=site_url("posts/save_post/{$post->id}");?>" title="edit"><i class="icon-pencil "></i></a>
 				&nbsp;
-				<a href="<?=base_url();?>posts/delete_post/<?=$post->id;?>" title="delete" class="delete"><i class="icon-trash "></i></a>
+				<a href="<?=base_url("posts/delete_post/{$post->id}");?>" title="delete" class="delete"><i class="icon-trash "></i></a>
 			</td>
 		</tr>
 		<?php endforeach ?>

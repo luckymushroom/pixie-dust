@@ -18,7 +18,13 @@
 				<div class="control-group">
 					<label class="control-label" for="input01">Unit Weight</label>
 					<div class="controls">
-						<input type="text" name="units" value="<?=$post->units;?>" class="input-xlarge" id="input01" placeholder="eg. KG" required />
+						<input type="text" name="weight_unit" value="<?=$post->weight_unit;?>" class="input-xlarge" id="input01" placeholder="eg. KG" required />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="input01">Packaging</label>
+					<div class="controls">
+						<input type="text" name="packaging" value="<?=$post->packaging;?>" class="input-xlarge" id="input01" placeholder="eg. Bag, Net, Crate" required />
 					</div>
 				</div>
 				<div class="control-group">
