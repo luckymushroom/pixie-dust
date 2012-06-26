@@ -25,7 +25,7 @@ a:hover{
 	text-decoration:none;
 }
 a img{
-	border:none
+	border:none;
 }
 .imgcenter{
 	margin:18px auto 15px auto;
@@ -3341,7 +3341,7 @@ ul.wine-list > li { margin: 0; padding: 15px 0 15px 130px; min-height: 130px; bo
 ul.wine-list li:first-child { border-top: none; }
 ul.wine-list li h4 { margin: 14px 0 0 0; width: 390px; font-size: 24px; font-weight: normal; line-height: 1; }
 ul.wine-list li p { margin-bottom: 0; width: 390px; font-size: 12px; }
-ul.wine-list li img { position: absolute; top: 15px; left: 0; }
+ul.wine-list li img { position: absolute; top: 15px; left: 0; border:3px solid #ddd;}
 ul.wine-list li input { clear: both; }
 .clearfix{ display: block;}
 
@@ -3374,7 +3374,7 @@ letter-spacing: normal;
 	ul.wine-list li ul.icons { width: 283px; }
 
 	/* ACTIONS */
-	ul.wine-list div.actions { position: absolute; top: 65px; right: 20px; }
+	ul.wine-list div.actions { position: absolute; top: 65px; right: 15px; }
 	ul.wine-list button { height: 29px; display: block; }
 	ul.wine-list button.add-to-cart { width: 156px; background-position: -200px 0; }
 	ul.wine-list button.in-cart { width: 128px; background-position: -200px -30px; }
