@@ -2,7 +2,11 @@
 
 class Prices extends MY_Controller {
 
+	// Load models here
 	protected $models = array('price','product');
+	/**
+	 * Load constructor here
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,36 +14,53 @@ class Prices extends MY_Controller {
 		$this->ion_auth->logged_in_check();
 	}
 
+	/**
+	 * Load the days prices
+	 * @author mogetutu
+	 * @access public
+	 * @return price array for the day.
+	 */
 	public function index()
 	{
-		$this->data['prices'] = $this->price->deleted()->get_all();
+		$this->data['prices'] = $this->price->deleted()->latest()->order_by('product_id')->get_all();
+		// echo "<pre>";
+		// var_dump($this->price->deleted()->latest()->get_all());
+		// echo "</pre>";
 	}
 
-	public function test()
-	{
-		$this->view = false;
-	}
-
+	/**
+	 * Update of price(s) states from live to pending for erroneous records
+	 * @author mogetutu
+	 * @access public
+	 * @return boolean
+	 */
 	public function change_status()
 	{
 		$this->view = false;
 		$status = $this->input->post('submit');
 		$primary_values = $this->input->post('status');
+		$status = ($status == 'Make Pending') ? array('status' => 0) : array('status' => 1);
 
-		$status = ($status == 'pending') ? array('status' => 0) : array('status' => 1) ;
 		// update records
-		if($this->price->update_many($primary_values, $status))
+		if($this->price->update_many($primary_values, $status) AND $this->db->affected_rows())
 		{
 			$this->session->set_flashdata('message','Record(s) Updated');
-			redirect('prices', 'refresh');
+			redirect('/prices/index/', 'refresh');
 		}
 		else
 		{
 			$this->session->set_flashdata('message','Oops something went wrong. Please Try Again.');
-			redirect('prices', 'refresh');
+			redirect('/prices/', 'refresh');
 		}
 	}
 
+	/**
+	 * Load price item for edit or viewing
+	 * @author mogetutu
+	 * @access public
+	 * @param $id integer
+	 * @return void
+	 */
 	public function view($id)
 	{
 		$this->data['options'] = $this->product->dropdown('id','product_name');
@@ -53,6 +74,14 @@ class Prices extends MY_Controller {
 			redirect('prices', 'refresh');
 		}
 	}
+
+	/**
+	 * Updated selected price item
+	 * @author mogetutu
+	 * @access public
+	 * @param $id integer
+	 * @return boolean
+	 */
 	public function edit($id)
 	{
 		$this->view = FALSE;
@@ -74,6 +103,10 @@ class Prices extends MY_Controller {
 		}
 	}
 
+	/**
+	 * Delete price item from records
+	 * @author mogetutu
+	 */
 	public function delete($id)
 	{
 		$delete = $this->price->update($id,array('deleted'=>1));
@@ -89,14 +122,9 @@ class Prices extends MY_Controller {
 		}
 	}
 
-	public function filters($column, $value)
-	{
-		$column = ($column == 'status') ? 'status' : 'location_id' ;
-
-	}
-
 	/**
 	 * Crops that have not been reported
+	 * @author mogetutu
 	 */
 	public function missing_crops()
 	{
