@@ -67,16 +67,19 @@
 $route['default_controller'] = 'site';
 $route['404_override']       = '';
 
-$route['index']         = 'site/index';
-$route['stories']       = 'blog';
-$route['blog']          = 'blog';
-$route['faq']           = 'site/faq';
-$route['price']         = 'site/price';
-$route['press']         = 'site/press';
-$route['about']         = 'site/about';
-$route['team']          = 'site/team';
-$route['services']      = 'site/services';
-$route['contact']       = 'site/contact';
-$route['ktn/index.xml'] = 'site/ktn';
+$route['index']             = 'site/index';
+$route['stories']           = 'blog';
+$route['blog']              = 'blog';
+$route['faq']               = 'site/faq';
+$route['price']             = 'site/price';
+$route['press']             = 'site/press';
+$route['about']             = 'site/about';
+$route['team']              = 'site/team';
+$route['services']          = 'site/services';
+$route['contact']           = 'site/contact';
+$route['ktn/index.xml']     = 'site/ktn';
+$route['blog/manage/posts'] = 'blog/manage_posts';
+$route['blog/update/post/(:num)'] 	= 'blog/update_post/$1';
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
