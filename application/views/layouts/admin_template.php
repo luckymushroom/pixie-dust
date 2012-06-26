@@ -16,23 +16,23 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">body {padding-top: 75px;padding-bottom: 40px;}</style>
     <link href="<?=base_url();?>media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>media/css/docs.css" rel="stylesheet">
     <link href="<?=base_url();?>media/css/site.css" rel="stylesheet">
+    <!-- Dark Theme in the works -->
+    <link href="<?=base_url();?>media/css/darkstrap.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?=base_url();?>media/js/jquery.min.js"></script>
     <script src="<?=base_url();?>media/js/modernizr-2.5.3.min.js"></script>
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="<?=base_url();?>media/img/favicon.ico">
+    <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link rel="apple-touch-icon" href="<?=base_url();?>media/img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?=base_url();?>media/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="<?=base_url();?>media/img/apple-touch-icon-114x114.png">
   </head>
 
   <body>
-  <div id="hellobar-wrapper" class="hellobar-right hellobar-dark-images">
+  <div id="hellobar-wrapper" class="hellobar-right hellobar-dark-images hidden-phone">
     <div id="hellobar-container" class="">
-      <span>Welcome to the New User Panel</span>
-      <a class="hellobar-cta-link" href="#" target="_blank">Update Now &rarr;</a>
+      <span>System Driven Information will be posted here</span>
         <a href="#close" id="hellobar-close">Close</a>
         <div id="hellobar-shadow"></div>
     </div>
@@ -52,11 +52,11 @@
           <a class="brand" href="<?=base_url();?>">MFarm App</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="<?=base_url();?>"><i class="icon-home icon-white"></i>  Dashboard</a></li>
+              <li><a href="<?=site_url('dashboard');?>"><i class="icon-home icon-white"></i>  Dashboard</a></li>
               <!-- <li><a href="<?=base_url();?>categories/" title="Categories">Categories</a></li> -->
               <li><a href="<?=base_url();?>products/manage_products" title="Products"><i class="icon-tags icon-white"></i>  Products</a></li>
-              <li><a href="<?=base_url();?>prices" title="Prices"><i class="icon-eye-open icon-white"></i>  Prices</a></li>
-              <li><a href="<?=base_url();?>sms" title="SMS"><i class="icon-comment icon-white"></i>  Sms</a></li>
+              <li><a href="<?=site_url('/prices/index');?>" title="Prices"><i class="icon-eye-open icon-white"></i>  Prices</a></li>
+              <li><a href="<?=base_url();?>sms/manage_sms" title="SMS"><i class="icon-comment icon-white"></i>  Sms</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Farmers <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -78,8 +78,7 @@
       </div>
     </div>
 
-    <div id='hld'>
-      <div class='container-fluid'>
+    <div class='container-fluid'>
       <?php if ($this->session->flashdata('message')): ?>
         <div class="alert alert-success">
           <a class="close" data-dismiss="alert">&times;</a>
@@ -91,12 +90,15 @@
             <ul class="nav nav-list well">
               <li class="nav-header">MFarm</li>
               <li <?php if ( $this->uri->uri_string() == '' ) echo 'class=active'; ?>
-                ><a href="<?=base_url();?>"><i class="icon-home"></i> Home</a></li>
+                ><a href="<?=site_url('/dashboard/');?>"><i class="icon-home"></i> Home</a></li>
               <li <?php if ( $this->uri->uri_string() == 'posts' ) echo 'class=active'; ?> >
-                <a href="<?=base_url();?>prices/manage_posts"><i class="icon-th-list "></i> Posts</a>
+                <a href="<?=site_url('/posts/');?>"><i class="icon-th-list "></i> Posts</a>
+              </li>
+              <li <?php if ( $this->uri->uri_string() == 'blog/manage' ) echo 'class=active'; ?> >
+                <a href="<?=site_url('/blog/manage');?>"><i class="icon-th-list "></i> Blog</a>
               </li>
               <li <?php if ( $this->uri->uri_string() == 'orders' ) echo 'class=active'; ?> >
-                <a href="<?=base_url();?>orders/manage_orders"><i class="icon-inbox"></i> Orders</a>
+                <a href="<?=site_url('/orders/');?>"><i class="icon-inbox"></i> Orders</a>
               </li>
               <li class="nav-header">Your Account</li>
               <li <?php if ( $this->uri->uri_string() == 'settings/profile' ) echo 'class=active'; ?>>
@@ -125,7 +127,7 @@
       ================================================== -->
       <footer class="footer">
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a> by <a href="http://twitter.com/mogetutu" target="_blank">@mogetutu</a> and <a href="http://twitter.com/kuljay" target="_blank">@jay</a>.</p>
+        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a> by <a href="http://twitter.com/mogetutu" target="_blank">@mogetutu</a> and <a href="http://twitter.com/kuljay" target="_blank">@kuljay</a>.</p>
         <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
       </footer>
 
@@ -134,15 +136,17 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?=base_url();?>media/js/widgets.js"></script>
-    <script src="<?=base_url();?>media/js/bootstrap.min.js"></script>
-    <script src="<?=base_url();?>media/js/bootstrap-datepicker.js"></script>
-    <script src="<?=base_url();?>media/js/jquery.dataTables.js"></script>
-    <script src="<?=base_url();?>media/js/dt_bootstrap.js"></script>
+    <script src="<?=site_url('media/js/widgets.js');?>"></script>
+    <script src="<?=site_url('media/js/wysihtml5.js');?>"></script>
+    <script src="<?=site_url('media/js/bootstrap.min.js');?>"></script>
+    <script src="<?=site_url('media/js/bootstrap-wysihtml5.min.js');?>"></script>
+    <script src="<?=site_url('media/js/bootstrap-datepicker.js');?>"></script>
+    <script src="<?=site_url('media/js/jquery.dataTables.js');?>"></script>
+    <script src="<?=site_url('media/js/dt_bootstrap.js');?>"></script>
     <script src="<?=site_url('media/js/highcharts/js/highcharts.js');?>"></script>
     <script src="<?=site_url('media/js/highcharts/js/modules/exporting.js');?>"></script>
     <script src="<?=site_url('media/js/jquery-cookie.js');?>"></script>
-    <script src="<?=base_url();?>media/js/site.js"></script>
+    <script src="<?=site_url('media/js/site.js');?>"></script>
 
   </body>
 </html>

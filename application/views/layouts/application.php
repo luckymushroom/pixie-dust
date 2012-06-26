@@ -25,7 +25,7 @@
 <link href="<?php echo base_url();?>media/site/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/style.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>media/site/css/custom-style.css" rel="stylesheet" type="text/css" />
-<?php if ($this->uri->segment(1) != 'contact'): ?>
+<?php if ($this->uri->segment(1) != 'contact' AND $this->uri->segment(1) != 'price' ): ?>
     <link href="<?=base_url();?>media/site/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <?php endif; ?>
 
@@ -49,53 +49,8 @@
 <script type="text/javascript" src="<?=base_url();?>media/site/js/jflickrfeed.min.js"></script>
 <script src="<?=base_url();?>media/site/js/bootstrap-modal.js"></script>
 <script src="<?=base_url();?>media/site/js/quickpager.jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){   
-    
-    //Flickr Jquery Setting
-    <!--
-    $('#cbox').jflickrfeed({
-        limit: 14,
-        qstrings: {
-            id: '69259295@N05'
-        },
-        itemTemplate: '<li>'+
-                        '<a rel="colorbox" href="{{image}}" title="{{title}}">' +
-                            '<img src="{{image_s}}" alt="{{title}}" />' +
-                        '</a>' +
-                      '</li>'
-    }, function(data) {
-        $('#cbox a').colorbox();
-    });
-    // -->
-    
-    //Colorbox Setting
-    $("a[rel='portfolio']").colorbox({transition:"fade"});
-    
-    //Tab Jquery
-    $(".tab_content").hide(); 
-    $("ul.tabs li:first").addClass("active").show(); 
-    $(".tab_content:first").show(); 
-    $("ul.tabs li").click(function() {
-        $("ul.tabs li").removeClass("active");
-        $(this).addClass("active"); 
-        $(".tab_content").hide(); 
-        var activeTab = $(this).find("a").attr("href"); 
-        $(activeTab).fadeIn(); 
-        return false;
-    });
-    
-    //Twitter Jquery Setting
-    $("#twitter").getTwitter({
-        userName: "mfarm_ke",
-        numTweets: 3,
-        loaderText: "Loading tweets...",
-        slideIn: true,
-        slideDuration: 750
-    });
+<script src="<?=base_url();?>media/site/js/site.js"></script>
 
-});
-</script>
 <?php if ($this->session->flashdata('message') != ''): ?>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
@@ -126,7 +81,7 @@
                     <div id="righttop-header">
                         <div id="top-social">             
                             <ul>
-                                <li><a class="" href="<?php echo base_url();?>auth" title="login here"><img src="<?php echo base_url();?>media/site/images/top-login.png" alt="Login into the app" /></a></li>
+                                <li><a class="" href="<?=site_url('/auth/login/');?>" title="login here"><img src="<?php echo base_url();?>media/site/images/top-login.png" alt="Login into the app" /></a></li>
                                 <li><a href="https://www.facebook.com/pages/M-Farm/168567086502534" target="_blank" title="facebook"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social1.png" alt="mfarm-facebook" /></a></li>
                                 <li><a href="https://plus.google.com/105305873259684952530?prsrc=3" target="_blank" title="g+"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social2.png" alt="mfarm-google+" /></a></li>
                                 <li><a href="https://twitter.com/#!/mfarm_ke" target="_blank" title="twitter"><img src="<?php echo base_url();?>media/site/images/social-icons/top-social/social3.png" alt="mfarm-twitter" /></a></li>
@@ -136,13 +91,17 @@
                             <h4>Welcome to <span class="title-green">MFarm</span>, you're on the right place to find <br/> many creative agribusiness solutions, because we're a factory of ideas</h4>
                         </div>
                         <div id="mainmenu">
+                            <?php 
+                            $page = $this->uri->segment(1);
+                            $current = 'class=current'; ?>
                             <ul id="menu">
-                                <li class="current"><a href="<?=site_url('index');?>">home</a></li>
-                                <li><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
-                                <li><a href="<?=site_url('price');?>" title="mfarm price information">prices</a></li>
-                                <li><a href="<?=site_url('team');?>" title="mfarm team page">team</a></li>
-                                <li><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
-                                <li><a href="<?=site_url('contact');?>" title="contact mfarm">contact</a></li>
+                                <li <?=($page=='index' || '')?$current:'';?>><a href="<?=site_url('index');?>">home</a></li>
+                                <li <?=($page=='blog')?$current:'';?>><a href="<?=site_url('blog');?>" title="mfarm blog">blog</a></li>
+                                <li <?=($page=='about')?$current:'';?>><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
+                                <li <?=($page=='press')?$current:'';?>><a href="<?=site_url('press');?>" title="mfarm press page">press</a></li>
+                                <li <?=($page=='price')?$current:'';?>><a href="<?=site_url('price');?>" title="mfarm price information">prices</a></li>
+                                <li <?=($page=='service')?$current:'';?>><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
+                                <li <?=($page=='contact')?$current:'';?>><a href="<?=site_url('contact');?>" title="contact mfarm">contact</a></li>
                             </ul>
                         </div>
                     </div>
