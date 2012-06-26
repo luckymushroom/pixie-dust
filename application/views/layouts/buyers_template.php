@@ -13,23 +13,24 @@
 
 
     <!-- Le styles -->
-    <style type="text/css">body {padding-top: 80px;padding-bottom: 40px;}</style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <style type="text/css">body {padding-top: 75px;padding-bottom: 40px;}</style>
     <link href="<?=base_url();?>media/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?=base_url();?>media/css/docs.css" rel="stylesheet">
     <link href="<?=base_url();?>media/css/site.css" rel="stylesheet">
-    <!-- JS -->
+    <!-- Dark Theme in the works -->
+    <link href="<?=base_url();?>media/css/darkstrap.css" rel="stylesheet">
+    <!-- jQuery -->
     <script src="<?=base_url();?>media/js/jquery.min.js"></script>
     <script src="<?=base_url();?>media/js/modernizr-2.5.3.min.js"></script>
-
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="<?=base_url();?>media/img/favicon.ico">
+    <link rel="shortcut icon" href="<?=base_url();?>media/favicon.ico">
     <link rel="apple-touch-icon" href="<?=base_url();?>media/img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="<?=base_url();?>media/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="<?=base_url();?>media/img/apple-touch-icon-114x114.png">
   </head>
 
   <body>
-  <div id="hellobar-wrapper" class="hellobar-right hellobar-dark-images">
+  <div id="hellobar-wrapper" class="hellobar-right hellobar-dark-images hidden-phone">
     <div id="hellobar-container" class="">
       <span>Update you Profile + Other Report Settings and More</span>
       <a class="hellobar-cta-link" href="<?=site_url('settings/profile');?>" target="_blank">Update Now &rarr;</a>
@@ -116,7 +117,7 @@
       ================================================== -->
       <footer class="footer">
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a> by <a href="http://twitter.com/mogetutu" target="_blank">@mogetutu</a> and <a href="http://twitter.com/kuljay" target="_blank">@jay</a>.</p>
+        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a> by <a href="http://twitter.com/mogetutu" target="_blank">@mogetutu</a> and <a href="http://twitter.com/kuljay" target="_blank">@kuljay</a>.</p>
         <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
       </footer>
 
