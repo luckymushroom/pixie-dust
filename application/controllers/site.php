@@ -9,19 +9,20 @@ class Site extends MY_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->layout = 'layouts/application';
 		$this->data['page_title'] = '';
 		$this->data['page_subtitle'] = '';
-		$this->load->library('user_agent');
-		if ($this->agent->is_mobile()) {
-			redirect('http://m.mfarm.co.ke','refresh');
-		}
+		// $this->load->library('user_agent');
+		// if ($this->agent->is_mobile()) {
+		// 	redirect('http://m.mfarm.co.ke','refresh');
+		// }
 	}
 
 	public function index()
 	{
 		// Stories will be here
 		$this->data['page_title'] = 'Homepage';
-		$this->data['posts'] =$this->post->with_order_details()->match_products()->with_photos()->with_location()->get_all();
+		$this->data['posts'] =$this->post->live()->with_order_details()->match_products()->with_photos()->with_location()->order_by('posts.id','desc')->get_all();
 	}
 
 	public function faq()
@@ -32,7 +33,7 @@ class Site extends MY_Controller {
 	public function price()
 	{
 		$this->data['page_title'] = 'Wholesale Market Price Information';
-		$this->data['prices'] = $this->price->get_prices()->get_all();
+		$this->data['prices'] = $this->price->latest()->get_prices()->get_all();
 	}
 
 	public function press()
