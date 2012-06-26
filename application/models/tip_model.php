@@ -2,7 +2,7 @@
 
 class Tip_model extends MY_Model
 {
-	public $before_get = array('join_tables');
+	public $after_get = array( 'get_user' );
 
 	//php 5 constructor
 	function __construct()
@@ -10,12 +10,10 @@ class Tip_model extends MY_Model
 		parent::__construct();
 	}
 
-	public function join_tables()
+	public function get_user($result)
 	{
-		$this->db
-		->select('tips.*,username,first_name,last_name,email')
-		->join('users','users.id = tips.user_id')
-		->order_by('id','DESC');
+		$this->db->where('user_id', $result->user_id, FALSE);
+		$this->db->select('username,first_name,last_name,email', FALSE);
 		return $this;
 	}
 
