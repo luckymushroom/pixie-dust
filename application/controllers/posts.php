@@ -12,7 +12,7 @@
 class Posts extends MY_Controller
 {
 	// Load models
-	protected $models = array('post','product','photo');
+	protected $models = array('post','product','photo','price');
 	/**
 	 * construct, Do your magic here
 	 */
@@ -30,7 +30,14 @@ class Posts extends MY_Controller
 	public function index()
 	{
 		// List Posts
-		$this->data['posts'] = $this->post->deleted()->get_many_by('user_id',$this->current_user);
+		if($this->ion_auth->is_admin())
+		{
+			$this->data['posts'] = $this->post->order_by('posts.id','desc')->get_all();
+		}
+		else
+		{
+			$this->data['posts'] = $this->post->deleted()->get_many_by('user_id',$this->current_user);
+		}
 	}
 
 	public function new_post() {}
@@ -38,7 +45,8 @@ class Posts extends MY_Controller
 	public function price_feed($crop=44)
 	{
 		$this->view = false;
-		$commodity = $this->post->price_feed($crop);
+		$limit = 5;
+		$commodity = $this->price->price_feed($crop,$limit)->get_all();
 		echo json_encode($commodity);
 	}
 	/**
@@ -58,7 +66,6 @@ class Posts extends MY_Controller
 			if($this->input->post())
 			{
 				// Update existing Post
-				$_POST['date_modified'] = date('Y-m-d H:i:s');
 				$update = $this->post->update($post_id,$this->input->post());
 				if($this->db->affected_rows())
 				{
@@ -76,7 +83,6 @@ class Posts extends MY_Controller
 			if($this->input->post())
 			{
 				// Insert new Post
-				$_POST['date_added'] = date('Y-m-d H:i:s');
 				$_POST['user_id'] = $this->current_user;
 				$add = $this->post->insert($this->input->post());
 				if($add)
