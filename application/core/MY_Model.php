@@ -118,25 +118,6 @@ class MY_Model extends CI_Model
     }
 
     /**
-     * Fetch a single record based on an arbitrary LIKE call. Can be
-     * any valid value to $this->db->like().
-     */
-    public function get_like()
-    {
-        $like = func_get_args();
-        $this->_set_like($like);
-
-        $this->_run_before_callbacks('get');
-        $row = $this->db->get($this->_table)
-                        ->{$this->_return_type()}();
-        $this->_temporary_return_type = $this->return_type;
-
-        $this->_run_after_callbacks('get', array( $row ));
-
-        return $row;
-    }
-
-    /**
      * Fetch an array of records based on an array of primary values.
      */
     public function get_many($values)
@@ -198,9 +179,9 @@ class MY_Model extends CI_Model
             $insert_id = $this->db->insert_id();
 
             $this->_run_after_callbacks('create', array( $data, $insert_id ));
-
+            
             return $insert_id;
-        }
+        } 
         else
         {
             return FALSE;
@@ -359,6 +340,13 @@ class MY_Model extends CI_Model
         return $result;
     }
 
+    public function deleted($column = NULL , $status = FALSE)
+    {
+        $column = (is_null($column)) ? $this->_table.'.deleted' : $column ;
+        $this->db->where($column, $status);
+        return $this;
+    }
+
     /* --------------------------------------------------------------
      * UTILITY METHODS
      * ------------------------------------------------------------ */
@@ -393,7 +381,7 @@ class MY_Model extends CI_Model
         {
             $options[$row->{$key}] = $row->{$value};
         }
-
+        
         return $options;
     }
 
@@ -497,13 +485,6 @@ class MY_Model extends CI_Model
         return $this;
     }
 
-    public function deleted($column = NULL , $status = FALSE)
-    {
-        $column = (is_null($column)) ? $this->_table.'.deleted' : $column ;
-        $this->db->where($column, $status);
-        return $this;
-    }
-
     /**
      * A wrapper to $this->db->limit()
      */
@@ -530,7 +511,7 @@ class MY_Model extends CI_Model
         {
             foreach ($this->$name as $method)
             {
-                $data = call_user_func_array(array($this, $method), $params);
+                $data += call_user_func_array(array($this, $method), $params);
             }
         }
 
@@ -616,21 +597,6 @@ class MY_Model extends CI_Model
         else
         {
             $this->db->where($params[0], $params[1]);
-        }
-    }
-
-    /**
-     * Set LIKE parameters, cleverly
-     */
-    private function _set_like($params)
-    {
-        if (count($params) == 1)
-        {
-            $this->db->like($params[0]);
-        }
-        else
-        {
-            $this->db->like($params[0], $params[1]);
         }
     }
 
