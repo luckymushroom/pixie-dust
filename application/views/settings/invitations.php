@@ -7,7 +7,7 @@
 				<input type="text" class="input-medium" value="<?=set_value('first_name');?>" name="first_name" placeholder="First Name" required>
 				<input type="text" class="input-medium" value="<?=set_value('last_name');?>" name="last_name" placeholder="Last Name" required>
 				<input type="text" class="input-medium" value="<?=set_value('email');?>" name="email" placeholder="Email" required>
-				<button type="submit" class="btn btn-primary">Send Invite</button>
+				<button type="submit" class="btn btn-warning">Send Invite</button>
 				<p class="help-block">Please Enter Full names and email address of the person you want to invite.</p>
 		</div>
 	</fieldset>
@@ -21,7 +21,7 @@
 		<a class="btn" href="<?=base_url();?>settings/invitations/pending">Pending</a>
 	</div>
 </div>
-<table class="table table-bordered table-striped" id="example">
+<table class="table table-bordered" id="example">
 	<thead>
 		<tr>
 			<th>Names</th>
