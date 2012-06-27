@@ -69,10 +69,13 @@ class User_model extends MY_Model
 	public function by_group_id($group)
 	{
 		if (is_string($group))
+		{
 			$group_id = self::get_group_id($group);
+		}	
 		else
+		{
 			$group_id = $group;
-
+		}
 		$users = $this->db->select('user_id')->where('group_id', $group_id)->get('users_groups')->result();
 		foreach ($users as $row) {
 			$user_ids[] = $row->user_id;
