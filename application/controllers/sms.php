@@ -53,6 +53,7 @@ class SMS extends MY_Controller {
 		$message_date_time = now();
 		$this->date = date('Y-m-d');
 		$this->load->model('sms_model','sms');
+		$this->layout = 'layouts/admin_template';
 	}
 
 	/**
@@ -82,6 +83,9 @@ class SMS extends MY_Controller {
 					self::price_sms($this->message);
 					break;
 				case 'join':
+					self::subscribe_sms($this->message);
+					break;
+				case 'sub':
 					self::subscribe_sms($this->message);
 					break;
 				case 'sell':
@@ -145,6 +149,9 @@ class SMS extends MY_Controller {
 			if($crop == '' OR $location == '')
 			{
 				$reply = $this->lang->line('error_message_price');
+				$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
+				self::save_outgoing_sms($post);
+				self::send_sms( $reply );
 			}
 			else
 			{
@@ -157,28 +164,37 @@ class SMS extends MY_Controller {
 					{
 						foreach($rows as $row)
 						{
-							$reply = "{$row->product_name} Kshs {$row->crop_price} per {$row->crop_weight} {$row->crop_unit}. powered by samsung.";
+							$reply = "{$row->product_name} Kshs {$row->crop_price} per {$row->crop_weight} {$row->crop_unit} on {$this->date} in {$location}. powered by samsung.";
+							$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
+							self::save_outgoing_sms($post);
+							self::send_sms( $reply );
 						}
 					}
 					else
 					{
 						$reply = $this->lang->line('error_message_price');
+						$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
+						self::save_outgoing_sms($post);
+						self::send_sms( $reply );
 					}
 
 				}
 				else
 				{
 					$reply = $this->lang->line('error_message_price');
+					$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
+					self::save_outgoing_sms($post);
+					self::send_sms( $reply );
 				}
 			}
 		}
 		else
 		{
-			$reply = $this->lang->line('error_message_price');			
+			$reply = $this->lang->line('error_message_price');	
+			$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
+			self::save_outgoing_sms($post);
+			self::send_sms( $reply );		
 		}
-		$post = array('destination'=>$this->mobile_number,'message'=>$reply,'network'=>$this->network);
-		self::save_outgoing_sms($post);
-		self::send_sms( $reply );
 	}
 
 	
@@ -354,11 +370,12 @@ class SMS extends MY_Controller {
 
 	public function default_sms($message)
 	{
-		$text = 'To join send: join firstname secondname location
-				 to check price send: price crop location
-				 to sell produce send:sell crop quantity price
-				 Call 0707 933 993 for help.';
-		self::send_sms($text);
+		$text = 'To join send: join firstname secondname location. For prices send: price crop location. To sell produce:sell crop quantity price. Call 0707 933 993 for help.';
+		$spam = 'FREE SMS: Dear MFarm Customer, we would like to inform you that we switched from 3535 (KES 10) to 3555 (KES 1). Powered By Samsung';
+		//$spam1 = 'FREE SMS: To join mfarm send: join firstname secondname location, to 3555 which is KES 1.00 eg. join john doe nairobi. Powered By Samsung.';
+		// self::send_sms($spam);
+		// self::send_sms($spam1);
+		self::send_sms( $text );
 	}
 	/**
 	 * Encode text for sending over Shujaa Server
@@ -406,6 +423,42 @@ class SMS extends MY_Controller {
 	 */
 	public function test_sms() { }
 
+
+	/**
+	 * SMS Manager
+	 */
+	public function manage_sms()
+	{
+		
+	}
+
+	public function incoming_sms($date_range = 'Today')
+	{
+		$this->session->set_flashdata('referrer',uri_string());
+		// Default get the days incoming sms
+		if($date_range != 'Today')
+		{
+			$date_range = '-'.str_replace('-', ' ', $date_range);
+		}
+		$date_range = date('Y-m-d H:i:s',strtotime($date_range));
+		$this->data['texts'] = $this->incoming_text->since($date_range)->deleted()->order_by('date_created','desc')->get_all();
+	}
+
+	public function delete_sms($id)
+	{
+		$data = array('deleted' => 1);
+		$referrer = $this->session->flashdata('referrer');
+		if($this->incoming_text->update($id,$data))
+		{
+			$this->session->set_flashdata('message','Text Deleted!');
+			redirect($referrer, 'refresh');
+		}
+		else
+		{
+			$this->session->set_flashdata('message','Oops, Text was NOT Deleted!');
+			redirect($referrer, 'refresh');
+		}
+	}
 	/**
 	 * Generate random user password
 	 * @return string users password
@@ -451,5 +504,13 @@ class SMS extends MY_Controller {
 		}
 
 		return $output;
+	}
+
+	public function text_len($string='')
+	{
+		$this->view = false;
+		echo "<pre>";
+		echo strlen('Nokia yesterday unveiled a new crop of smartphones that could put the company back in the smartphone race with rivals iPhone and Android. It could also mark a turnaround for Microsoft\'s unpopular Windows Phone 7 software.');
+		echo "</pre>";
 	}
 }
