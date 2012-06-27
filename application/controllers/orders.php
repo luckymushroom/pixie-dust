@@ -17,6 +17,8 @@ class Orders extends MY_Controller
 	{
 		parent::__construct();
 		//Load Dependencies
+		// Check is bugger is logged
+		$this->ion_auth->logged_in_check();
 	}
 
 	// List all your items
