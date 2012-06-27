@@ -20,7 +20,7 @@ class Price_model extends MY_Model {
 	 */
 	protected function timestamps($price)
     {
-        $price['created_at'] = $price['updated_at'] = date('Y-m-d H:i:s');
+        $price['date_created'] = $price['date_updated'] = date('Y-m-d H:i:s');
         return $price;
     }
     /**
@@ -41,8 +41,11 @@ class Price_model extends MY_Model {
 	 */
 	public function get_product_name($result)
 	{
-		$result->product_name = $this->db->where('id',$result->product_id)->get('products',1)->row()->product_name;
-		return $result;
+		if ($result->product_id) {
+			$result->product_name = $this->db->where('id',$result->product_id)->get('products',1)->row()->product_name;
+			return $result;
+		}
+		
 	}
 	/**
 	 * Get username for user_id in result array
@@ -57,6 +60,13 @@ class Price_model extends MY_Model {
 		return $this;
 	}
 
+	public function latest()
+	{
+		$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
+		$this->db->where('crop_price >', '0');
+		return $this;
+	}
+
 	/**
 	 * [get_prices description]
 	 * @param  crop_date $date=NULL   crop date entry in the database
@@ -66,9 +76,9 @@ class Price_model extends MY_Model {
 	 */
 	function get_prices($date=NULL,$limit=NULL,$offset=NULL)
 	{
-		$this->db->select('prices.id as m_id,product_name,prices.product_id as product_id,prices.location_id,location_name,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,flag,prices.status');
+		$this->db->select('prices.id as m_id,user_id,product_name,prices.product_id as product_id,prices.location_id,location_name,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,flag,prices.status');
 		$this->db->where('crop_price >', '0');
-		$this->db->where('prices.status', 'live');
+		$this->db->where('prices.status', '1');
 		if($date):
 			$this->db->where('crop_date', $date);
 		else:
@@ -78,6 +88,22 @@ class Price_model extends MY_Model {
 		$this->db->join('locations', 'locations.id = prices.location_id');
 		$this->db->group_by(array('product_id','location_name','crop_weight'));
 		$this->db->order_by('prices.product_id','desc');
+		return $this;
+	}
+
+	public function price_feed($crop,$limit)
+	{
+		$this->db->select('product_id,location_id,user_id,crop_weight,crop_unit,crop_date,DATE_FORMAT(crop_date,"%a") as wk_date,
+			MAX(if(location_id = 43,crop_price, NULL)) AS "NBI",
+			MAX(if(location_id = 44,crop_price, NULL)) AS "MSA",
+			MAX(if(location_id = 45,crop_price, NULL)) AS "KSM",
+			MAX(if(location_id = 55,crop_price, NULL)) AS "ELD",
+			MAX(if(location_id = 56,crop_price, NULL)) AS "KTL"', FALSE);
+		$this->db->where('crop_date <', '(SELECT max(crop_date) FROM prices)', FALSE);
+		$this->db->where('product_id', $crop);
+		$this->db->group_by(array('product_id','wk_date'));
+		$this->db->order_by('crop_date', 'desc');
+		$this->db->limit($limit);
 		return $this;
 	}
 
