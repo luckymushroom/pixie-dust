@@ -18,12 +18,8 @@
 // --------------------------------------------------------------------------
 
 // $config['base_url'] = '';
-$config['per_page'] = 2;
 $config['uri_segment'] = 3;
 $config['num_links'] = 9;
-$config['page_query_string'] = TRUE;
-// $config['use_page_numbers'] = TRUE;
-$config['query_string_segment'] = 'page';
 
 $config['full_tag_open'] = '<div class="pagination"><ul>';
 $config['full_tag_close'] = '</ul></div><!--pagination-->';
