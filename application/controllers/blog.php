@@ -7,6 +7,7 @@ class Blog extends MY_Controller {
 	{
 		parent::__construct();
 		$this->layout = ($this->ion_auth->is_admin()) ? 'layouts/admin_template' : 'layouts/application' ;
+		$this->load->library('image_lib');
 	}
 	/**
 	 * Load the blog page
@@ -17,7 +18,17 @@ class Blog extends MY_Controller {
 		// Blog will be here
 		$this->data['page_title'] = 'Our Thoughts';
 		$this->data['page_subtitle'] = 'Sometimes Great Ideas Come From a Story';
-		$this->data['posts'] = $this->blog->deleted()->live()->get_all();
+		// Pagination
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url('/blog/page/');
+		$config['total_rows'] = count($this->blog->live()->deleted()->get_all());
+		$config['per_page'] = 4;
+
+		$this->pagination->initialize($config);
+
+		// List all blog posts
+		$this->data['posts'] = $this->blog->with_author()->deleted()->live()->order_by('blogs.id','desc')->limit($config['per_page'], $this->uri->segment(3))->get_all();
 	}
 
 	public function post($slug='')
@@ -45,25 +56,28 @@ class Blog extends MY_Controller {
 
 	public function save_post($id = '')
 	{
+		$slug = str_replace(' ', '-', strtolower($this->input->post('title', TRUE)));
 		$post = array(
-			'title'            => $this->input->post('title', TRUE),
-			'blog_category_id' => $this->input->post('blog_category_id', TRUE),
-			'intro'            => $this->input->post('intro', TRUE),
-			'body'             => $this->input->post('content', TRUE),
-			'status'           => $this->input->post('status', TRUE)
+			'title'            => $this->input->post('title'),
+			'author_id'        => $this->current_user,
+			'slug'             => $slug,
+			'blog_category_id' => $this->input->post('blog_category_id'),
+			'intro'            => $this->input->post('intro'),
+			'body'             => $this->input->post('body'),
+			'status'           => $this->input->post('status')
 			);
 		if ($id) 
 		{
-			$this->blog->update($id, $post);
-			if($this->db->affected_rows())
+			$update = $this->blog->update($id, $post);
+			if($update && $this->db->affected_rows())
 			{
 				$this->session->set_flashdata('message','Blog Post updated!');
-				redirect('blog/manage_posts', 'refresh');
+				redirect("blog/update/post/{$id}", 'refresh');
 			}
 			else
 			{
 				$this->session->set_flashdata('message','Oops! Problem updating Blog Post!');
-				redirect('blog/add_post', 'refresh');
+				redirect("blog/update/post/{$id}", 'refresh');
 			}
 		}
 		else
@@ -104,6 +118,94 @@ class Blog extends MY_Controller {
 		$blogs = ($category) ? $this->blog->category($category)->deleted()->get_all() : $this->blog->deleted()->get_all();
 		$this->data['blogs'] = $blogs;
 		$this->data['categories'] = $this->blog_category->deleted()->get_all();
+	}
+
+	public function upload_photo($blog_id)
+	{
+		//upload and update the file
+		$config['upload_path'] = './media/blog_photos/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['overwrite'] = TRUE;
+		$config['remove_spaces'] = TRUE;
+		//$config['max_size']   = '100';// in KB
+
+		$this->load->library('upload', $config);
+		if($_FILES['photo']['error'] == 0)
+		{
+			if ( ! $this->upload->do_upload('photo') )
+			{
+			    $this->session->set_flashdata('message', $this->upload->display_errors());
+			    redirect("blog/update/post/{$blog_id}");
+			}
+			else
+			{
+			    //Image Resizing
+			    $config['source_image'] = $this->upload->upload_path.$this->upload->file_name;
+			    $config['maintain_ratio'] = true;
+			    $config['width'] = 200;
+			    $config['height'] = 230;
+
+				$this->image_lib->clear();
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+
+				if ( ! $this->image_lib->resize())
+				{
+			        $this->session->set_flashdata('message', $this->image_lib->display_errors());
+			    }
+
+			    // Create Thumbnail
+				$config['source_image']   = $this->upload->upload_path.$this->upload->file_name;
+				$config['create_thumb']   = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width']          = 125;
+				$config['height']         = 107;
+
+				$this->image_lib->clear();
+                $this->image_lib->initialize($config);
+                $this->image_lib->resize();
+
+				// Blog Photo and thumbnail
+			    $photo_data = array(
+					'image'     => $this->upload->file_name,
+					'thumbnail' => substr($this->upload->file_name, 0, -4)."_thumb".$this->upload->file_ext
+			    	);
+			    $this->blog->update($blog_id,$photo_data);
+			    //Need to update the session information if email was changed
+			    $this->session->set_flashdata('message', 'Your Photo has been Uploaded!');
+			    redirect("blog/update/post/{$blog_id}");
+			}
+		}
+		else
+		{
+			$this->session->set_flashdata('message', $this->upload->display_errors());
+			redirect('posts/save_post/'.$post_id);
+		}
+	}
+	/**
+	 * Delete Photo
+	 * @author mogetutu
+	 * @access public
+	 * @param $post_id int
+	 * @param $photo_id int
+	 */
+	public function delete_photo($post_id)
+	{
+		$photo_data = array( 
+			'thumbnail' =>'', 
+			'image'     =>''
+			);
+		$this->blog->update($post_id, $photo_data);
+		if($this->db->affected_rows())
+		{
+			$this->session->set_flashdata('message','Your Photo has been deleted');
+			redirect('blog/update/post/'.$post_id);
+		}
+		else
+		{
+			$this->session->set_flashdata('message','Ooops Something went wrong!');
+			redirect('blog/update/post/'.$post_id);
+		}
 	}
 
 }
