@@ -96,8 +96,12 @@ class SMS extends MY_Controller {
 					break;
 				case 'aggregate':
 					self::aggregate_sms($this->message);
+					break;
+				case 'samsung':
+					self::default_sms($this->message);
+					break;
 				default:
-					$this->default_sms($this->message);
+					$this->default_sms();
 					break;
 			}
 		}
@@ -368,9 +372,9 @@ class SMS extends MY_Controller {
 		self::send_sms($text);
 	}
 
-	public function default_sms($message)
+	public function default_sms()
 	{
-		$text = 'To join send: join firstname secondname location. For prices send: price crop location. To sell produce:sell crop quantity price. Call 0707 933 993 for help.';
+		$text = 'To join send: join firstname secondname location. For prices send: price crop location. To sell produce:sell crop quantity price. Powered By Samsung.';
 		$spam = 'FREE SMS: Dear MFarm Customer, we would like to inform you that we switched from 3535 (KES 10) to 3555 (KES 1). Powered By Samsung';
 		//$spam1 = 'FREE SMS: To join mfarm send: join firstname secondname location, to 3555 which is KES 1.00 eg. join john doe nairobi. Powered By Samsung.';
 		// self::send_sms($spam);
