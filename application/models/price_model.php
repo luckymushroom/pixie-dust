@@ -20,7 +20,7 @@ class Price_model extends MY_Model {
 	 */
 	protected function timestamps($price)
     {
-        $price['date_created'] = $price['date_updated'] = date('Y-m-d H:i:s');
+        $price['created_at'] = $price['updated_at'] = date('Y-m-d H:i:s');
         return $price;
     }
     /**
