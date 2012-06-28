@@ -13,7 +13,7 @@ class Blog_model extends MY_Model {
 
 	public function date_modified($post)
 	{
-		$post->date_modified = date('Y-m-d H:i:s');
+		$post['date_modified'] = date('Y-m-d H:i:s');
 		return $post;
 	}
 
@@ -27,6 +27,12 @@ class Blog_model extends MY_Model {
 	public function live()
 	{
 		$this->db->where('status', TRUE);
+		return $this;
+	}
+
+	public function with_author()
+	{
+		$this->db->join('users', 'blogs.author_id = users.id','left');
 		return $this;
 	}
 
