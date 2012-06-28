@@ -38,13 +38,13 @@
 	</form>
 	</div>
 	<div class="span3">	
-	<legend>Upload Photos</legend>
+	<legend>Upload Photo</legend>
 	<?php if ($post->image): ?>
 		<ul class="thumbnails">
 			<li class="span2">
 				<div class="thumbnail">
 	      			<a href='<?=site_url("blog/delete_photo/{$post->id}");?>' onclick="return confirm('Are you sure you want to delete this Photo?')" title="Delete Photo">
-	      			<img src='<?=site_url("media/blog/{$post->image}");?>' alt="" rel="popover" data-content="Click to Delete photo" data-original-title="Hi" data-placement="bottom">
+	      			<img src='<?=site_url("media/blog_photos/{$post->image}");?>' alt="" rel="popover" data-content="Click to Delete photo" data-original-title="Info" data-placement="bottom">
 	      			</a>
 	    		</div>
 			</li>
@@ -53,11 +53,6 @@
 	<!-- Upload form here -->
 		<form class="form-inline" action="<?=site_url('blog/upload_photo/'.$post->id);?>" method="post" enctype="multipart/form-data">
 			<fieldset>
-				<div class="control-group">
-					<div class="controls">
-						<input type="text" name="caption" class="input-xlarge" placeholder="Caption" id="input01">
-					</div>
-				</div>
 				<div class="control-group">
 					<div class="controls">
 						<input class="input-file" id="fileInput" type="file" name="photo">
