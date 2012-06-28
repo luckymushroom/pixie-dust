@@ -6,9 +6,9 @@
                     <img src="<?=base_url();?>media/site/images/blog-img1-1.jpg" alt="" class="imgborder2" />                                  
                 </div>
                 <div class="post-content2">
-                    <h5><a href="<?=site_url('blog/post/');?>">Nokia with First Windows Phone Handsets</a></h5>
+                    <h5><a href="<?=site_url("blog/post/{$post->id}");?>"><?=$post->title;?></a></h5>
                     <div class="post-info2">
-                        <span><img src="<?=base_url();?>media/site/images/blog-author.png" alt="" /></span> <span><a href="#">John Doe</a> &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+                        <span><img src="<?=base_url();?>media/site/images/blog-author.png" alt="" /></span> <span><a href="#"><?=$post->username;?></a> &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                         <span><img src="<?=base_url();?>media/site/images/blog-date.png" alt="" /></span> <span>Okt 28 2011</span>
                     </div>
                     <p>Nokia yesterday unveiled a new crop of smartphones that could put the company back in the smartphone race with rivals iPhone and Android. It could also mark a turnaround for Microsoft's unpopular Windows Phone 7 software.</p>
@@ -28,9 +28,7 @@
             
             <!-- begin of pagination -->
             <div class="blog-pagination">
-                <div class="pages blogpages">
-                    <span class="pageof">Page 1 of 3</span><a href="#" class="current">1</a><a href="#">2</a><a href="#">3</a><a href="#">&raquo;</a>
-                </div>
+                <?=$this->pagination->create_links();?>
             </div>
             <!-- end of pagination -->                        
         </div>
@@ -104,8 +102,7 @@
                 </ul>
             </div>
         </div>
-        <!-- END OF SIDEBAR -->             
-    
+        <!-- END OF SIDEBAR -->
     </div>
 </div>            
 <!-- END OF CONTENT -->
