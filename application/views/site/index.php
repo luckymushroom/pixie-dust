@@ -9,7 +9,7 @@
             <h3><?=$row->product_name;?></h3>
             <h5><?=$row->product_weight;?> <?=$row->weight_unit;?></h5>
             <a href="<?=base_url();?>soko/item" title="<?=$row->product_name;?>">
-                <img src="<?=base_url();?>media/crops/<?=$row->photo;?>" alt="<?=$row->image;?>" width="120" height="120">
+                <img src="<?=base_url("media/crops/{$row->photo}");?>" alt="<?=$row->image;?>" width="120" height="120">
             </a>
             <ul class="details clearfix">
                 <li class="price"><sup>KES</sup><?=$row->unit_price;?><sup>per <?=$row->packaging;?></sup></li>

@@ -66,7 +66,7 @@
 
             <div class="sidebar-content">
                 <ul class="sponsor-list">
-                    <li><a href="#"><img src="<?=base_url();?>media/site/images/banner1.png" alt="" /></a></li>        
+                    <li><a href="#"><img src="<?=base_url();?>media/site/images/banner2.png" alt="" /></a></li>        
                 </ul>
             </div>
 
@@ -75,8 +75,8 @@
                 <ul class="popular-list">
                     <?php foreach ($classifieds as $row): ?>
                         <li>
-                        <img src="<?=base_url("media/site/images/blog-img3.jpg");?>" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Supercar A Bolt from Les Bleus</a></p>
+                        <img src="<?=base_url("media/crops/{$row->photo}");?>" alt="" class="imgborder2" />                                                
+                        <p class="popular-title"><a href="<?=site_url('marketplace');?>"><?=$row->product_name;?></a></p>
                         <p>KES <?=$row->unit_price;?> per <?=$row->packaging;?></p>                        
                     </li>
                     <?php endforeach ?>                   

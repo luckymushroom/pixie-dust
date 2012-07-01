@@ -38,28 +38,23 @@
 
             <div class="sidebar-content">
                 <ul class="sponsor-list">
-                    <li><a href="#"><img src="<?=base_url();?>media/site/images/banner1.png" alt="" /></a></li>        
+                    <li><a href="#"><img src="<?=base_url();?>media/site/images/banner2.png" alt="" /></a></li>        
                 </ul>
             </div>
 
-            <h5>Classifieds</h5>
+            <?php if ($classifieds): ?>
+                <h5>Classifieds</h5>
                 <ul class="popular-list">
-                    <li>
-                        <img src="<?=base_url();?>media/site/images/blog-img3.jpg" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Supercar A Bolt from Les Bleus</a></p>
-                        <p>12 Comments</p>                        
+                    <?php foreach ($classifieds as $row): ?>
+                        <li>
+                        <img src="<?=base_url("media/crops/{$row->photo}");?>" alt="" class="imgborder2" />                                                
+                        <p class="popular-title"><a href="<?=site_url('marketplace');?>"><?=$row->product_name;?></a></p>
+                        <p>KES <?=$row->unit_price;?> per <?=$row->packaging;?></p>                        
                     </li>
-                    <li>
-                        <img src="<?=base_url();?>media/site/images/blog-img1.jpg" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Nokia with First Windows Phone Handsets</a></p>
-                        <p>8 Comments</p>                              
-                    </li>
-                    <li>
-                        <img src="<?=base_url();?>media/site/images/blog-img2.jpg" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Artificial Blood That Could be Used Transfusions</a></p>
-                        <p>4 Comments</p>                                
-                    </li>                     
+                    <?php endforeach ?>                   
                 </ul>
+            <?php endif ?>
+            
             </div>
 
             <div class="sidebar-content">
