@@ -29,8 +29,8 @@
             </div>
 
             <div class='form-actions'>
+                  <a href="<?=site_url('auth/login');?>" class="btn btn-warning" title="Sign In">Cancel</a>
                   <?php echo form_submit('submit', 'Create User','class="btn btn-success"');?>
-                  <a href="<?=site_url('auth/login');?>" class="btn btn-warning" title="Sign In">Sign In</a>
             </div>
       <?php echo form_close();?>
 </div>

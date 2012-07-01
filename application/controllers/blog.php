@@ -2,12 +2,12 @@
 
 class Blog extends MY_Controller {
 
-	protected $models = array('blog','blog_category');
+	protected $models = array('blog','blog_category','post');
 	public function __construct()
 	{
 		parent::__construct();
-		$this->layout = ($this->ion_auth->is_admin()) ? 'layouts/admin_template' : 'layouts/application' ;
 		$this->load->library('image_lib');
+		$this->data['classifieds'] =$this->post->live()->with_order_details()->match_products()->with_photos()->with_location()->order_by('posts.id','desc')->limit(3)->get_all();
 	}
 	/**
 	 * Load the blog page
@@ -28,14 +28,15 @@ class Blog extends MY_Controller {
 		$this->pagination->initialize($config);
 
 		// List all blog posts
-		$this->data['posts'] = $this->blog->with_author()->deleted()->live()->order_by('blogs.id','desc')->limit($config['per_page'], $this->uri->segment(3))->get_all();
+		$this->data['posts'] = $this->blog->deleted()->live()->order_by('blogs.id','desc')->limit($config['per_page'], $this->uri->segment(3))->get_all();
 	}
 
-	public function post($slug='')
+	public function post($slug)
 	{
 		$this->layout = 'layouts/application' ;
 		$this->data['page_title'] = 'Our Thoughts';
 		$this->data['page_subtitle'] = 'Sometimes Great Ideas Come From a Story';
+		$this->data['post'] = $this->blog->get($slug);
 	}
 	/**
 	 * Add new blog post
@@ -45,13 +46,19 @@ class Blog extends MY_Controller {
 	 */
 	public function add_post()
 	{
-
+		// Get all categories
+		// create and empty record and redirect
+		$post = array('title' => 'Draft Post');
+		$this->blog->insert($post);
+		$post_id = $this->db->insert_id();
+		if($post_id)
+			redirect("blog/update/post/{$post_id}", 'refresh');
 	}
 
 	public function update_post($id)
 	{
-		$this->layout = 'layouts/admin_template' ;
 		$this->data['post'] = $this->blog->get($id);
+		$this->data['categories'] = $this->blog_category->dropdown('id','title');
 	}
 
 	public function save_post($id = '')
@@ -65,7 +72,7 @@ class Blog extends MY_Controller {
 			'intro'            => $this->input->post('intro'),
 			'body'             => $this->input->post('body'),
 			'status'           => $this->input->post('status')
-			);
+		);
 		if ($id) 
 		{
 			$update = $this->blog->update($id, $post);
@@ -104,7 +111,6 @@ class Blog extends MY_Controller {
 	 */
 	public function manage($section = 'blog')
 	{
-		$this->layout = 'layouts/admin_template' ;
 	}
 	/**
 	 * Load Blogs and Categories
@@ -114,7 +120,6 @@ class Blog extends MY_Controller {
 	 */
 	public function manage_posts($category = '')
 	{
-		$this->layout = 'layouts/admin_template' ;
 		$blogs = ($category) ? $this->blog->category($category)->deleted()->get_all() : $this->blog->deleted()->get_all();
 		$this->data['blogs'] = $blogs;
 		$this->data['categories'] = $this->blog_category->deleted()->get_all();

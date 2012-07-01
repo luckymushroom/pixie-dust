@@ -6,7 +6,9 @@ class Help extends MY_Controller
 	{
 	   parent::__construct();
 	   //Do your magic here
-	   $this->layout = 'seller_template';
+	   $seller = 'layouts/seller_template';
+	   $admin = 'layouts/admin_template';
+	   $this->layout = ($this->ion_auth->in_group('admin')) ? $admin : $seller ;
 	}
 
 	public function index()

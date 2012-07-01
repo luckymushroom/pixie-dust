@@ -8,6 +8,9 @@ class Trends extends MY_Controller
 	{
 		parent::__construct();
 		$this->ion_auth->logged_in_check();
+	   $seller = 'layouts/seller_template';
+	   $admin = 'layouts/admin_template';
+	   $this->layout = ($this->ion_auth->in_group('admin')) ? $admin : $seller ;
 	}
 	/**
 	 * Load trends for the user

@@ -98,10 +98,10 @@ class SMS extends MY_Controller {
 					self::aggregate_sms($this->message);
 					break;
 				case 'samsung':
-					self::default_sms($this->message);
+					self::default_sms();
 					break;
 				default:
-					$this->default_sms();
+					self::default_sms();
 					break;
 			}
 		}

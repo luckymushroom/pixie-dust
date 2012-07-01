@@ -3,24 +3,22 @@
             <?php foreach ($posts as $post): ?>
             <div class="blog-post"><!-- blog posts here --> 
                 <div class="post-image">
-                    <img src="<?=base_url();?>media/site/images/blog-img1-1.jpg" alt="" class="imgborder2" />                                  
+                    <img src='<?=base_url("media/blog_photos/{$post->image}");?>' alt="" class="imgborder2" />                                  
                 </div>
                 <div class="post-content2">
                     <h5><a href="<?=site_url("blog/post/{$post->id}");?>"><?=$post->title;?></a></h5>
                     <div class="post-info2">
-                        <span><img src="<?=base_url();?>media/site/images/blog-author.png" alt="" /></span> <span><a href="#"><?=$post->username;?></a> &nbsp;&nbsp;|&nbsp;&nbsp; </span>
-                        <span><img src="<?=base_url();?>media/site/images/blog-date.png" alt="" /></span> <span>Okt 28 2011</span>
+                        <span><img src="<?=base_url();?>media/site/images/blog-author.png" alt="" /></span> <span><a href="#"><?=$post->author;?></a> &nbsp;&nbsp;|&nbsp;&nbsp; </span>
+                        <span><img src="<?=base_url();?>media/site/images/blog-date.png" alt="" /></span> <span><?=date('F, m Y',strtotime($post->date_modified));?></span>
                     </div>
-                    <p>Nokia yesterday unveiled a new crop of smartphones that could put the company back in the smartphone race with rivals iPhone and Android. It could also mark a turnaround for Microsoft's unpopular Windows Phone 7 software.</p>
+                    <p><?=$post->intro;?></p>
                     <div class="social-button">
                         <ul class="sharesocial-bloglist">
                             <li><a href="#"><img src="<?=base_url();?>media/site/images/social-icons/top-social/social1.png" alt="" /></a></li>
                             <li><a href="#"><img src="<?=base_url();?>media/site/images/social-icons/top-social/social2.png" alt="" /></a></li>
                             <li><a href="#"><img src="<?=base_url();?>media/site/images/social-icons/top-social/social3.png" alt="" /></a></li>
-                            <li><a href="#"><img src="<?=base_url();?>media/site/images/social-icons/top-social/social4.png" alt="" /></a></li>
-                            <li><a href="#"><img src="<?=base_url();?>media/site/images/social-icons/top-social/social5.png" alt="" /></a></li>
                         </ul>
-                        <a href="<?=site_url('blog/post/');?>" class="button small gray"><span>read full article &raquo;</span></a>
+                        <a href="<?=site_url("blog/post/{$post->id}");?>" class="button small gray"><span>read full article &raquo;</span></a>
                     </div>                                
                 </div>                            
             </div>

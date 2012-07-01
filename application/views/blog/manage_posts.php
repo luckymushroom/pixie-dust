@@ -1,8 +1,8 @@
 <div class='page-header'>
 	<div class='pull-right'>
 		<div class='btn-group'>
-			<a href="<?=site_url('/blog/add_post');?>" class='btn btn-success'><i class='icon-plus-sign icon-white'></i> New Post</a>
 			<a href="<?=site_url('/blog/add_category');?>" class='btn btn-success'><i class='icon-plus-sign icon-white'></i> New Category</a>
+			<a href="<?=site_url('/blog/view_category');?>" class='btn btn-success'><i class='icon-plus-sign icon-white'></i> View Categories</a>
 		</div>
 	</div>
 	<h2>Blog Posts</h2>
@@ -22,7 +22,7 @@
 	<?php endforeach ?>
 	<div class="span3">
 	  <div class="project thumbnail new-project">
-		  <h1><a href="">+</a></h1>
+		  <h1><a href="<?=site_url('/blog/add_post');?>">+</a></h1>
 	  </div>
 	</div>
 </div>

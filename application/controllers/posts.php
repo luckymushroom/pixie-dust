@@ -21,6 +21,9 @@ class Posts extends MY_Controller
 	   parent::__construct();
 	   $this->ion_auth->logged_in_check();
 	   $this->data['products'] = $this->product->dropdown('product_name');
+	   $seller = 'layouts/seller_template';
+	   $admin = 'layouts/admin_template';
+	   $this->layout = ($this->ion_auth->in_group('admin')) ? $admin : $seller ;
 	}
 	/**
 	 * @author isaak mogetutu <imogetutu@gmail.com>

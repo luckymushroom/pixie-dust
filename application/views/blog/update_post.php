@@ -1,35 +1,40 @@
 <div class="row">
-	<div class="span6">
+	<div class="span8 offset1">
+	<div class='page-header'>
+		<div class='btn-group pull-right'>
+			<a href="<?=site_url('/blog/manage_posts/');?>" class='btn'> &larr; Back to Posts</a>
+		</div>
+		<h2>Publish Post</h2></div>
+
 	<form action='<?=site_url("blog/save_post/{$post->id}");?>' method='post'>
 		<div class='page-header'>
-			<input type="text" name="title" value="<?=$post->title;?>" class="input-xlarge span6" id="input01" placeholder='Title'>
+			<input type="text" name="title" value="<?=$post->title;?>" class="input-xlarge span8" id="input01" placeholder='Title'>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<textarea class="input-xlarge span6" name='intro' id="textarea" rows="5" placeholder='Intro/Excerpt'>
+				<textarea class="input-xlarge span8" name='intro' id="textarea" rows="5" placeholder='Intro/Excerpt'>
 					<?=($post->intro) ? $post->intro : ''; ?>
 				</textarea>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<textarea class="input-xlarge span6" name='body' id="textarea1" rows="9" placeholder='Body/Content'>
+				<textarea class="input-xlarge span8" name='body' id="textarea1" rows="12" placeholder='Body/Content'>
 					<?=($post->body) ? $post->body : ''; ?>
 				</textarea>
 			</div>
 		</div>
+
 		<div class="control-group">
 			<div class="controls">
-				<div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Action</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-					</ul>
-				</div>
+				<?php echo form_dropdown('category_id', $categories, '1'); ?>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="controls">
+				<select name='status'><option value='0'>draft</option><option value='1'>live</option></select>
+				<?php echo $post->status; ?>
 			</div>
 		</div>
 		<div class='controls'>
@@ -38,7 +43,7 @@
 	</form>
 	</div>
 	<div class="span3">	
-	<legend>Upload Photo</legend>
+	<div class='page-header'><h3>Upload cover photo</h3></div>
 	<?php if ($post->image): ?>
 		<ul class="thumbnails">
 			<li class="span2">
@@ -65,10 +70,3 @@
 		</form>
 </div>
 </div>
-<script type="text/javascript">
-	jQuery(document).ready(function() {
-		$('#textarea').wysihtml5();
-		$('#textarea1').wysihtml5();
-	});
-	
-</script>

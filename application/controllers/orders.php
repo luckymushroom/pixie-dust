@@ -19,6 +19,9 @@ class Orders extends MY_Controller
 		//Load Dependencies
 		// Check is bugger is logged
 		$this->ion_auth->logged_in_check();
+		$seller = 'layouts/seller_template';
+		$admin = 'layouts/admin_template';
+		$this->layout = ($this->ion_auth->in_group('admin')) ? $admin : $seller ;
 	}
 
 	// List all your items
@@ -47,7 +50,10 @@ class Orders extends MY_Controller
 		{
 			$post_ids[] = $post->id;
 		}
-		return $post_ids;
+		if(! empty($post_ids))
+			return $post_ids;
+		else
+			return NULL;
 	}
 
 	public function order_details($order_id)

@@ -4,6 +4,7 @@ class Blog_model extends MY_Model {
 
 	public $before_update = array('date_modified');
 	public $before_create = array('date_modified');
+	public $after_get = array('get_author');
 
 	public function __construct()
 	{
@@ -32,8 +33,14 @@ class Blog_model extends MY_Model {
 
 	public function with_author()
 	{
-		$this->db->join('users', 'blogs.author_id = users.id','left');
+		$this->db->join('users', 'blogs.author_id = users.id');
 		return $this;
+	}
+
+	public function get_author($result)
+	{
+		$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
+		return $result;
 	}
 
 }

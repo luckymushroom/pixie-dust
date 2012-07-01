@@ -78,10 +78,10 @@ $query_builder = TRUE;
 
 $db['production'] = array(
 	'dsn'	=> '',
-	'hostname' => '127.0.0.1',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'production_zeamays',
+	'hostname' => 'internal-db.s111833.gridserver.com',
+	'username' => 'db111833_mfarm',
+	'password' => 'mfarm2010',
+	'database' => 'db111833_zeamays',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
