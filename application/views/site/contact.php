@@ -42,7 +42,7 @@
         Nairobi, KENYA<br/>
         </p>
         <p>
-        <img src="<?=base_url();?>media/site/images/contact-phone.png" alt="" class="contact-icon" />+254 722 286084<br/>
+        <img src="<?=base_url();?>media/site/images/contact-phone.png" alt="" class="contact-icon" />+254 707 993 933<br/>
         <img src="<?=base_url();?>media/site/images/contact-email.png" alt="" class="contact-icon" />info@mfarm.co.ke<br/>
         <img src="<?=base_url();?>media/site/images/contact-web.png" alt="" class="contact-icon" />www.mfarm.co.ke
         </p>
