@@ -5,6 +5,7 @@
 <link href="https://plus.google.com/105305873259684952530" rel="publisher" />
 <meta name="description" content="MFarm website homepage">
 <meta name="keywords" content="mfarm,mfarm_ke,m farm,m farm kenya,mobile farmer,mobile farming,kenya mfarm, mfarm kenya,mfarm price">
+<meta name="keywords" content="mfarm, mfarmer, mfarm_ke,m farm,m farm kenya,mobile farmer,mobile farming,kenya mfarm, mfarm kenya,mfarm price">
 <meta name="author" content="jamila,susaneve,linda,mogetutu,melvin">
 <meta name="robots" content="index, follow">
 <!-- Apple iOS and Android stuff -->
