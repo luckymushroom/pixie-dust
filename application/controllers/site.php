@@ -21,7 +21,7 @@ class Site extends MY_Controller {
 	public function index()
 	{
 		// Stories will be here
-		$this->data['page_title'] = 'Homepage';
+		$this->data['page_title'] = 'Marketplace';
 		$this->data['posts'] =$this->post->live()->with_order_details()->match_products()->with_photos()->with_location()->order_by('posts.id','desc')->get_all();
 	}
 
@@ -40,6 +40,45 @@ class Site extends MY_Controller {
 	{
 		// Stories will be here
 		$this->data['page_title'] = 'Press Page';
+		$this->data['links'] = Page::find('all',array('conditions'=>array('deleted = ? AND page = ?',0,'press')));
+	}
+
+	public function admin($section)
+	{
+		// Check is bugger is logged
+		$this->ion_auth->logged_in_check();
+		$this->layout = 'layouts/blog';
+		$this->data['items'] = Page::find('all',array('conditions' => array('deleted = ? AND page = ?', 0, $section)));
+	}
+
+	public function admin_add($section)
+	{
+		$item = new Page();
+		$item->title = 'Draft '.$section.' Item';
+		$item->page = $section;
+		$item->save();
+		redirect("/site/admin_edit/{$item->id}", 'refresh');
+	}
+
+	public function admin_edit($id)
+	{
+		// Check is bugger is logged
+		$this->ion_auth->logged_in_check();
+		$this->layout = 'layouts/blog';
+		$press_item = Page::find($id);
+		$this->data['item'] = $press_item;
+		if($this->input->post())
+		{
+			$press_item->title         = $this->input->post('title', TRUE);
+			$press_item->visual        = $this->input->post('visual', TRUE);
+			$press_item->body          = $this->input->post('body', TRUE);
+			$press_item->external_link = $this->input->post('external_link', TRUE);
+			$press_item->source        = $this->input->post('source', TRUE);
+			$press_item->author_id     = $this->current_user;
+			$press_item->save();
+			$this->session->set_flashdata('message','Press Item Updated!');
+			redirect('/site/admin/press', 'refresh');
+		}
 	}
 
 	public function about()
