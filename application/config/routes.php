@@ -64,10 +64,10 @@
 |
 */
 
-$route['default_controller'] = 'site';
+$route['default_controller'] = 'blog';
 $route['404_override']       = '';
 
-$route['index']             = 'site/index';
+$route['market']             = 'site/index';
 $route['stories']           = 'blog';
 $route['blog']              = 'blog';
 $route['blog/page']  = 'blog/index';
