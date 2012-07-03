@@ -15,6 +15,8 @@ class Tip_model extends MY_Model
 		$this->db->where('user_id', $result->user_id, FALSE);
 		$this->db->select('username,first_name,last_name,email', FALSE);
 		return $this;
+		$result->username = $this->db->get_where('users', array('id'=>$result->user_id))->row()->username;
+		return $result;
 	}
 
 }
