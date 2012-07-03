@@ -75,8 +75,6 @@ class SMS extends MY_Controller {
 		// Check for number, keywords in message
 		if((isset($this->mobile_number)) && (isset($this->message)))
 		{
-			// Explode message to get keywords sepator is space
-			$exploded_message = explode(' ', $this->message);
 			// Explode message to get keywords separator is space
 			$this->message = preg_replace('/[\.]+$/','',$this->message);
 			$this->message = preg_replace('/[\.\_\-\W]+/',' ',$this->message);
@@ -85,24 +83,30 @@ class SMS extends MY_Controller {
 			$keyword = strtolower($exploded_message[0]);
 			switch ($keyword) {
 				case 'price':
-					self::price_sms($this->message);
+					self::price_sms($message);
 					break;
 				case 'join':
-					self::subscribe_sms($this->message);
+					self::subscribe_sms($message);
 					break;
 				case 'sub':
-					self::subscribe_sms($this->message);
+					self::subscribe_sms($message);
 					break;
 				case 'sell':
-					self::sell_sms($this->message);
+					self::sell_sms($message);
 					break;
 				case 'buy':
-					self::buy_sms($this->message);
+					self::buy_sms($message);
 					break;
 				case 'aggregate':
 					self::aggregate_sms($this->message);
+					self::aggregate_sms($message);
 					break;
 				case 'samsung':
+				case 'sumsung':
+				case 'sam':
+				case 'sum':
+				case 'samsang':
+				case 'samsug':
 					self::default_sms();
 					break;
 				default:
