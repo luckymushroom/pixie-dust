@@ -18,7 +18,7 @@
     <link href="<?=base_url();?>media/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?=base_url();?>media/css/site.css" rel="stylesheet">
     <!-- Dark Theme in the works -->
-    <link href="<?=base_url();?>media/css/darkstrap.css" rel="stylesheet">
+    <!-- <link href="<?=base_url();?>media/css/darkstrap.css" rel="stylesheet"> -->
     <!-- jQuery -->
     <script src="<?=base_url();?>media/js/jquery.min.js"></script>
     <script src="<?=base_url();?>media/js/modernizr-2.5.3.min.js"></script>
