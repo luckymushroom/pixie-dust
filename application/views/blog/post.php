@@ -32,29 +32,17 @@
             </div>
             <!--End sharing box--> 
             
+
             <!-- Begin of Related Post -->
+            <?php if ($related_posts): ?>
             <div id="recentPostList">
                 <div id="related-post-title"><h5>Related Posts</h5></div>                                           
-                <div class="related-item-wrapper"><!-- related item -->                                                             
+                <div class="related-item-wrapper"><!-- 4 related items -->                                                             
                     <a href="blog.html"><img src="<?=base_url();?>media/site/images/related-pic1.jpg" alt="" class="img-related" /></a>
                     <p><a href="blog.html">Nemo enim ipsam voluptate quia voluptas tempora</a></p>
-                </div>
-                        
-                <div class="related-item-wrapper"><!-- related item -->                                                             
-                    <a href="blog.html"><img src="<?=base_url();?>media/site/images/related-pic2.jpg" alt="" class="img-related" /></a>
-                    <p><a href="blog.html">Accusamus tolo dignissimos ducimus blanditiis explora</a></p>
-                </div>
-                       
-                <div class="related-item-wrapper"><!-- related item -->                                                             
-                    <a href="blog.html"><img src="<?=base_url();?>media/site/images/related-pic3.jpg" alt="" class="img-related" /></a>
-                    <p><a href="blog.html">Sed ut perspiciatis unde omnis voluptatemi natus</a></p>
-                </div>
-                        
-                <div class="related-item-wrapper-last"><!-- related item -->                                                            
-                    <a href="blog.html"><img src="<?=base_url();?>media/site/images/related-pic4.jpg" alt="" class="img-related" /></a>
-                    <p><a href="blog.html">Excepteur sint occaecat cupidatat non proident</a></p>
-                </div>                                                                                                             
-            </div>
+                </div>                                                                                                          
+            </div>                
+            <?php endif ?>
             <!-- End of Related Post -->                     
         </div>                
     </div>
@@ -76,7 +64,7 @@
                     <?php foreach ($classifieds as $row): ?>
                         <li>
                         <img src="<?=base_url("media/crops/{$row->photo}");?>" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="<?=site_url('marketplace');?>"><?=$row->product_name;?></a></p>
+                        <p class="popular-title"><a href="<?=site_url('market');?>"><?=$row->product_name;?></a></p>
                         <p>KES <?=$row->unit_price;?> per <?=$row->packaging;?></p>                        
                     </li>
                     <?php endforeach ?>                   
@@ -98,22 +86,22 @@
             <div class="sidebar-content">
             <h5>Blog categories</h5>
                 <ul class="sidebar-list">
-                    <li><a href="#">Web design and Programing</a></li>                    
-                    <li><a href="#">Photoshop and Ilustrator</a></li>                                
-                    <li><a href="#">SEO and Internet Marketing</a></li>
-                    <li><a href="#">jQuery, AJAX, and PHP</a></li>
-                    <li><a href="#">Lifestyle and Technology</a></li>
+                    <?php foreach ($blog_categories as $row): ?>
+                        <li><a href="#"><?=$row->title;?></a></li>
+                    <?php endforeach ?>
                 </ul>
             </div>
             
             <div class="sidebar-content">
-            <h5>Popular post</h5>
+            <h5>Recent post</h5>
                 <ul class="popular-list">
+                    <?php foreach ($recent as $row): ?>
                     <li>
-                        <img src="<?=base_url();?>media/site/images/blog-img3.jpg" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Supercar A Bolt from Les Bleus</a></p>
-                        <p>12 Comments</p>                        
-                    </li>                    
+                        <img src="<?=base_url("media/blog_photos/{$post->image}");?>" alt="" class="imgborder2" />                                                
+                        <p class="popular-title"><a href="<?=site_url("blog/post/{$post->id}");?>"><?=$post->title;?></a></p>
+                        <p><?=date('F, m Y',strtotime($post->date_modified));?></p>                        
+                    </li> 
+                    <?php endforeach ?>                  
                 </ul>
             </div>
             

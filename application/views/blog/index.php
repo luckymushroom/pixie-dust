@@ -70,22 +70,22 @@
             <div class="sidebar-content">
             <h5>Blog categories</h5>
                 <ul class="sidebar-list">
-                    <li><a href="#">Web design and Programing</a></li>                    
-                    <li><a href="#">Photoshop and Ilustrator</a></li>                                
-                    <li><a href="#">SEO and Internet Marketing</a></li>
-                    <li><a href="#">jQuery, AJAX, and PHP</a></li>
-                    <li><a href="#">Lifestyle and Technology</a></li>
+                    <?php foreach ($blog_categories as $row): ?>
+                        <li><a href="#"><?=$row->title;?></a></li>
+                    <?php endforeach ?>
                 </ul>
             </div>
             
             <div class="sidebar-content">
-            <h5>Popular post</h5>
+            <h5>Recent post</h5>
                 <ul class="popular-list">
+                    <?php foreach ($recent as $row): ?>
                     <li>
-                        <img src="<?=base_url();?>media/site/images/blog-img3.jpg" alt="" class="imgborder2" />                                                
-                        <p class="popular-title"><a href="#">Supercar A Bolt from Les Bleus</a></p>
-                        <p>12 Comments</p>                        
-                    </li>                    
+                        <img src='<?=base_url("media/blog_photos/{$row->image}");?>' alt="" class="imgborder2" />                                                
+                        <p class="popular-title"><a href="<?=site_url("blog/post/{$row->id}");?>"><?=$row->title;?></a></p>
+                        <p><?=date('F, m Y',strtotime($row->date_modified));?></p>                        
+                    </li> 
+                    <?php endforeach ?>                  
                 </ul>
             </div>
             
