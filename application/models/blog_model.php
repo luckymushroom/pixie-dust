@@ -41,6 +41,11 @@ class Blog_model extends MY_Model {
 	{
 		$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
 		return $result;
+		if($result->author_id)
+			$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
+			return $result;
+	}
+
 	public function related_posts($category, $blog_id)
 	{
 		$attributes = array(
