@@ -96,15 +96,12 @@
                             $page = $this->uri->segment(1);
                             $current = 'class=current'; ?>
                             <ul id="menu">
-                                <li <?=($page=='index' || '')?$current:'';?>><a href="<?=site_url('index');?>">home</a></li>
-                                <li <?=($page=='blog')?$current:'';?>><a href="<?=site_url('blog');?>" title="mfarm blog">blog</a></li>
                                 <li <?=($page=='blog' || $page=='')?$current:'';?>><a href="<?=site_url('blog');?>">home</a></li>
                                 <li <?=($page=='market')?$current:'';?>><a href="<?=site_url('market');?>" title="mfarm marketplace">marketplace</a></li>
                                 <li <?=($page=='about')?$current:'';?>><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
                                 <li <?=($page=='service')?$current:'';?>><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
                                 <li <?=($page=='press')?$current:'';?>><a href="<?=site_url('press');?>" title="mfarm press page">press</a></li>
                                 <li <?=($page=='price')?$current:'';?>><a href="<?=site_url('price');?>" title="mfarm price information">prices</a></li>
-                                <li <?=($page=='service')?$current:'';?>><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
                                 <li <?=($page=='contact')?$current:'';?>><a href="<?=site_url('contact');?>" title="contact mfarm">contact</a></li>
                             </ul>
                         </div>
@@ -153,8 +150,6 @@
               <div id="client-logo">
                   <ul>
                         <li><img src="<?php echo base_url();?>media/site/images/client5.gif" alt="techfortrade.org" /></li>
-                      <li><img src="<?php echo base_url();?>media/site/images/client1.gif" alt="ipo48" /></li>
-                        <li><img src="<?php echo base_url();?>media/site/images/client2.gif" alt="humanipo" /></li>
                         <li><img src="<?php echo base_url();?>media/site/images/client1.gif" alt="ipo48" /></li>
                         <li><img src="<?php echo base_url();?>media/site/images/client2.png" alt="samsung" /></li>
                         <li><img src="<?php echo base_url();?>media/site/images/client3.gif" alt="ihub" /></li>
