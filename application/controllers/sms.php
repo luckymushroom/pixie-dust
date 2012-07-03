@@ -98,7 +98,6 @@ class SMS extends MY_Controller {
 					self::buy_sms($message);
 					break;
 				case 'aggregate':
-					self::aggregate_sms($this->message);
 					self::aggregate_sms($message);
 					break;
 				case 'samsung':
