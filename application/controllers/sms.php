@@ -517,12 +517,4 @@ class SMS extends MY_Controller {
 
 		return $output;
 	}
-
-	public function text_len($string='')
-	{
-		$this->view = false;
-		echo "<pre>";
-		echo strlen('Nokia yesterday unveiled a new crop of smartphones that could put the company back in the smartphone race with rivals iPhone and Android. It could also mark a turnaround for Microsoft\'s unpopular Windows Phone 7 software.');
-		echo "</pre>";
-	}
 }
