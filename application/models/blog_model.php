@@ -39,8 +39,6 @@ class Blog_model extends MY_Model {
 
 	public function get_author($result)
 	{
-		$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
-		return $result;
 		if($result->author_id)
 			$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
 			return $result;
