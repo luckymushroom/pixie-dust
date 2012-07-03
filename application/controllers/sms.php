@@ -509,10 +509,12 @@ class SMS extends MY_Controller {
 		// Check if the there is a space between the middle elements of the string
 		if (preg_match('/[^a-zA-Z0-9]+$/i', $output))
 		{
-			// Remove spaces
+			// Remove spaces,dashes,dots and hyphens
 			$output = str_replace(' ', '', $output);
 			$output = str_replace('-', '', $output);
 			$output = str_replace('_', '', $output);
+			$output = str_replace('.', '', $output);
+			$output = str_replace('/', '', $output);
 		}
 
 		return $output;
