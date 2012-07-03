@@ -7,7 +7,9 @@ class Blog extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->library('image_lib');
-		$this->data['classifieds'] =$this->post->live()->with_order_details()->match_products()->with_photos()->with_location()->order_by('posts.id','desc')->limit(3)->get_all();
+		$this->data['classifieds'] = self::classifieds(3);
+		$this->data['blog_categories'] = $this->blog_category->deleted()->get_all();
+		$this->data['recent'] = $this->blog->live()->deleted()->limit(1)->get_all();
 	}
 	/**
 	 * Load the blog page
@@ -37,6 +39,7 @@ class Blog extends MY_Controller {
 		$this->data['page_title'] = 'Our Thoughts';
 		$this->data['page_subtitle'] = 'Sometimes Great Ideas Come From a Story';
 		$this->data['post'] = $this->blog->get($slug);
+		$this->data['related_posts'] = self::related_posts($slug);
 	}
 	/**
 	 * Add new blog post
@@ -111,6 +114,10 @@ class Blog extends MY_Controller {
 	 */
 	public function manage($section = 'blog')
 	{
+		$blogs = $this->blog->deleted()->live()->get_all();
+		$blogs_today = $this->blog->deleted()->live()->todays_posts()->get_all();
+		$this->data['post_count'] = count($blogs);
+		$this->data['post_count_today'] = count($blogs_today);
 	}
 	/**
 	 * Load Blogs and Categories
@@ -211,6 +218,20 @@ class Blog extends MY_Controller {
 			$this->session->set_flashdata('message','Ooops Something went wrong!');
 			redirect('blog/update/post/'.$post_id);
 		}
+	}
+
+
+	public function classifieds($limit = '')
+	{	
+		 return $this->post->live()->with_order_details()->match_products()->with_photos()->with_location()->order_by('posts.id','desc')->limit($limit)->get_all();
+	}
+
+	public function related_posts($blog_id, $limit = 4)
+	{
+		$category = $this->blog->deleted()->get($blog_id)->blog_category_id;
+		$related = $this->blog->deleted()->live()->related_posts($category, $blog_id)->limit($limit)->order_by('id','desc')->get_all();
+
+		return $related;
 	}
 
 }
