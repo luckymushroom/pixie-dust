@@ -77,6 +77,11 @@ class SMS extends MY_Controller {
 		{
 			// Explode message to get keywords sepator is space
 			$exploded_message = explode(' ', $this->message);
+			// Explode message to get keywords separator is space
+			$this->message = preg_replace('/[\.]+$/','',$this->message);
+			$this->message = preg_replace('/[\.\_\-\W]+/',' ',$this->message);
+			$message = strtolower($this->message);
+			$exploded_message = explode(' ', $message);
 			$keyword = strtolower($exploded_message[0]);
 			switch ($keyword) {
 				case 'price':
