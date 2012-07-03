@@ -1,8 +1,6 @@
 <h1>Users</h1>
 <legend>Below is a list of the users.</legend>
 
-	<div id="infoMessage"><?php echo $message;?></div>
-
 <table class="table table-bordered table-striped">
 	<thead>
 	<tr>
