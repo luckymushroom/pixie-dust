@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>MFarm KE | Connecting Farmers</title>
+    <title>MFarm KE | Content Management System</title>
     <meta name="description" content="MFarm Application">
     <meta name="author" content="mogetutu, isaak@mogetutu.com, @mogetutu">
 
@@ -30,18 +30,6 @@
   </head>
 
   <body>
-  <div id="hellobar-wrapper" class="hellobar-right hellobar-dark-images hidden-phone">
-    <div id="hellobar-container" class="">
-      <span>Update you Profile + Other Report Settings and More</span>
-      <a class="hellobar-cta-link" href="#" target="_blank">Update Now &rarr;</a>
-        <a href="#close" id="hellobar-close">Close</a>
-        <div id="hellobar-shadow"></div>
-    </div>
-    <div id="hellobar-open" class="hidden">
-      <a href="#close" id="hellobar-open">Open</a>
-    </div>
-  </div>
-
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -55,10 +43,9 @@
             <ul class="nav">
               <li><a href="<?=site_url('dashboard');?>"><i class="icon-home icon-white"></i>  Dashboard</a></li>
               <!-- <li><a href="<?=base_url();?>categories/" title="Categories">Categories</a></li> -->
-              <li><a href="<?=base_url();?>blog/posts/" title="Posts"><i class="icon-tags icon-white"></i>  Posts</a></li>
-              <li><a href="#"><i class="icon-th-list icon-white"></i>  Blog Categories </a></li>
-              <li><a href="<?=base_url();?>settings/tips"><i class="icon-leaf icon-white"></i>  Pages</a></li>
-              <li><a href="<?=base_url();?>reports/"><i class="icon-print icon-white"></i>  Reports</a></li>
+              <li><a href="<?=base_url('blog/manage/posts');?>" title="Posts"><i class="icon-tags icon-white"></i>  Posts</a></li>
+              <li><a href="#"><i class="icon-th-list icon-white"></i>  Categories </a></li>
+              <li><a href="<?=base_url('site/admin/press');?>"><i class="icon-leaf icon-white"></i>  Press</a></li>
             </ul>
             <ul class="nav pull-right">
               <li><a href="<?=base_url();?>settings/"><i class="icon-cog icon-white"></i>  Settings</a></li>
