@@ -51,6 +51,11 @@ class Blog_model extends MY_Model {
 		$this->db->where($attributes);
 		return $this;
 	}
+
+	public function todays_posts()
+	{
+		$this->db->where('DATE_FORMAT(date_modified,"%d-%m-%Y")', date('d-m-Y'));
+		return $this;
 	}
 
 }
