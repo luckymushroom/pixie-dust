@@ -41,6 +41,16 @@ class Blog_model extends MY_Model {
 	{
 		$result->author = $this->db->where('id',$result->author_id)->get('users')->row()->username;
 		return $result;
+	public function related_posts($category, $blog_id)
+	{
+		$attributes = array(
+			'blog_category_id' => $category,
+			'id !=' => $blog_id
+
+			);
+		$this->db->where($attributes);
+		return $this;
+	}
 	}
 
 }
