@@ -64,16 +64,17 @@
 |
 */
 
-$route['default_controller'] = 'blog';
+$route['default_controller'] = 'site';
 $route['404_override']       = '';
 
-$route['market']             = 'site/index';
+$route['index']             = 'site/index';
 $route['stories']           = 'blog';
 $route['blog']              = 'blog';
 $route['blog/page']  = 'blog/index';
 $route['blog/page/(:num)']  = 'blog/index/$1';
 $route['faq']               = 'site/faq';
 $route['price']             = 'site/price';
+$route['price/(:any)']      = 'site/price/$1';
 $route['press']             = 'site/press';
 $route['about']             = 'site/about';
 $route['team']              = 'site/team';

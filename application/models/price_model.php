@@ -60,7 +60,11 @@ class Price_model extends MY_Model {
 		return $this;
 	}
 
-	public function latest($date = '')
+	/**
+	 * get_prices
+	 * @return result array.
+	 */
+	function get_prices($date=NULL)
 	{
 		if($date):
 			$this->db->where('crop_date', $date);
@@ -68,22 +72,10 @@ class Price_model extends MY_Model {
 			$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
 		endif;
 		$this->db->where('crop_price >', '0');
-		return $this;
-	}
-
-	/**
-	 * [get_prices description]
-	 * @param  crop_date $date=NULL   crop date entry in the database
-	 * @param  records limit $limit=NULL  query limit
-	 * @param  records offset $offset=NULL query offset
-	 * @return result array.
-	 */
-	function get_prices($date=NULL,$limit=NULL,$offset=NULL)
-	{
-		$this->db->select('prices.id as m_id,user_id,prices.product_id as product_id,prices.location_id,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,prices.status');
 		$this->db->where('prices.status', 'live');
 		$this->db->group_by(array('product_id','location_id','crop_weight'));
 		$this->db->order_by('prices.product_id','desc');
+		$this->db->select('prices.id as m_id,user_id,prices.product_id as product_id,prices.location_id,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,prices.status');
 		return $this;
 	}
 

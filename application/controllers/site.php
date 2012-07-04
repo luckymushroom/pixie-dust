@@ -30,10 +30,10 @@ class Site extends MY_Controller {
 		$this->data['page_title'] = 'FAQs';
 	}
 
-	public function price()
+	public function price($date = '')
 	{
 		$this->data['page_title'] = 'Wholesale Market Price Information';
-		$this->data['prices'] = $this->price->latest()->get_prices()->get_all();
+		$this->data['prices'] = $this->price->get_prices($date)->get_all();
 	}
 
 	public function press()
@@ -58,6 +58,16 @@ class Site extends MY_Controller {
 		$item->page = $section;
 		$item->save();
 		redirect("/site/admin_edit/{$item->id}", 'refresh');
+	}
+
+	public function test($date)
+	{
+		$with_date = $this->db->where('crop_date', $date);
+		$without_date = $this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)', false);
+		$sql = ($date) ? $with_date : $without_date;
+		echo "<pre>";
+		var_dump( $sql );
+		echo "</pre>";
 	}
 
 	public function admin_edit($id)

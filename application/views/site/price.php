@@ -31,9 +31,9 @@ $(document).ready( function() {
         var date = $(this).val();
         $.ajax({
                 type: "POST",
-                url: "<?php echo base_url();?>price/archives",
+                url: "<?php echo site_url('price/');?>",
                 data: date,
-                success: function(data) { window.location = "<?=base_url();?>price/archives/" + date }
+                success: function(data) { window.location = "<?php echo site_url('price');?>/" + date }
             });
     });
 });
