@@ -96,8 +96,8 @@
                             $page = $this->uri->segment(1);
                             $current = 'class=current'; ?>
                             <ul id="menu">
-                                <li <?=($page=='blog' || $page=='')?$current:'';?>><a href="<?=site_url('blog');?>">home</a></li>
-                                <li <?=($page=='market')?$current:'';?>><a href="<?=site_url('market');?>" title="mfarm marketplace">marketplace</a></li>
+                                <li <?=($page=='index' || '')?$current:'';?>><a href="<?=site_url('index');?>">home</a></li>
+                                <li <?=($page=='blog' || $page=='')?$current:'';?>><a href="<?=site_url('blog');?>">blog</a></li>
                                 <li <?=($page=='about')?$current:'';?>><a href="<?=site_url('about');?>" title="mfarm agricultural information">about</a></li>
                                 <li <?=($page=='service')?$current:'';?>><a href="<?=site_url('services');?>" title="services by mfarm">services</a></li>
                                 <li <?=($page=='press')?$current:'';?>><a href="<?=site_url('press');?>" title="mfarm press page">press</a></li>
@@ -180,7 +180,6 @@
                       <img src="<?php echo base_url();?>media/site/images/footer-logo.png" alt="mfarm-footer-logo" />
                     </div>
                     <div class="footer-text">
-                      <p>© 2011 MFARM. Developed by Dev Team Mfarm. <br/> Create solutions that empower farmers to work and communicate in new and innovative ways.</p>
                       <p>© copyright 2010 - <?=date('Y'); ?> MFARM. Developed by Dev Team Mfarm. <br/> Create solutions that empower farmers to work and communicate in new and innovative ways.</p>
                     </div>
                 </div>

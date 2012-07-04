@@ -30,7 +30,7 @@ class Price_model extends MY_Model {
      */
 	public function get_location_name($result)
 	{
-		$result->location = $this->db->where('id',$result->location_id)->get('locations',1)->row()->location_name;
+		$result->location_name = $this->db->where('id',$result->location_id)->get('locations',1)->row()->location_name;
 		return $result;
 	}
 	/**
@@ -60,9 +60,13 @@ class Price_model extends MY_Model {
 		return $this;
 	}
 
-	public function latest()
+	public function latest($date = '')
 	{
-		$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
+		if($date):
+			$this->db->where('crop_date', $date);
+		else:
+			$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
+		endif;
 		$this->db->where('crop_price >', '0');
 		return $this;
 	}
@@ -76,17 +80,9 @@ class Price_model extends MY_Model {
 	 */
 	function get_prices($date=NULL,$limit=NULL,$offset=NULL)
 	{
-		$this->db->select('prices.id as m_id,user_id,product_name,prices.product_id as product_id,prices.location_id,location_name,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,flag,prices.status');
-		$this->db->where('crop_price >', '0');
-		$this->db->where('prices.status', '1');
-		if($date):
-			$this->db->where('crop_date', $date);
-		else:
-			$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
-		endif;
-		$this->db->join('products', 'products.id = prices.product_id');
-		$this->db->join('locations', 'locations.id = prices.location_id');
-		$this->db->group_by(array('product_id','location_name','crop_weight'));
+		$this->db->select('prices.id as m_id,user_id,prices.product_id as product_id,prices.location_id,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,prices.status');
+		$this->db->where('prices.status', 'live');
+		$this->db->group_by(array('product_id','location_id','crop_weight'));
 		$this->db->order_by('prices.product_id','desc');
 		return $this;
 	}
