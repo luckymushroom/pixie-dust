@@ -78,7 +78,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','parser','pagination','form_validation','ion_auth','curl');
+$autoload['libraries'] = array('database','session','form_validation');
 
 
 /*
@@ -135,10 +135,16 @@ $autoload['language'] = array('mfarm_sms');
 |
 */
 
-$autoload['model'] = array('price_model');
-
-$autoload['sparks'] = array('php-activerecord/0.0.2');
-
+$autoload['model'] = array();
+/*
+| -------------------------------------------------------------------
+|  Auto-load Sparks
+| -------------------------------------------------------------------
+| Prototype:
+|
+|	$autoload['sparks'] = array('spark1', 'spark2');
+|
+*/
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
