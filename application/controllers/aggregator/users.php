@@ -12,7 +12,13 @@ class Users extends MY_Controller {
     {
         $this->data['farmers'] = $this->user->get_many_by('aggregator', $user);
     }
-
+    /**
+     * Show Farmer Profile
+     * @param  int $user aggregator
+     * @param  int $farmer
+     * @return array
+     * @author mogetutu <imogetutu@gmail.com>
+     */
     public function show($user,$farmer)
     {
         $farmer = $this->user->aggregator($this->current_user)->get($farmer);
@@ -27,7 +33,10 @@ class Users extends MY_Controller {
         }
 
     }
-
+    /**
+     * Update user profile
+     * @author mogetutu <imogetutu@gmail.com>
+     */
     public function update($user,$farmer)
     {
         if($this->user->aggregator($this->current_user)->get($farmer))
@@ -45,7 +54,10 @@ class Users extends MY_Controller {
             }
         }
     }
-
+    /**
+     * Delete User account from aggregator panel
+     * @author mogetutu <imogetutu@gmail.com>
+     */
     public function delete($id)
     {
         $this->user->update($id,array('aggregator'=>0));

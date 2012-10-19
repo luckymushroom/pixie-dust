@@ -7,7 +7,7 @@
         <a href='{site_url("aggregator/farm/crops/{$user_id}")}' class='btn btn-small'><i class='icon-leaf'></i> Planted</a>
         <a href={site_url("aggregator/farm/crops/{$user_id}/harvested")} class='btn btn-small'>Harvested</a>
     </div>
-    <h2>Farm Details</h2> <a href='{site_url("aggregator/farm/create/{$user_id}")}' title="Add New" class="btn btn-small">Add New</a>
+    <h2>Farm Details</h2> <a href='{site_url("aggregator/farm/create_new/{$user_id}")}' title="Add New" class="btn btn-small">Add New</a>
 </div>
 <!-- Page header ends here -->
 

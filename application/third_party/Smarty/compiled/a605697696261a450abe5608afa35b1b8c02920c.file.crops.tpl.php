@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-19 11:04:30
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-19 13:30:45
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/crops.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:78647166850769c22ccee54-27074529%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a605697696261a450abe5608afa35b1b8c02920c' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/crops.tpl',
-      1 => 1350637441,
+      1 => 1350646226,
       2 => 'file',
     ),
   ),
@@ -41,7 +41,7 @@ aggregator/farm/details/<?php echo $_smarty_tpl->tpl_vars['user_id']->value;?>
         <a href=<?php echo site_url("aggregator/farm/crops/".($_smarty_tpl->tpl_vars['user_id']->value)."/harvested");?>
  class='btn btn-small'>Harvested</a>
     </div>
-    <h2>Farm Details</h2> <a href='<?php echo site_url("aggregator/farm/create/".($_smarty_tpl->tpl_vars['user_id']->value));?>
+    <h2>Farm Details</h2> <a href='<?php echo site_url("aggregator/farm/create_new/".($_smarty_tpl->tpl_vars['user_id']->value));?>
 ' title="Add New" class="btn btn-small">Add New</a>
 </div>
 <!-- Page header ends here -->

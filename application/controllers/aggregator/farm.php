@@ -3,6 +3,7 @@
 class Farm extends MY_Controller
 {
     protected $models = array( 'county', 'farm_detail', 'planting_plan', 'user' );
+    protected $models = array( 'county', 'farm_detail', 'planting_plan', 'user', 'product' );
     function __construct()
     {
         parent::__construct();
