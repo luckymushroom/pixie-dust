@@ -2,7 +2,6 @@
 
 class Farm extends MY_Controller
 {
-    protected $models = array( 'county', 'farm_detail', 'planting_plan', 'user' );
     protected $models = array( 'county', 'farm_detail', 'planting_plan', 'user', 'product' );
     function __construct()
     {
@@ -32,12 +31,19 @@ class Farm extends MY_Controller
         $this->data['user_id'] = $user_id;
         $this->data['crops'] = $this->planting_plan->status($status)->join('products')->get_many_by('user_id', $user_id);
     }
+
+    public function create_new($id)
+    {
+        $this->data['farmer'] = $this->user->get($id);
+        $this->data['products'] = $this->product->dropdown('product_name');
+    }
     /**
      * Add new crop to list
      */
     public function create($id = null, $product_id = null)
     {
-        $id = ($id) ? $id : $this->input->post('user_id');
+        $id = ($this->input->post('user_id')) ? $this->input->post('user_id') : $id;
+        if($id) $_POST['user_id'] = $id;
         $product_id = ($product_id) ? $product_id : $this->input->post('product_id');
         $farm_details = $this->input->post();
         if($product_id && $id)
@@ -49,7 +55,7 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops something went wrong.');
         }
-        redirect($this->router->directory . $this->router->class . '/crops' );
+        redirect("{$this->router->directory}{$this->router->class}/crops/" . $id );
     }
     /**
      * Update planted crop details
@@ -66,7 +72,7 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops something went wrong.');
         }
-        redirect($this->router->directory . $this->router->class . '/crops/' . $user_id );
+        redirect("{$this->router->directory}{$this->router->class}/crops/" . $user_id );
     }
     /**
      * Delete farmer crop
@@ -82,7 +88,7 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops! Something went wrong.');
         }
-        redirect($this->router->directory . $this->router->class . '/crops/' . $user_id);
+        redirect("{$this->router->directory}{$this->router->class}/crops/" . $user_id);
     }
     /**
      * Update farmer farm details
@@ -99,7 +105,7 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops! Something went wrong.');
         }
-        redirect($this->router->directory . $this->router->class . '/details/' . $user_id);
+        redirect("{$this->router->directory}{$this->router->class}/details/" . $user_id);
     }
 }
 /* End of file farm.php */
