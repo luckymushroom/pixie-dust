@@ -1,10 +1,11 @@
 Web Application
 ======================
+Some Web app am trying to work on.
 
-**Version 1.1
+Changelog
+---------
 
-Changelog 19-10-2012
-======================
-``Added Aggregator Panel
-``Added Farmer/User Panel
-``Updated Crop Reports
+**Version 1.1.0**
+* Added Aggregator Panel
+* Added Farmer/User Panel
+* Updated Crop Reports
