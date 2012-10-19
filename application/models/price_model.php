@@ -1,62 +1,52 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access');
 
-class Price_model extends MY_Model {
-
-	public $after_get = array( 'get_username', 'get_product_name', 'get_location_name' );
-	public $before_create = array( 'timestamps' );
-
-    
-	//php 5 constructor
-	function __construct()
+class Price_model extends MY_Model
+{
+	public $before_create = array( 'created_at' );
+    public $before_update = array( 'created_at', 'updated_at' );
+	public function __construct()
 	{
 		parent::__construct();
 	}
 
 	/**
-	 * Timestamps on create and update
-	 * @author mogetutu <imogetutu@gmail.com>
-	 * @access public
-	 * @param $object price post object
+	 * Get Location Name
 	 */
-	protected function timestamps($price)
-    {
-        $price['created_at'] = $price['updated_at'] = date('Y-m-d H:i:s');
-        return $price;
-    }
-    /**
-     * @author mogetutu <imogetutu@gmail.com>
-     * @param $result array()
-     * @return $result array()
-     */
-	public function get_location_name($result)
+	public function location_name()
 	{
-		$result->location_name = $this->db->where('id',$result->location_id)->get('locations',1)->row()->location_name;
-		return $result;
+		$this->db->join('locations', 'locations.id = prices.location_id', 'left');
+		return $this;
 	}
 	/**
-	 * Get Product name from product_id
-	 * @access public
-	 * @author mogetutu <imogetutu@gmail.com>
-	 * @return array result
+	 * Get Product Name
 	 */
-	public function get_product_name($result)
+	public function product_name()
 	{
-		if ($result->product_id) {
-			$result->product_name = $this->db->where('id',$result->product_id)->get('products',1)->row()->product_name;
-			return $result;
-		}
-		
+		$this->db->join('products', 'products.id = prices.product_id', 'left');
+		return $this;
 	}
 	/**
-	 * Get username for user_id in result array
-	 * @author mogetutu <imogetutu@gmail.com>
-	 * @access public
-	 * @param $array result
-	 * @return array alter user_id on the way back from the db
+	 * Get Username or user
 	 */
-	public function get_username($result)
+	public function with_username()
 	{
-		$result->username = $this->db->where('id',$result->user_id)->get('users',1)->row()->first_name;
+		$this->db->join('users', 'users.id = prices.user_id', 'left');
+		return $this;
+	}
+	/**
+	 * Get The Days prices
+	 */
+	function admin_get_prices($status, $date)
+	{
+		if($date):
+			$this->db->where('crop_date', $date);
+		else:
+			$this->db->where('crop_date', '(SELECT max(crop_date) FROM prices)',false);
+		endif;
+		$this->db->where('crop_price >', '0');
+		$this->db->where('prices.status', $status);
+		$this->db->order_by('prices.product_id','desc');
+		$this->db->select('prices.id,user_id,product_id,prices.location_id,crop_date,crop_weight,crop_unit,crop_price,prices.status,product_name,location_name,username');
 		return $this;
 	}
 
@@ -75,11 +65,11 @@ class Price_model extends MY_Model {
 		$this->db->where('prices.status', 'live');
 		$this->db->group_by(array('product_id','location_id','crop_weight'));
 		$this->db->order_by('prices.product_id','desc');
-		$this->db->select('prices.id as m_id,user_id,prices.product_id as product_id,prices.location_id,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,prices.status');
+		$this->db->select('prices.id,user_id,prices.product_id as product_id,prices.location_id,max(crop_date) as crop_date,crop_weight,crop_unit,crop_price,max(crop_price) as max_price,min(crop_price) as min_price,prices.status,product_name,location_name');
 		return $this;
 	}
 
-	public function price_feed($crop,$limit)
+	public function price_feed($product,$limit)
 	{
 		$this->db->select('product_id,location_id,user_id,crop_weight,crop_unit,crop_date,DATE_FORMAT(crop_date,"%a") as wk_date,
 			MAX(if(location_id = 43,crop_price, NULL)) AS "NBI",
@@ -88,11 +78,16 @@ class Price_model extends MY_Model {
 			MAX(if(location_id = 55,crop_price, NULL)) AS "ELD",
 			MAX(if(location_id = 56,crop_price, NULL)) AS "KTL"', FALSE);
 		$this->db->where('crop_date <', '(SELECT max(crop_date) FROM prices)', FALSE);
-		$this->db->where('product_id', $crop);
+		$this->db->where('product_id', $product);
 		$this->db->group_by(array('product_id','wk_date'));
 		$this->db->order_by('crop_date', 'desc');
 		$this->db->limit($limit);
 		return $this;
+	}
+
+	public function price_fluctuation($date = '', $crop = '')
+	{
+
 	}
 
 	public function select($columns)
@@ -151,7 +146,7 @@ class Price_model extends MY_Model {
 		return $this;
 	}
 
-	public function limit($limit)
+	public function limit($limit, $offset=0)
 	{
 		$this->db->limit($limit);
 		return $this;

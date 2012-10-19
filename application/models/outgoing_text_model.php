@@ -3,6 +3,8 @@
 class Outgoing_text_model extends MY_Model {
 
 	public $before_create = array('date_created');
+	protected $soft_delete = TRUE;
+
 	//php 5 constructor
 	function __construct()
 	{
@@ -11,7 +13,8 @@ class Outgoing_text_model extends MY_Model {
 
 	function date_created($post)
 	{
-		$post['date_created'] = date('Y-m-d H:i:s'); return $post;
+		$post['date_created'] = date('Y-m-d H:i:s');
+		return $post;
 	}
 
 }

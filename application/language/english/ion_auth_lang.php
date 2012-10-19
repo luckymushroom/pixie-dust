@@ -22,15 +22,15 @@ $lang['account_creation_duplicate_username'] = 'Username Already Used or Invalid
 
 // Invitation Creation
 $lang['invitation_creation_successful'] 	  	 = 'Invitation Successfully Sent';
-$lang['invitation_creation_unsuccessful'] 	 	 = ', Problem Sending Invitation';
+$lang['invitation_creation_unsuccessful'] 	 	 = 'Problem Sending Invitation';
 $lang['invitation_creation_duplicate_email'] 	 = 'Email Already Used or Invalid';
 $lang['invitation_creation_duplicate_username'] = 'Username Already Used or Invalid';
 
 // Password
-$lang['password_change_successful'] 	 	 = 'Password Successfully Changed';
+$lang['password_change_successful'] 	 	 = 'Password Successfully Changed. Check your email for temporary password.';
 $lang['password_change_unsuccessful'] 	  	 = 'Unable to Change Password';
-$lang['forgot_password_successful'] 	 	 = 'Password Reset Email Sent';
-$lang['forgot_password_unsuccessful'] 	 	 = 'Unable to Reset Password';
+$lang['forgot_password_successful'] 	 	 = 'Password Reset. Check your email for reset link.';
+$lang['forgot_password_unsuccessful'] 	 	 = 'Unable to Reset Password.';
 
 // Activation
 $lang['activate_successful'] 		  	     = 'Account Activated';
@@ -42,7 +42,7 @@ $lang['activation_email_unsuccessful']   	 = 'Unable to Send Activation Email';
 
 // Login / Logout
 $lang['login_successful'] 		  	         = 'Logged In Successfully';
-$lang['login_unsuccessful'] 		  	     = 'Incorrect Login';
+$lang['login_unsuccessful'] 		  	     = 'Incorrect Login. Check your Email and Password';
 $lang['login_unsuccessful_not_active'] 		 = 'Account is inactive, Check your email for activation link';
 $lang['logout_successful'] 		 	         = 'Logged Out Successfully';
 

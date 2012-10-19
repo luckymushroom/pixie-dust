@@ -3,10 +3,11 @@
 class Setting_model extends MY_Model
 {
 	public $before_get = array('join_tables');
+	protected $soft_delete = TRUE;
+
 	public function __construct()
 	 {
 	    parent::__construct();
-	    //Do your magic here
 	 }
 
 	 public function join_tables()

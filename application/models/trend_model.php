@@ -2,7 +2,8 @@
 
 class Trend_model extends CI_Model {
 
-	//php 5 constructor
+	protected $soft_delete = TRUE;
+
 	function __construct()
 	{
 		parent::__construct();
@@ -27,7 +28,8 @@ class Trend_model extends CI_Model {
 					AND crop_date > ((SELECT max(crop_date) FROM prices) - INTERVAL "'.$days.'" DAY)
 					AND prices.product_id = "'.$product_id.'"
 					AND location_id = "'.$town_id.'"
-					AND prices.status ="live"
+					AND prices.status = "live"
+					AND prices.deleted = 0
 					GROUP BY prices.product_id,m_date
 					ORDER BY crop_date ASC';
 		return $this->db->query($Q)->result();

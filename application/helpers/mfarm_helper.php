@@ -185,3 +185,15 @@ if(! function_exists('price_feed') )
 		return $ci->db->query($Q)->result();
 	}
 }
+/**
+ * Language file modification
+ */
+if ( ! function_exists('lang'))
+{
+    function lang($line, $variables=array())
+    {
+        $CI =& get_instance();
+        $line = $CI->lang->line($line);
+        return @vsprintf($line, $variables) !== FALSE ? vsprintf($line, $variables) : 'lang:error';                    
+    }
+}

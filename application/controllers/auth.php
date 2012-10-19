@@ -23,76 +23,102 @@ class Auth extends MY_Controller
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
-			redirect('/auth/login/', 'refresh');
+			redirect('auth/login', 'refresh');
 		}
 	}
 
 	//log the user in
-	function login()
-	{
-		$this->data['page_title'] = 'Welcome - Sign In';
+    function login()
+    {
+        $this->data['page_title'] = 'Welcome - Sign In';
 
-		if ($this->ion_auth->logged_in())
-		{
-			//already logged in so no need to access this page
-			redirect($this->config->item('base_url'), 'refresh');
-		}
+        //validate form input
+        $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'required');
 
-		//validate form input
-		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == true)
+        { 
+            //check to see if the user is logging in
+            //check for "remember me"
+            $remember = (bool) $this->input->post('remember');
 
-		if ($this->form_validation->run() == true)
-		{ //check to see if the user is logging in
-			//check for "remember me"
-			$remember = (bool) $this->input->post('remember');
+            if ($this->ion_auth->login($this->input->post('email'), $this->input->post('password'), $remember))
+            { 
+                //if the login is successful
+                //redirect them back to the home page
+                $this->session->set_flashdata('message', $this->ion_auth->messages());
+                if($this->ion_auth->is_admin() || $this->ion_auth->in_group('editors'))
+                {
+                    redirect('admin/dashboard');
+                }
+                elseif($this->ion_auth->is_aggregator())
+                {
+                    redirect('aggregator/posts');
+                }
+                else
+                {
+                    redirect('farmer/dashboard');
+                }
+                
+            }
+            else
+            { 
+                //if the login was un-successful
+                //redirect them back to the login page
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+                redirect('auth/login'); //use redirects instead of loading views for compatibility with MY_Controller libraries
+            }
+        }
+        else
+        {  
+            //the user is not logging in so display the login page
+            //set the flash data error message if there is one
+            $this->data['message'] = (validation_errors()) ? validation_errors() : FALSE;
 
-			if ($this->ion_auth->login($this->input->post('email'), $this->input->post('password'), $remember))
-			{ //if the login is successful
-				//redirect them back to the home page
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-                $this->session->set_flashdata('message','Welcome '.$this->session->userdata('username'));
-				redirect('/dashboard/', 'refresh');
-			}
-			else
-			{
-				//if the login was un-successful
-				//redirect them back to the login page
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
-			}
-		}
-		else
-		{  //the user is not logging in so display the login page
-			//set the flash data error message if there is one
-			$this->session->set_flashdata('message',validation_errors());
-		}
-	}
+            $this->data['email'] = array(
+                'name' => 'email',
+                'id' => 'email',
+                'type' => 'text',
+                'class' => 'span4',
+                'value' => $this->form_validation->set_value('email'),
+                'placeholder' => 'Email'
+            );
+            $this->data['password'] = array(
+                'name' => 'password',
+                'id' => 'password',
+                'class' => 'span4',
+                'type' => 'password',
+                'placeholder' => 'Password'
+            );
+        }
+    }
 
-	//log the user out
+
+	/**
+     *  Log out User
+     */
 	function logout()
 	{
 		$this->data['title'] = "Logout";
-
-		//log the user out
 		$logout = $this->ion_auth->logout();
-
-		//redirect them back to the page they came from
 		redirect('auth', 'refresh');
 	}
 
-	//change password
+    /**
+     * Change Password
+     */
 	function change_password()
 	{
 		$this->form_validation->set_rules('old', 'Old password', 'required');
-		$this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
+		$this->form_validation->set_rules('new', 'New Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']
+            |max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', 'Confirm New Password', 'required');
 
 		if (!$this->ion_auth->logged_in())
 		{
 			redirect('auth/login', 'refresh');
 		}
-		$user = $this->ion_auth->get_user($this->session->userdata('user_id'));
+		$user = $this->ion_auth->profile();
 
 		if ($this->form_validation->run() == false)
 		{ //display the form
@@ -120,9 +146,6 @@ class Auth extends MY_Controller
 				'type'  => 'hidden',
 				'value' => $user->id,
 			);
-
-			//render
-			$this->load->view('auth/change_password', $this->data);
 		}
 		else
 		{
@@ -143,37 +166,35 @@ class Auth extends MY_Controller
 	}
 
 	//forgot password
-	function forgot_password()
-	{
-		//get the identity type from config and send it when you load the view
-		$identity = $this->config->item('identity', 'ion_auth');
-		$identity_human = ucwords(str_replace('_', ' ', $identity)); //if someone uses underscores to connect words in the column names
-		$this->form_validation->set_rules($identity, $identity_human, 'required');
-		if ($this->form_validation->run() == false)
-		{
-			//setup the input
-			$this->data[$identity] = array('name' => $identity,'id' => $identity);
-			//set any errors and display the form
-			$this->session->set_flashdata('message',validation_errors());
-			$this->data['identity'] = $identity; $this->data['identity_human'] = $identity_human;
-		}
-		else
-		{
-			//run the forgotten password method to email an activation code to the user
-			$forgotten = $this->ion_auth->forgotten_password($this->input->post($identity));
+    function forgot_password()
+    {
+        $this->form_validation->set_rules('email', 'Email Address', 'required');
+        if ($this->form_validation->run() == false)
+        {
+            //setup the input
+            $this->data['email'] = array('name' => 'email','id' => 'email', 'class' => 'span4');
 
-			if ($forgotten)
-			{ //if there were no errors
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('auth/login', 'refresh'); //we should display a confirmation page here instead of the login page
-			}
-			else
-			{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect('auth/forgot_password', 'refresh');
-			}
-		}
-	}
+            //set any errors and display the form
+            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+        }
+        else
+        {
+            //run the forgotten password method to email an activation code to the user
+            $forgotten = $this->ion_auth->forgotten_password($this->input->post('email'));
+
+            if ($forgotten)
+            { 
+                //if there were no errors
+                $this->session->set_flashdata('message', $this->ion_auth->messages());
+                redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
+            }
+            else
+            {
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+                redirect("auth/forgot_password", 'refresh');
+            }
+        }
+    }
 
 	//reset password - final step for forgotten password
 	public function reset_password($code)
@@ -193,19 +214,17 @@ class Auth extends MY_Controller
 	}
 
 	//activate the user
-	function activate($id, $code=false)
+	function activate($id, $code = FALSE)
 	{
 		if ($code !== false)
-			$activation = $this->ion_auth->activate($id, $code);
-		else if ($this->ion_auth->is_admin())
-			$activation = $this->ion_auth->activate($id);
-
-
-		if ($activation)
 		{
-			//redirect them to the auth page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect('auth', 'refresh');
+			$activation = $this->ion_auth->activate($id, $code);
+			if ($activation)
+			{
+				//redirect them to the auth page
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				redirect('auth/login', 'refresh');
+			}
 		}
 		else
 		{
@@ -262,79 +281,80 @@ class Auth extends MY_Controller
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-		$this->form_validation->set_rules('phone', 'Phone Number', 'required|xss_clean|min_length[3]|max_length[13]');
+        $this->form_validation->set_rules('phone', 'Phone Number', 'required|xss_clean|min_length[9]|max_length[9]|numeric');
 		$this->form_validation->set_rules('company', 'Company Name', 'xss_clean');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-		$this->form_validation->set_rules('password', 'Password Confirmation', 'required');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']
+            |max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if ($this->form_validation->run() == true)
 		{
 			$username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
 			$email = $this->input->post('email');
 			$password = $this->input->post('password');
+			$phone = self::_format_phone_number($this->input->post('phone'));
 
-			$additional_data = array('first_name' => $this->input->post('first_name'),
-				'last_name' => $this->input->post('last_name'),
-				'company' => $this->input->post('company'),
-				'phone' => $this->input->post('phone'),
+			$additional_data = array(
+				'first_name' => $this->input->post('first_name'),
+				'last_name'  => $this->input->post('last_name'),
+				'company'    => $this->input->post('company'),
+				'phone'      => $phone,
 			);
 
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
-		{ //check to see if we are creating the user
-			//redirect them back to the admin page
+		{
+            //redirect them back to the admin page
 			$this->session->set_flashdata('message',"Your has been Account Created, Check your email for the Activation Link.");
-			redirect('/auth/login/', 'refresh');
+			redirect('/auth/login/');
 		}
 		else
-		{ //display the create user form
-			//set the flash data error message if there is one
-			if($this->ion_auth->errors())
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-			if(validation_errors())
-				$this->session->set_flashdata('message', validation_errors());
+		{
+            //set the flash data error message if there is one
+			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : false));
 
 			$this->data['first_name'] = array(
 				'name'  => 'first_name',
 				'id'    => 'first_name',
 				'type'  => 'text',
+                'class' => 'span4',
 				'value' => $this->form_validation->set_value('first_name'),
 			);
 			$this->data['last_name'] = array(
 				'name'  => 'last_name',
 				'id'    => 'last_name',
 				'type'  => 'text',
+                'class' => 'span4',
 				'value' => $this->form_validation->set_value('last_name'),
 			);
 			$this->data['email'] = array(
 				'name'  => 'email',
 				'id'    => 'email',
 				'type'  => 'text',
+                'class' => 'span4',
 				'value' => $this->form_validation->set_value('email'),
 			);
 			$this->data['company'] = array(
 				'name'  => 'company',
 				'id'    => 'company',
 				'type'  => 'text',
+                'class' => 'span4',
 				'value' => $this->form_validation->set_value('company'),
 			);
 			$this->data['phone'] = array(
 				'name'  => 'phone',
 				'id'    => 'phone',
 				'type'  => 'text',
+                'placeholder' => '722123456',
+                'style' => 'width:84.6%;*width:84.6%;',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
 				'name'  => 'password',
 				'id'    => 'password',
 				'type'  => 'password',
+                'class' => 'span4',
 				'value' => $this->form_validation->set_value('password'),
-			);
-			$this->data['password_confirm'] = array(
-				'name'  => 'password_confirm',
-				'id'    => 'password_confirm',
-				'type'  => 'password',
-				'value' => $this->form_validation->set_value('password_confirm'),
 			);
 		}
 	}
@@ -362,5 +382,4 @@ class Auth extends MY_Controller
 			return FALSE;
 		}
 	}
-
 }

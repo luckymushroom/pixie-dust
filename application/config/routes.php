@@ -64,25 +64,41 @@
 |
 */
 
-$route['default_controller'] = 'site';
-$route['404_override']       = '';
+$route['default_controller']                       = 'site/blog';
+$route['404_override']                             = '';
 
-$route['index']             = 'site/index';
-$route['stories']           = 'blog';
-$route['blog']              = 'blog';
-$route['blog/page']  = 'blog/index';
-$route['blog/page/(:num)']  = 'blog/index/$1';
-$route['faq']               = 'site/faq';
-$route['price']             = 'site/price';
-$route['price/(:any)']      = 'site/price/$1';
-$route['press']             = 'site/press';
-$route['about']             = 'site/about';
-$route['team']              = 'site/team';
-$route['services']          = 'site/services';
-$route['contact']           = 'site/contact';
-$route['ktn/index.xml']     = 'site/ktn';
-$route['blog/manage/posts'] = 'blog/manage_posts';
-$route['blog/update/post/(:num)'] 	= 'blog/update_post/$1';
-
+$route['market']                                   = 'site/index';
+$route['market/(:any)']                            = 'site/index/$1';
+$route['marketplace']                              = 'site/index';
+$route['stories']                                  = 'blog';
+$route['blog']                                     = 'site/blog';
+$route['blog/post/(:any)']                         = 'site/post/$1';
+$route['index']                                    = 'site/blog';
+$route['blog/page']                                = 'site/blog';
+$route['blog/page/(:num)']                         = 'site/blog/$1';
+$route['farmers/page']                             = 'farmers/index';
+$route['farmers/page/(:num)']                      = 'farmers/index/$1';
+$route['faq']                                      = 'site/faq';
+$route['price']                                    = 'site/price';
+$route['price/(:any)']                             = 'site/price/$1';
+$route['press']                                    = 'site/press';
+$route['about']                                    = 'site/about';
+$route['team']                                     = 'site/team';
+$route['services']                                 = 'site/services';
+$route['contact']                                  = 'site/contact';
+$route['ktn/index.xml']                            = 'site/ktn';
+$route['contact_send']                             = 'site/contact_send';
+$route['admin']                                    = 'auth/login/';
+$route['sign-in']                                  = 'auth/login/';
+$route['users/(:num)']                             = 'users/index/$1';
+$route['farmer/posts/(:num)']                      = 'farmer/posts/show/$1';
+$route['admin/posts/(:num)']                       = 'admin/posts/show/$1';
+$route['users/(:num)/farmers']                     = 'farmers/show/$1';
+$route['users/(:num)/posts']                       = 'admin/posts/show/$1';
+$route['admin/posts/(:num)/products/(:num)/users'] = 'admin/posts/show_many/$2/$1';
+$route['aggregator/users/(:num)']                  = 'aggregator/users/index/$1';
+$route['aggregator/users/(:num)/(:num)']           = 'aggregator/users/show/$1/$2';
+$route['aggregator/posts/(:num)']                  = 'aggregator/posts/show/$1';
+$route['aggregator/posts/(:num)/user']             = 'aggregator/posts/user/$1';
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

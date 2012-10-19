@@ -52,20 +52,8 @@ class MY_Controller extends CI_Controller
 
 	public function __construct()
 	{
-	  parent::__construct();
-	  $this->_load_models();
-	  $this->load->config('application');
-	  $this->load->library(array('ion_auth','parser'));
-	  $this->load->helper(array('mfarm','date','inflector'));
-	  $this->current_user = $this->session->userdata('user_id');
-	  $this->data['code'] = '';
-	  $this->admin_group = $this->config->item('admin_group','ion_auth');
-	  $this->farmer_group = $this->config->item('default_group','ion_auth');
-	  $this->buyer_group = $this->config->item('buyers_group','ion_auth');
-	  $this->admin_template = $this->config->item('admin_template','ion_auth');
-	  $this->farmer_template = $this->config->item('farmer_template','ion_auth');
-	  $this->buyer_template = $this->config->item('buyer_template','ion_auth');
-
+		parent::__construct();
+		self::load_vars();
 	}
 
  /* --------------------------------------------------------------
@@ -108,7 +96,7 @@ class MY_Controller extends CI_Controller
 		if ($this->view !== FALSE)
 		{
 			// If $this->view isn't empty, load it. If it isn't, try and guess based on the controller and action name
-			$view = (!empty($this->view)) ? $this->view : $this->router->directory . $this->router->class . '/' . $this->router->method;
+			$view = (!empty($this->view)) ? $this->view : $this->router->directory. $this->router->class . '/' . $this->router->method;
 
 			// Load the view into $yield
 			$data['yield'] = $this->load->view($view, $this->data, TRUE);
@@ -129,26 +117,20 @@ class MY_Controller extends CI_Controller
 			// If we didn't specify the layout, try to guess it
 			if (!isset($this->layout))
 			{
-				if (file_exists(APPPATH . 'views/layouts/' . $this->router->class . '.php'))
+				if (file_exists(APPPATH . 'views/layouts/' . $this->router->class . '.tpl'))
 				{
 					$layout = 'layouts/' . $this->router->class;
 				}
 				else
 				{
-					if ($this->ion_auth->in_group($this->admin_group))
+					if ($this->ion_auth->logged_in())
 					{
-						$layout = 'layouts/'.$this->admin_template;
-					}
-					elseif ($this->ion_auth->in_group($this->farmer_group))
-					{
-						$layout = 'layouts/'.$this->farmer_template;
-					}
-					elseif($this->ion_auth->in_group($this->buyer_group))
-					{
-						$layout = 'layouts/'.$this->buyer_template;
+						// Load Users layout
+						$layout = "layouts/{$this->template}";
 					}
 					else
 					{
+						 // Load site
 						$layout = 'layouts/application';
 					}
 				}
@@ -173,6 +155,37 @@ class MY_Controller extends CI_Controller
 		}
 	}
 
+	public function load_vars()
+	{
+		$this->_load_models();
+		$this->data['environment'] = ENVIRONMENT;
+		// Load application config
+		$this->load->config('application');
+		$this->load->library('ion_auth');
+		$this->load->helper(array('mfarm','date','inflector'));
+		$this->current_user = $this->session->userdata('user_id');
+		$this->data['code'] = '';
+		$this->data['seg_one'] = $this->uri->segment(1);
+		$this->data['seg_two'] = $this->uri->segment(2);
+        $this->data['seg_three'] = $this->uri->segment(3);
+		$this->data['seg_four'] = $this->uri->segment(4);
+		$this->data['uri_string'] = $this->uri->uri_string();
+		$this->data['flash_message'] = $this->session->flashdata('message');
+		$this->data['user_session'] = $this->current_user;
+        if($this->current_user)
+        {
+            // $this->group = $this->ion_auth->get_group()->name;
+            $this->template = $this->ion_auth->get_group()->template;
+        }
+	}
+
+    public function dd($value)
+    {
+        echo "<pre>";
+        var_dump($value);
+        echo "</pre>";
+    }
+
 	/* --------------------------------------------------------------
      * MODEL LOADING
      * ------------------------------------------------------------ */
@@ -195,5 +208,71 @@ class MY_Controller extends CI_Controller
     protected function _model_name($model)
     {
         return str_replace('%', $model, $this->model_string);
+    }
+
+    /**
+     * This function sends out $text for sending over Shujaa Server
+     */
+    public function curl_sms_action($mobile_number, $text, $redirect_url)
+    {
+        $this->view = false;
+        $network = ($this->network = 'Safaricom Short Code' OR $this->network == 'Safaricom Bulk') ? 'Safaricom' : 'Airtel';
+        // Start session (also wipes existing/previous sessions)
+        $this->load->library('curl');
+        $this->curl->create(TARGET_URL);
+
+        // Options
+        $this->curl->options(array(CURLOPT_BUFFERSIZE => 10, CURLOPT_POST => true));
+
+        // Login to HTTP user authentication
+        $this->curl->http_login(SMS_USER, SMS_PASS);
+
+        // Post - If you do not use post, it will just run a GET request
+        $post = array(
+            'username'    => SMS_USER,
+            'password'    => SMS_PASS,
+            'account'     =>'live',
+            'source'      => 3555,
+            'destination' => $mobile_number,
+            'message'     => $text,
+            'network'     => $network
+            );
+        // Save Outgoing text
+        self::save_outgoing_sms($post);
+        $this->curl->post($post);
+        // Execute - returns response
+        $response = $this->curl->execute();
+        list($curl_status) = explode(':', $response);
+
+        if($curl_status)
+        {
+            $this->session->set_flashdata('message', "Message sent! {$response}");
+            redirect($redirect_url);
+        }
+        else
+        {
+            $this->session->set_flashdata('message', "Message NOT sent! {$response}");
+            redirect($redirect_url);
+        }
+    }
+    /**
+     * Save outgoing messages
+     */
+    public function save_outgoing_sms($post)
+    {
+        $save = array(
+            'destination' => element('destination', $post),
+            'message'     => element('message', $post),
+            'network'     => $this->network
+            );
+        $this->outgoing_text->insert($save);
+    }
+    public function _format_phone_number($phone_string)
+    {
+        $phone_string = urldecode($phone_string);
+        $this->view = false;
+        $phone_string = substr($phone_string, -9);
+        $phone_string = preg_replace('/\s+/', '', $phone_string);
+        return $phone_string = $this->config->item('country_code','ion_auth').$phone_string;
     }
 }

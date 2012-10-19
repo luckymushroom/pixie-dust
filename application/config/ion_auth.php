@@ -27,7 +27,8 @@
 	/**
 	 * Site Title, example.com
 	 */
-	$config['site_title']		   = "M-farm KE";
+	$config['site_title']   = "M-farm KE";
+	$config['country_code'] = '254';
 
 	/**
 	 * Admin Email, admin@example.com
@@ -37,16 +38,18 @@
 	/**
 	 * Default Templates for different users
 	 */
-	$config['admin_template'] = 'admin_template';
-	$config['farmer_template'] = 'seller_template';
-	$config['buyer_template'] = 'buyers_template';
+	$config['admin_template']  = 'admin_template';
+	$config['farmer_template'] = 'farmer_template';
+	$config['aggregator_template'] = 'aggregator_template';
+	$config['buyer_template']  = 'buyer_template';
 
 	/**
 	 * Default administrators group, use name
 	 */
-	$config['admin_group']         = 'admin';
-	$config['default_group']      = 'farmers';
-	$config['buyers_group']       = 'buyers';
+	$config['admin_group']       = 'admin';
+	$config['default_group']     = 'farmers';
+	$config['buyers_group']      = 'buyers';
+	$config['aggregator_group']  = 'aggregators';
 	/**
 	 * Users table column and Group table column you want to join WITH.
 	 * Joins from users.id
@@ -106,25 +109,25 @@
 	 * activate Account Email Template
      * Default : activate.tpl.php
 	 **/
-	$config['email_activate']   = 'activate.tpl.php';
+	$config['email_activate']   = 'activate.tpl';
 
 	/**
 	 * activate Account Email Template
      * Default : activate.tpl.php
 	 **/
-	$config['email_invite']   = 'invitation.tpl.php';
+	$config['email_invite']   = 'invitation.tpl';
 
 	/**
 	 * Forgot Password Email Template
      * Default : forgot_password.tpl.php
 	 **/
-	$config['email_forgot_password']   = 'forgot_password.tpl.php';
+	$config['email_forgot_password']   = 'forgot_password.tpl';
 
 	/**
 	 * Forgot Password Complete Email Template
      * Default : new_password.tpl.php
 	 **/
-	$config['email_forgot_password_complete']   = 'new_password.tpl.php';
+	$config['email_forgot_password_complete']   = 'new_password.tpl';
 
 	/**
 	 * Salt Length

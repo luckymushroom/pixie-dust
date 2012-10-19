@@ -1,20 +1,14 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access');
-// 
-//  sms_model.php
-//  application model
-//  
-//  Created by Team Mfarm on 2011-11-02.
-//  Copyright 2011 __MFarm LTD__. All rights reserved.
-// 
 
 class Sms_model extends CI_Model
 {
+	protected $soft_delete = TRUE;
 
-	public function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	/**
 	 * get_crop_details
 	 * @access public
@@ -29,30 +23,37 @@ class Sms_model extends CI_Model
 		$this->db->join('products', 'prices.product_id = products.id');
 		$this->db->join('locations', 'locations.id = prices.location_id');
 		$this->db->where('crop_price >', 0);
+		$this->db->where('prices.status', 'live');
 		$this->db->where('crop_date', '(SELECT max(crop_date) from prices)',FALSE);
-		$this->db->or_like('product_alias', $crop);
-		$this->db->or_like('product_name', $crop);
+		$this->db->like('product_alias', $crop);
 		if (is_numeric($location))
-		{ 
-			$this->db->where('locations.location_id', $location); 
+		{
+			$this->db->where('locations.id', $location);
 		}
 		else
-		{ 
-			$this->db->like('location_alias', $location); 
+		{
+			$this->db->like('location_alias', $location);
 		}
-		$this->db->group_by('product_id,crop_date');
-		$this->db->order_by('crop_date','DESC');
-		$this->db->order_by('crop_price','DESC');
-		$this->db->order_by('products.id','DESC');
-		$response = $this->db->get('prices',4)->result();
-		if ($response) 
+		$this->db->group_by('product_id');
+		$this->db->order_by('crop_date desc, products.id asc');
+		$response = $this->db->get('prices',1)->row();
+		if ($response)
 		{
 			return $response;
 		}
-		else 
+		else
 		{
 			return false;
 		}
+	}
+	/**
+	 * Get Product id from product name
+	 */
+	public function get_product_id($product_name)
+	{
+		$this->db->like('product_name', $product_name);
+		$this->db->or_like('product_alias', $product_name);
+		return $this->db->get('products')->row()->id;
 	}
 	/**
 	 * get_subscriber_details
@@ -64,12 +65,12 @@ class Sms_model extends CI_Model
 	{
 		// Get susbcriber with the set mobile number
 		$response = $this->db->like('phone',$mobile_number)->get('users', 1);
-		if ($response) 
+		if ($response)
 		{
 			//Return the subscriber details
 			return $response->row();
 		}
-		else 
+		else
 		{
 			//If not present return nothing
 			return false;
@@ -104,7 +105,7 @@ class Sms_model extends CI_Model
 		// Add incoming SMS into db and set flag to zero
 		$sql="INSERT INTO incomingsms(message,date,mobilenumber,flag ) values('".$message."','".$date."','".$phone."','0')" ;
 		$response = $this->db->query($sql);
-		if ($response) 
+		if ($response)
 		{
 			//Return the SMS id for further processing
 			return $this->db->insert_id();
@@ -114,7 +115,7 @@ class Sms_model extends CI_Model
 			return false;
 		}
 	}
-	
+
 	/**
 	 * [update_incoming_sms description]
 	 * @param  int $id unique sms id
@@ -131,7 +132,7 @@ class Sms_model extends CI_Model
 			return false;
 		}
 	}
-	
+
 	/**
 	 * [insert_new_subscriber description]
 	 * @param  array $data user details
@@ -149,7 +150,7 @@ class Sms_model extends CI_Model
 			return false;
 		}
 	}
-	
+
 	/**
 	 * [insert_buy_details description]
 	 * @param  array $data buyer details
@@ -158,31 +159,31 @@ class Sms_model extends CI_Model
 	public function insert_buy_details($data)
 	{
 		$query = $this->db->insert('offer_buyers',$data);
-		if ($query) 
+		if ($query)
 		{
 			return true;
 		}
-		else 
+		else
 		{
 			return false;
 		}
 	}
-	
+
 	//public function get all sms with flag as 0 || 1
 	/**
 	 * Get SMS's flagged as one or zero
-	 * @param  array  $params 
+	 * @param  array  $params
 	 * @return array
 	 */
 	public function get_sms_stats($params = array())
 	{
 		$flag = isset($params['request']);
-		
+
 		if(!$flag)
 		{
 			$this->db->order_by('date','DESC');
 			$request = $this->db->get('incomingsms')->result();
-		}	
+		}
 		else
 		{
 			if (is_numeric($flag))
@@ -190,12 +191,10 @@ class Sms_model extends CI_Model
 			else
 				$request = $this->db->query("SELECT * FROM (`incomingsms`) WHERE SUBSTRING_INDEX( `message` ,' ', 1 ) = '$flag' AND date = NOW()")->result();
 		}
-
-
 		return $request;
 	}
 
-	
+
 	/**
 	 * [get_todays_sms description]
 	 * @return array

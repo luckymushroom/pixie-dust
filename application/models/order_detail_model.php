@@ -2,37 +2,37 @@
 
 class Order_detail_model extends MY_Model {
 
-	public $after_get = array('product_name','dateformatting');
-	public $before_create = array('date_modified');
-	//php 5 constructor
+	public $before_create = array( 'created_at' );
+    public $before_update = array( 'created_at', 'updated_at' );
+    public $belongs_to = array( 'post' );
+
 	function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function product_name($result)
+	public function select($columns)
 	{
-		$result->post_id = $this->db->select('product_name')->join('posts', 'posts.product_id = products.id')
-		->where('posts.id', $result->post_id)->get('products')->row();
-		return $result;
-	}
-
-	public function my_bids($post_ids)
-	{
-		$this->db->where_in('post_id',$post_ids);
+		$this->db->select($columns);
 		return $this;
 	}
 
-	public function date_modified($post)
+	public function user()
 	{
-		$post['date_modified'] = date('Y-m-d H:i:s');
-		return $post;
+		$this->db->join('users','users.id = posts.user_id','left');
+		return $this;
 	}
 
-	public function dateformatting($result)
+	public function product()
 	{
-		$result->date_modified = date('d-m-Y H:i:s');
-		return $result;
+		$this->db->join('products','products.id = posts.product_id','inner');
+		return $this;
+	}	
+
+	public function post()
+	{
+		$this->db->join('posts','posts.id = order_details.post_id','left');
+		return $this;
 	}
 
 }

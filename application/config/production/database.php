@@ -78,11 +78,11 @@ $query_builder = TRUE;
 
 $db['production'] = array(
 	'dsn'	=> '',
-	'hostname' => 'external-db.s111833.gridserver.com',
+	'hostname' => 'internal-db.s111833.gridserver.com',
 	'username' => 'db111833_mfarm',
-	'password' => 'mfarm2012!',
+	'password' => 'Sn0wPea5-365!',
 	'database' => 'db111833_zeamays',
-	'dbdriver' => 'mysql',
+	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
 	'db_debug' => (ENVIRONMENT == 'production' ? FALSE : TRUE),

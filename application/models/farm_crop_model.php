@@ -3,6 +3,7 @@
 class Farm_crop_model extends MY_Model {
 
 	public $before_get = array('join_commodities');
+	protected $soft_delete = TRUE;
 	//php 5 constructor
 	function __construct()
 	{

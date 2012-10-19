@@ -2,30 +2,18 @@
 
 class Post_model extends MY_Model
 {
-	// public $before_get = array('join_tables');
-	public $after_get = array('product_name');
-	public $before_create = array('date_created');
-	public $before_update = array('date_updated');
+	public $before_create = array( 'created_at' );
+    public $before_update = array( 'created_at', 'updated_at' );
 
 	public function __construct()
 	{
 	   parent::__construct();
-	   //Do your magic here
 	}
 
-	/**
-	 * Timestamps
-	 */
-	public function date_created($post)
+	public function select($columns)
 	{
-		$post['date_created'] = date('Y-m-d H:i:s');
-		return $post;
-	}
-
-	public function date_updated($post)
-	{
-		$post['date_updated'] = date('Y-m-d H:i:s');
-		return $post;
+		$this->db->select($columns);
+		return $this;
 	}
 
 	/**
@@ -38,16 +26,30 @@ class Post_model extends MY_Model
 		$this->db->where('posts.user_id',$user);
 		return $this;
 	}
-
+	/**
+	 * Get recent 10 items posted
+	 * @author mogetutu
+	 * @access public
+	 */
 	public function recent($limit = '10')
 	{
 		$this->db->order_by('posts.id','DESC')->limit($limit);
 		return $this;
 	}
-
+	/**
+	 * Get items that are live on the site
+	 * @author mogetutu
+	 * @acces public
+	 */
 	public function live()
 	{
 		$this->db->where('post_status','LIVE');
+		return $this;
+	}
+
+	public function user()
+	{
+		$this->db->join('users','users.id = posts.user_id','left');
 		return $this;
 	}
 
@@ -57,43 +59,31 @@ class Post_model extends MY_Model
 		return $this;
 	}
 
-	public function with_photos()
-	{
-		$this->db->join('photos', 'photos.post_id = posts.id','left');
-		return $this;
-	}
-
 	public function match_products()
 	{
 		$this->db->join('products','products.id = posts.product_id','left');
 		return $this;
 	}
 
-	public function with_location()
+	public function product($product)
 	{
-		$this->db->join('locations','locations.id = posts.location_id','left');
+		if($product)
+		{
+			$this->db->like('product_name', $product);
+		}
 		return $this;
 	}
-	/**
-	 * @author mogetutu
-	 * @access public
-	 * Calculate the available amount of a posting on the marketplace
-	 */
-	public function amount_available($result)
-	{
-		$result->amount_available = ($result->product_weight - $result->total_weight);
-		return $result;
-	}
 
-	public function product_name($result)
+	public function with_location()
 	{
-		$result->product_name = $this->db->get_where('products', array('id'=>$result->product_id))->row()->product_name;
-		return $result;
+		$this->db->join('locations','locations.id = users.location_id','left');
+		return $this;
 	}
 
 	public function status($status)
 	{
-		$this->db->where('post_status',$status);
+		$status = ($status === 'approved') ? true : false ;
+		$this->db->where('approved_product_weight', $status);
 		return $this;
 	}
 
@@ -106,6 +96,60 @@ class Post_model extends MY_Model
 	public function filter_ids($ids)
 	{
 		$this->db->where('id', $ids);
+		return $this;
+	}
+
+	public function group_by($column)
+	{
+		$this->db->group_by($column);
+		return $this;
+	}
+
+	public function posts_with($user, $status)
+    {
+		$this->db->select('product_id,product_name,sum(approved_product_weight) as total_weight, count(product_id) as entries,weight_unit,posts.created_at,posts.updated_at, approved_product_weight, sum(product_weight) as total_product_weight');
+    	if ($status)
+    	{
+    		$this->post->status($status);
+    	}
+    	$this->post->join('users')->join('products');
+    	$this->db->where('user_id', $user);
+    	return $this;
+    }
+
+	public function aggregated_product($aggregator, $weeknumber = null, $status = null)
+	{
+		$this->db->select('product_id,product_name,sum(approved_product_weight) as total_weight, count(product_id) as entries,weight_unit,posts.created_at,posts.updated_at, approved_product_weight, sum(product_weight) as total_product_weight');
+		$this->db->where('aggregator', $aggregator);
+		if($weeknumber)
+		{
+			$this->db->where("DATE_FORMAT(created_at, '%V') =", $weeknumber);
+		}
+		if($status)
+		{
+			$this->post->status($status);
+		}
+		$this->post->join('users')->join('products');
+		$this->db->order_by('posts.created_at','DESC');
+		$this->post->group_by('product_id');
+		return $this;
+	}
+
+	public function update_weight($id, $weight)
+	{
+		$this->post->update($id, array('updated_by' => $this->current_user, 'approved_product_weight' => $weight));
+		return $this;
+	}
+	/**
+	 * Get Week Numbers from Posts
+	 */
+	public function get_week_numbers()
+	{
+		for ($week = 1; $week < 53; $week++)
+		{
+			$weeks[$week] = $week;
+		}
+		return $weeks;
 	}
 
 }

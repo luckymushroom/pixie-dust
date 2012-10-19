@@ -33,6 +33,10 @@
 		{
 			$('#delivery-date').removeClass('hidden').fadeIn();
 		}
+		if ($('input#radio-no').is(':checked'))
+		{
+			$('#delivery-date').addClass('hidden');
+		}
 		$('input#radio-no').click(function(){
 			$('div#delivery-date').addClass('hidden').fadeOut();
 		});
@@ -87,6 +91,26 @@
 	            return false;
 	        }
 	    });
+
+	    // $('#reportrange').daterangepicker({
+	    // 	ranges: {
+	    // 		'Today': ['today', 'today'],
+	    // 		'Yesterday': ['yesterday', 'yesterday'],
+	    // 		'Last 7 Days': [Date.today().add({ days: -6 }), 'today'],
+	    //         'Last 30 Days': [Date.today().add({ days: -29 }), 'today'],
+	    //         'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
+	    //         'Last Month': [Date.today().moveToFirstDayOfMonth().add({ months: -1 }), Date.today().moveToFirstDayOfMonth().add({ days: -1 })]
+		   //      }
+		   //  },
+		   //  function(start, end) {
+		   //  	$('#reportrange span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+	    //         $.post(
+				 //       'http://mogetutu.dev/mfarm-web/prices/index/',
+				 //       { startdate: start.toString('yyyy-MM-dd'), enddate: end.toString('yyyy-MM-dd') }
+				 //    );
+
+		   //  }
+	    // );
 	});
 
 })(this.jQuery);

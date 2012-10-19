@@ -2,8 +2,7 @@
 
 class User_model extends MY_Model
 {
-
-	//php 5 constructor
+	public $has_many = array('posts');
 	function __construct()
 	{
 		parent::__construct();
@@ -33,54 +32,21 @@ class User_model extends MY_Model
 		return $this;
 	}
 
-	public function aggregator($code)
+	public function aggregator($user_id)
 	{
-		$this->db->where('aggregator', $code);
+		$this->db->where('aggregator', $user_id);
 		return $this;
 	}
 
 	public function is_aggregator()
 	{
-		$this->db->where('is_aggregator', TRUE);
+		$this->db->where('is_aggregator', true);
 		return $this;
 	}
 	public function not_aggregator()
 	{
-		$this->db->where('is_aggregator', FALSE);
+		$this->db->where('is_aggregator', false);
 		return $this;
-	}
-	/**
-	 * array of user_ids is selected group
-	 * @param  string/int $group group name or id
-	 * @return array or user ids
-	 */
-	public function in_group($group)
-	{
-		$user_ids = self::by_group_id($group);
-
-		$this->db->where_in('id', $user_ids);
-		return $this;
-	}
-	/**
-	 * get list of users of a the set group id
-	 * @param  int $group_id group id
-	 * @return array
-	 */
-	public function by_group_id($group)
-	{
-		if (is_string($group))
-		{
-			$group_id = self::get_group_id($group);
-		}	
-		else
-		{
-			$group_id = $group;
-		}
-		$users = $this->db->select('user_id')->where('group_id', $group_id)->get('users_groups')->result();
-		foreach ($users as $row) {
-			$user_ids[] = $row->user_id;
-		}
-		return $user_ids;
 	}
 	/**
 	 * get group id give a group name
@@ -111,20 +77,23 @@ class User_model extends MY_Model
 		return $this;
 	}
 
-	/**
-	 * Refactor code to look for farmer and buyer group from controller and pass and paramter
-	 * Remove hard coding of groups
-	 */
-	public function is_farmer($user, $group = 2)
-	{
-		$user = $this->db->where('user_id',$user)->where('group_id',$group)->get('users_groups')->result();
-		return ($user) ? TRUE : FALSE ;
-	}
+    public function check_account($email)
+    {
+        $check = $this->user->get_by('email',$email);
+        return ($check) ? TRUE : FALSE;
+    }
 
-	public function is_buyer($user, $group = 3)
-	{
-		$user = $this->db->where('user_id',$user)->where('group_id',$group)->get('users_groups')->result();
-		return ($user) ? TRUE : FALSE ;
-	}
+    public function phone_number_exists($phone_number)
+    {
+        $check = $this->user->get_by('phone',$phone_number);
+        return ($check) ? TRUE : FALSE;
+    }
 
+    public function aggregator_exists($code)
+    {
+    	$check = $this->user->get_by(array('is_aggregator' => $code))->id;
+    	return ($check != 0) ? $check : FALSE;
+    }
 }
+/* End of file user_model.php */
+/* Location: ./application/models/user_model.php */

@@ -135,7 +135,7 @@ class CI_Input {
 	{
 		if ( ! isset($array[$index]))
 		{
-			return FALSE;
+			return NULL;
 		}
 
 		if ($xss_clean === TRUE)
@@ -263,23 +263,27 @@ class CI_Input {
 			}
 		}
 
-		if ($prefix == '' && config_item('cookie_prefix') != '')
+		if ($prefix === '' && config_item('cookie_prefix') !== '')
 		{
 			$prefix = config_item('cookie_prefix');
 		}
+
 		if ($domain == '' && config_item('cookie_domain') != '')
 		{
 			$domain = config_item('cookie_domain');
 		}
-		if ($path == '/' && config_item('cookie_path') !== '/')
+
+		if ($path === '/' && config_item('cookie_path') !== '/')
 		{
 			$path = config_item('cookie_path');
 		}
-		if ($secure == FALSE && config_item('cookie_secure') != FALSE)
+
+		if ($secure === FALSE && config_item('cookie_secure') !== FALSE)
 		{
 			$secure = config_item('cookie_secure');
 		}
-		if ($httponly == FALSE && config_item('cookie_httponly') != FALSE)
+
+		if ($httponly === FALSE && config_item('cookie_httponly') !== FALSE)
 		{
 			$httponly = config_item('cookie_httponly');
 		}
@@ -324,39 +328,113 @@ class CI_Input {
 			return $this->ip_address;
 		}
 
-		if (config_item('proxy_ips') != '' && $this->server('HTTP_X_FORWARDED_FOR') && $this->server('REMOTE_ADDR'))
+		$proxy_ips = config_item('proxy_ips');
+		if ( ! empty($proxy_ips) && ! is_array($proxy_ips))
 		{
-			$proxies = preg_split('/[\s,]/', config_item('proxy_ips'), -1, PREG_SPLIT_NO_EMPTY);
-			$proxies = is_array($proxies) ? $proxies : array($proxies);
-
-			$this->ip_address = in_array($_SERVER['REMOTE_ADDR'], $proxies) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
-		}
-		elseif ( ! $this->server('HTTP_CLIENT_IP') && $this->server('REMOTE_ADDR'))
-		{
-			$this->ip_address = $_SERVER['REMOTE_ADDR'];
-		}
-		elseif ($this->server('REMOTE_ADDR') && $this->server('HTTP_CLIENT_IP'))
-		{
-			$this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
-		}
-		elseif ($this->server('HTTP_CLIENT_IP'))
-		{
-			$this->ip_address = $_SERVER['HTTP_CLIENT_IP'];
-		}
-		elseif ($this->server('HTTP_X_FORWARDED_FOR'))
-		{
-			$this->ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+			$proxy_ips = explode(',', str_replace(' ', '', $proxy_ips));
 		}
 
-		if ($this->ip_address === FALSE)
-		{
-			return $this->ip_address = '0.0.0.0';
-		}
+		$this->ip_address = $this->server('REMOTE_ADDR');
 
-		if (strpos($this->ip_address, ',') !== FALSE)
+		if ($proxy_ips)
 		{
-			$x = explode(',', $this->ip_address);
-			$this->ip_address = trim(end($x));
+			foreach (array('HTTP_X_FORWARDED_FOR', 'HTTP_CLIENT_IP', 'HTTP_X_CLIENT_IP', 'HTTP_X_CLUSTER_CLIENT_IP') as $header)
+			{
+				if (($spoof = $this->server($header)) !== NULL)
+				{
+					// Some proxies typically list the whole chain of IP
+					// addresses through which the client has reached us.
+					// e.g. client_ip, proxy_ip1, proxy_ip2, etc.
+					if (strpos($spoof, ',') !== FALSE)
+					{
+						$spoof = explode(',', $spoof, 2);
+						$spoof = $spoof[0];
+					}
+
+					if ( ! $this->valid_ip($spoof))
+					{
+						$spoof = NULL;
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+
+			if ($spoof)
+			{
+				for ($i = 0, $c = count($proxy_ips); $i < $c; $i++)
+				{
+					// Check if we have an IP address or a subnet
+					if (strpos($proxy_ips[$i], '/') === FALSE)
+					{
+						// An IP address (and not a subnet) is specified.
+						// We can compare right away.
+						if ($proxy_ips[$i] === $this->ip_address)
+						{
+							$this->ip_address = $spoof;
+							break;
+						}
+
+						continue;
+					}
+
+					// We have a subnet ... now the heavy lifting begins
+					isset($separator) OR $separator = $this->valid_ip($this->ip_address, 'ipv6') ? ':' : '.';
+
+					// If the proxy entry doesn't match the IP protocol - skip it
+					if (strpos($proxy_ips[$i], $separator) === FALSE)
+					{
+						continue;
+					}
+
+					// Convert the REMOTE_ADDR IP address to binary, if needed
+					if ( ! isset($ip, $convert_func))
+					{
+						if ($separator === ':')
+						{
+							// Make sure we're have the "full" IPv6 format
+							$ip = str_replace('::', str_repeat(':', 9 - substr_count($this->ip_address, ':')), $this->ip_address);
+							$convert_func = is_php('5.3')
+								? function ($value)
+									{
+										return str_pad(base_convert($value, 16, 2), 16, '0', STR_PAD_LEFT);
+									}
+								: create_function('$value', 'return str_pad(base_convert($value, 16, 2), 16, "0", STR_PAD_LEFT);');
+						}
+						else
+						{
+							$ip = $this->ip_address;
+							$convert_func = is_php('5.3')
+								? function ($value)
+									{
+										return str_pad(decbin($value), 8, '0', STR_PAD_LEFT);
+									}
+								: create_function('$value', 'return str_pad(decbin($value), 8, "0", STR_PAD_LEFT);');
+						}
+
+						$ip = implode(array_map($convert_func, explode($separator, $ip)));
+					}
+
+					// Split the netmask length off the network address
+					list($netaddr, $masklen) = explode('/', $proxy_ips[$i], 2);
+
+					// Again, an IPv6 address is most likely in a compressed form
+					if ($separator === ':')
+					{
+						$netaddr = str_replace('::', str_repeat(':', 9 - substr_count($netaddr, ':')), $netaddr);
+					}
+
+					// Convert to a binary form and finally compare
+					$netaddr = implode(array_map($convert_func, explode($separator, $netaddr)));
+					if (strncmp($ip, $netaddr, $masklen) === 0)
+					{
+						$this->ip_address = $spoof;
+						break;
+					}
+				}
+			}
 		}
 
 		if ( ! $this->valid_ip($this->ip_address))
@@ -372,14 +450,26 @@ class CI_Input {
 	/**
 	 * Validate IP Address
 	 *
-	 * Updated version suggested by Geert De Deckere
-	 *
 	 * @param	string
+	 * @param	string	'ipv4' or 'ipv6'
 	 * @return	bool
 	 */
-	public function valid_ip($ip)
+	public function valid_ip($ip, $which = '')
 	{
-		return (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+		switch (strtolower($which))
+		{
+			case 'ipv4':
+				$which = FILTER_FLAG_IPV4;
+				break;
+			case 'ipv6':
+				$which = FILTER_FLAG_IPV6;
+				break;
+			default:
+				$which = NULL;
+				break;
+		}
+
+		return (bool) filter_var($ip, FILTER_VALIDATE_IP, $which);
 	}
 
 	// --------------------------------------------------------------------
@@ -459,7 +549,7 @@ class CI_Input {
 		}
 
 		// Is $_GET data allowed? If not we'll set the $_GET to an empty array
-		if ($this->_allow_get_array == FALSE)
+		if ($this->_allow_get_array === FALSE)
 		{
 			$_GET = array();
 		}
@@ -502,7 +592,7 @@ class CI_Input {
 		$_SERVER['PHP_SELF'] = strip_tags($_SERVER['PHP_SELF']);
 
 		// CSRF Protection check
-		if ($this->_enable_csrf == TRUE)
+		if ($this->_enable_csrf === TRUE && ! $this->is_cli_request())
 		{
 			$this->security->csrf_verify();
 		}
@@ -559,7 +649,7 @@ class CI_Input {
 		}
 
 		// Standardize newlines if needed
-		if ($this->_standardize_newlines == TRUE && strpos($str, "\r") !== FALSE)
+		if ($this->_standardize_newlines === TRUE && strpos($str, "\r") !== FALSE)
 		{
 			return str_replace(array("\r\n", "\r", "\r\n\n"), PHP_EOL, $str);
 		}
@@ -659,7 +749,7 @@ class CI_Input {
 
 		if ( ! isset($this->headers[$index]))
 		{
-			return FALSE;
+			return NULL;
 		}
 
 		return ($xss_clean === TRUE)

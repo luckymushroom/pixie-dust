@@ -9,7 +9,7 @@
 				<img src="<?=site_url('media/crops/'.$post->photo);?>" alt="" rel="popover"
 				data-content="
 				Product: <?=$post->product_name;?><br>
-				Amount Avaliable: <?=$post->amount_available.' '.$post->units;?><br>
+				Amount Avaliable: <?=$post->product_weight.' '.$post->units;?><br>
 				Unit Price: KES <?=$post->unit_price;?>"
 				data-original-title="Details"
 				data-placement="bottom">

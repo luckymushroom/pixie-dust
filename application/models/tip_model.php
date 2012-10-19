@@ -2,18 +2,17 @@
 
 class Tip_model extends MY_Model
 {
-	public $after_get = array( 'get_user' );
+	protected $soft_delete = TRUE;
 
-	//php 5 constructor
 	function __construct()
 	{
 		parent::__construct();
 	}
 
-	public function get_user($result)
+	public function match_user()
 	{
-		$result->username = $this->db->get_where('users', array('id'=>$result->user_id))->row()->username;
-		return $result;
+		$this->db->join('users', 'users.id = tips.user_id', 'left');
+		return $this;
 	}
 
 }

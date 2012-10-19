@@ -3,6 +3,7 @@
 class Order_model extends MY_Model
 {
 	public $after_get = array('get_process_name');
+	protected $soft_delete = TRUE;
 	public function __construct()
 	{
 	   parent::__construct();
@@ -35,5 +36,14 @@ class Order_model extends MY_Model
 	{
 		$result->process_step_id = $this->db->select('process_name')->get_where('process_steps', array('id'=>$result->process_step_id))->row();
 		return $result;
+	}
+
+	public function status( $status )
+	{
+		if(isset($status))
+		{
+			$this->db->where('process_step_id', $status);
+			return $this;
+		}
 	}
 }

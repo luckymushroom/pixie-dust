@@ -301,10 +301,9 @@ class Ion_auth
 	 * @return void
 	 * @author isaak mogetutu <imogetutu@gmail.com>
 	 **/
-	public function invitation_request($username, $password, $email, $additional_data)
+	public function invitation_request($username, $password, $email, $additional_data, $referrer)
 	//need to test email activation
 	{
-		$referrer = $this->current_user();
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
 		$email_activation = $this->config->item('email_activation', 'ion_auth');
@@ -345,7 +344,10 @@ class Ion_auth
 			}
 
 			// Add Referrer to record created
-			$this->db->where('id',$id)->update('users', array('referral_id'=>$referrer));
+			if($this->db->get_where('users', array('id'=>$id))->row()->referral_id == 0)
+			{
+				$this->db->where('id',$id)->update('users', array('referral_id'=>$referrer));
+			}
 
 			$activation_code = $this->ion_auth_model->activation_code;
 			$user            = $this->ion_auth_model->user($id)->row();
@@ -440,9 +442,9 @@ class Ion_auth
 		return $this->session->userdata('user_id');
 	}
 
-	public function profile()
+	public function profile($user_id = NULL)
 	{
-		return $this->ion_auth_model->user()->row();
+		return $this->ion_auth_model->user($user_id)->row();
 	}
 
 	/**
@@ -458,6 +460,20 @@ class Ion_auth
 		$admin_group = $this->config->item('admin_group', 'ion_auth');
 
 		return $this->in_group($admin_group);
+	}
+	/**
+	 * is_aggregator
+	 *
+	 * @return bool
+	 * @author Mogetutu
+	 */
+	public function is_aggregator()
+	{
+		$this->ion_auth_model->trigger_events('is_aggregator');
+
+		$aggregator_group = $this->config->item('aggregator_group', 'ion_auth');
+
+		return $this->in_group($aggregator_group);
 	}
 
 	/**
@@ -497,5 +513,13 @@ class Ion_auth
 
 		return FALSE;
 	}
-
+	/**
+	 * Group Details
+	 * @return String
+	 * @author Mogetutu Isaak
+	 */
+	public function get_group($id=false)
+	{
+		return $this->ion_auth_model->get_users_groups($id)->row();
+	}
 }

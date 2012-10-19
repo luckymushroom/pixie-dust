@@ -462,6 +462,7 @@ class Ion_auth_model extends CI_Model
 		$this->trigger_events('extra_where');
 
 		return $this->db->where('email', $email)
+						->where('deleted',0)
 		                ->count_all_results($this->tables['users']) > 0;
 	}
 
@@ -600,8 +601,8 @@ class Ion_auth_model extends CI_Model
 			'password'   => $password,
 			'email'      => $email,
 			'ip_address' => sprintf('%u', ip2long($ip_address)),
-			'created_on' => time(),
-			'last_login' => time(),
+			'created_on' => strtotime(date('Y-m-d H:i:s')),
+			'last_login' => strtotime(date('Y-m-d H:i:s')),
 			'active'     => 1
 		);
 
@@ -892,7 +893,7 @@ class Ion_auth_model extends CI_Model
 		//if no id was passed use the current users id
 		$id || $id = $this->session->userdata('user_id');
 
-		return $this->db->select($this->tables['users_groups'].'.'.$this->join['groups'].' as id, '.$this->tables['groups'].'.name, '.$this->tables['groups'].'.description')
+		return $this->db->select($this->tables['users_groups'].'.'.$this->join['groups'].' as id, '.$this->tables['groups'].'.name, '.$this->tables['groups'].'.description,'.$this->tables['groups'].'.template ')
 		                ->where($this->tables['users_groups'].'.'.$this->join['users'], $id)
 		                ->join($this->tables['groups'], $this->tables['users_groups'].'.'.$this->join['groups'].'='.$this->tables['groups'].'.id')
 		                ->get($this->tables['users_groups']);

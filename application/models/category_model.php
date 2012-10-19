@@ -2,6 +2,7 @@
 
 class Category_model extends MY_Model
 {
+    protected $soft_delete = TRUE;
 	public function __construct()
 	{
 	   parent::__construct();
