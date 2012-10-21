@@ -3,13 +3,13 @@
 class Posts extends MY_Controller {
 
     protected $models = array( 'post','product','price','user' );
-    function __construct() 
+    function __construct()
     {
         parent::__construct();
         $this->ion_auth->logged_in_check();
     }
-    
-    public function index() 
+
+    public function index()
     {
         $columns = 'posts.*,product_name,username,phone';
         $this->data['posts'] = $this->post->select($columns)->user()->match_products()->order_by('posts.id','desc')->get_many_by('user_id',$this->current_user);
@@ -24,11 +24,13 @@ class Posts extends MY_Controller {
     {
         $products = $this->product->dropdown('product_name');
         $this->data['products'] = $products;
+        $this->data['weight_unit'] = array('KGs'=>'KGs','Crates'=>'Crates');
     }
     public function edit($post_id)
     {
         $columns = 'posts.*,product_name,product_id';
         $this->data['products'] = $this->product->dropdown('product_name');
+        $this->data['weight_unit'] = array('KGs'=>'KGs','Crates'=>'Crates');
         // Check is there is post id to update else insert new record
         if($post_id)
         {
@@ -57,7 +59,7 @@ class Posts extends MY_Controller {
             {
                 // Insert new Post
                 $additional_data = array(
-                    'user_id'       => $this->current_user, 
+                    'user_id'       => $this->current_user,
                     'contact'       => $this->user->get($this->current_user)->phone,
                     'delivery_date' => $delivery_date
                     );

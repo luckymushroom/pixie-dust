@@ -1,38 +1,32 @@
-<div class="row-fluid">
-    <div class="span7">
+    <div class="span6">
         <legend>Post #{$post->id}</legend>
         <form class="form-horizontal" method="post" action='{site_url("farmer/posts/edit/{$post->id}")}'>
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="input01">Product Name</label>
                     <div class="controls">
-                        {form_dropdown('product_id', $products, $post->product_id)}
+                        {form_dropdown('product_id', $products, $post->product_id)} &nbsp;
+                        <a title="Add New Crop"><i class="icon-plus"></i></a>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">Product Amount</label>
                     <div class="controls">
-                        <input type="text" name="product_weight" value="{$post->product_weight}" class="input-xlarge" id="input01" required />
+                        <input type="text" name="product_weight" value="{$post->product_weight}" class="input-large" id="input01" required />
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="input01">Unit Weight</label>
                     <div class="controls">
-                        <input type="text" name="weight_unit" value="{$post->weight_unit}" class="input-xlarge" id="input01" placeholder="eg. KG" required />
+                        {form_dropdown('weight_unit',$weight_unit, $post->weight_unit)}
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="input01">Packaging</label>
-                    <div class="controls">
-                        <input type="text" name="packaging" value="{$post->packaging}" class="input-xlarge" id="input01" placeholder="eg. Bag, Net, Crate" required />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="appendedPrependedInput">Unit Price</label>
+                    <label class="control-label" for="appendedPrependedInput">Unit Price <br> (Per Kilo/Crate)</label>
                     <div class="controls">
                       <div class="input-prepend input-append">
                         <span class="add-on">KES</span>
-                        <input id="appendedPrependedInput" value="{$post->unit_price}" size="16" type="text" name="unit_price" required>
+                        <input id="appendedPrependedInput" value="{$post->unit_price}" class="span8" type="text" name="unit_price" required>
                         <span class="add-on">.00</span>
                       </div>
                     </div>
@@ -40,7 +34,7 @@
                 <div class="control-group">
                     <label class="control-label" for="textarea">Product Summary</label>
                     <div class="controls">
-                        <textarea class="input-xlarge" name="description" id="textarea" rows="3">{$post->description}</textarea>
+                        <textarea class="input-large" name="description" id="textarea" rows="3">{$post->description}</textarea>
                     </div>
                 </div>
                 <div class="control-group">
@@ -60,7 +54,7 @@
                         <input id="dp" type="text" class="input-xlarge" name="delivery_date" value="{$post->delivery_date}">
                     </div>
                 </div>
-                <div class="form-actions">
+                <div class="controls">
                     <button type="submit" class="btn btn-success">Update</button>
                     <a href="{site_url('farmer/posts/')}" class="btn btn-warning">Done</a>
                 </div>
@@ -74,12 +68,12 @@
             <li class="span7">
                 <div class="thumbnail">
                     <a href='{site_url("farmer/posts/delete_photo/{$post->id}/")}' onclick="return confirm('Are you sure you want to delete this Photo?')" title="Delete Photo">
-                    <img src='{site_url("media/crops/{$post->post_photo|default:'default-thumg.gif'}")}' alt="" rel="popover" data-content="{$post->post_photo}" data-original-title="Caption" data-placement="bottom">
+                    <img src='{site_url("media/crops/{$post->post_photo|default:'default-thumg.gif'}")}' alt="{$post->post_photo}">
                     </a>
                 </div>
             </li>
-        </ul><!-- / -->
-    {/if}
+        </ul><!-- /Photos -->
+    {else}
     <!-- Upload form here -->
         <form class="form-inline" action='{site_url("farmer/posts/upload_photo/{$post->id}")}' method="post" enctype="multipart/form-data">
             <fieldset>
@@ -98,7 +92,7 @@
                 </div>
             </fieldset>
         </form>
-
+    {/if}
         <br>
         <legend>Price Feed</legend>
         <table class="table">

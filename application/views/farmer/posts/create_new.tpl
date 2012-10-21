@@ -1,13 +1,12 @@
 <div class="page-header">
     <div class="pull-right">
         <div class="btn-group">
-            <a href="{site_url('farmer/posts')}" class="btn btn-success"><i class="icon-circle-arrow-left icon-white"></i> Cancel</a>
+            <a href="{site_url('farmer/posts')}" class="btn"><i class="icon-chevron-left"></i> Cancel</a>
         </div>
     </div>
-<h2>Post on the Marketplace</h2>
+<h3>Post to the Marketplace</h3>
 </div>
-<div class="row">
-<div class="span7">
+<div class="span6">
 <form id="new-post" class="form-horizontal" method="post" action="{site_url('farmer/posts/edit')}">
     <fieldset>
         <div class="control-group">
@@ -20,20 +19,13 @@
         <div class="control-group">
             <label class="control-label" for="input01">Product Amount</label>
             <div class="controls">
-                <input type="text" name="product_weight" class="input-xlarge" id="input01" placeholder='2000 Kgs' required />
+                <input type="text" name="product_weight" class="input-large" id="input01" placeholder='2000' required />
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="input01">Unit Weight</label>
             <div class="controls">
-                <input type="text" name="weight_unit" class="input-xlarge" id="input01" placeholder="eg. KG" required />
-            </div>
-        </div>
-
-        <div class="control-group">
-            <label class="control-label" for="input01">Packaging</label>
-            <div class="controls">
-                <input type="text" name="packaging" class="input-xlarge" id="input01" placeholder="eg. 90kg Bag, Net, Crate" required />
+                {form_dropdown('weight_unit', $weight_unit, 'KGs')}
             </div>
         </div>
 
@@ -48,7 +40,7 @@
         <div class="control-group">
             <label class="control-label" for="textarea">Product Summary</label>
             <div class="controls">
-                <textarea class="input-xlarge" name="description" id="textarea" rows="3"></textarea>
+                <textarea class="input-large" name="description" id="textarea" rows="3"></textarea>
             </div>
         </div>
         <div class="control-group">
@@ -75,7 +67,7 @@
     </fieldset>
 </form>
 </div>
-<div class="span3">
+<div class="span4">
     <legend>Price Feed</legend>
         <table class="table">
             <thead>
@@ -91,7 +83,6 @@
             <tbody id='prices'>
             </tbody>
         </table>
-</div>
 </div>
 <script type="text/javascript">
 $(function() {
