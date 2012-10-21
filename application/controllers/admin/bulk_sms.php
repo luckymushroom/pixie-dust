@@ -5,15 +5,24 @@ class Bulk_sms extends MY_Controller {
     protected $models = array( 'incoming_text','user','bulk_text' );
     public $before_create = array( 'created_at', 'updated_at' );
     public $before_update = array( 'updated_at' );
-    function __construct() 
+    function __construct()
     {
         parent::__construct();
     }
-    
-    function index() 
+
+    function index()
     {
+        $this->output->enable_profiler(true);
         // List Numbers
-        $this->data['numbers'] = $this->incoming_text->unique_numbers()->get_all();
+        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+
+        if ( ! $bulksms = $this->cache->get('bulksms'))
+        {
+            $bulksms = $this->incoming_text->unique_numbers()->get_all();
+            // Save into the cache for 2 minutes
+            $this->cache->save('bulksms', $bulksms, 150);
+        }
+        $this->data['numbers'] = $bulksms;
     }
 
     public function thread($number)
