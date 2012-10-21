@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Administration Panel | MFarm KE</title>
-    <meta name="description" content="MFarm Application">
-    <meta name="author" content="mogetutu, isaak@mogetutu.com, @mogetutu">
+    <meta name="description" content="MFarm Web and SMS Application, Kenya">
+    <meta name="author" content="jamila, jamila@mfarm.co.ke, susaneve, susan@mfarm.co.ke, mogetutu, mogetutu@mfarm.co.ke, @mogetutu">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -60,7 +60,7 @@
               <li><a href="{site_url('admin/prices/index/')}" title="Prices"><i class="icon-eye-open icon-white"></i>  Prices</a></li>
               <li><a href="{site_url('admin/sms/')}" title="SMS"><i class="icon-comment icon-white"></i>  Sms</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Accounts 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Accounts
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{site_url('admin/users/status/active')}"><i class="icon-plus"></i>  Active Accounts</a></li>
