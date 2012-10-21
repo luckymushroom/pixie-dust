@@ -57,8 +57,7 @@
       </div>
     </div>
 
-    <div id='hld'>
-      <div class='container-fluid'>
+    <div class='container'>
       {if ($flash_message)}
         <div class="alert alert-success">
           <a class="close" data-dismiss="alert">&times;</a>
