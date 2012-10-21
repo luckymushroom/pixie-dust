@@ -67,32 +67,31 @@
 			</label>
 			</div>
 		</div>
-		<div class="form-actions">
-			<button type="submit" class="btn btn-success">Save</button> <button class="btn">Cancel</button>
+		<div class="controls">
+			<button type="submit" class="btn btn-success">Save Changes</button> <button class="btn">Cancel</button>
 		</div>
 	</fieldset>
 	</form>
-	</div>
-	<div class="span4">
-		<legend>Profile Pic</legend>
-		{if $user->avatar != 'default_avatar.jpg'}
-			<img src="{base_url}media/avatars/{$user->avatar}" alt="{$user->avatar}" class="thumbnail">
-		{/if}
-		<br>
-		<form class="well" action="{base_url}farmer/settings/upload_photo/{$user->id}" method="post" enctype="multipart/form-data">
-			<fieldset>
-				<div class="control-group">
-					<label class="control-label" for="fileInput">Upload Profile Picture:</label>
-					<div class="controls">
-						<input class="input-file" id="fileInput" type="file" name="user_avatar">
-					</div>
+</div>
+
+<div class="span4">
+	<legend>Profile Pic</legend>
+	{if $user->avatar != 'default_avatar.jpg'}
+		<img src="{base_url}media/avatars/{$user->avatar}" alt="{$user->avatar}" class="thumbnail">
+	{/if}
+	<br>
+	<form class="well" action="{base_url}farmer/settings/upload_photo/{$user->id}" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="fileInput">Upload Profile Picture:</label>
+				<div class="controls">
+					<input class="input-file" id="fileInput" type="file" name="user_avatar">
 				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Save changes</button>
-					<button class="btn">Cancel</button>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-	</div>
+			</div>
+			<div class="controls">
+				<button type="submit" class="btn btn-success">Save changes</button>
+				<button class="btn">Cancel</button>
+			</div>
+		</fieldset>
+	</form>
 </div>
