@@ -64,6 +64,7 @@ class Post_model extends MY_Model
 		if($product)
 		{
 			$this->db->like('product_name', $product);
+			$this->db->or_like('product_alias', $product);
 		}
 		return $this;
 	}
