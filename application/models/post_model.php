@@ -59,12 +59,6 @@ class Post_model extends MY_Model
 		return $this;
 	}
 
-	public function match_products()
-	{
-		$this->db->join('products','products.id = posts.product_id','left');
-		return $this;
-	}
-
 	public function product($product)
 	{
 		if($product)
