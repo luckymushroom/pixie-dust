@@ -8,16 +8,20 @@ class Posts extends MY_Controller {
         parent::__construct();
         $this->ion_auth->logged_in_check();
     }
-
+    /**
+     * List Farmer Posts
+     * @return array
+     */
     public function index()
     {
         $columns = 'posts.*,product_name,username,phone';
-        $this->data['posts'] = $this->post->select($columns)->user()->match_products()->order_by('posts.id','desc')->get_many_by('user_id',$this->current_user);
+        $this->data['posts'] = $this->post->select($columns)->join('users')->join('products')->order_by('posts.id','desc')
+                               ->get_many_by('user_id',$this->current_user);
     }
 
     public function show($id)
     {
-        $this->data['posts'] = $this->post->user()->match_products()->get_many_by(array('user_id'=>$id));
+        $this->data['posts'] = $this->post->join('users')->join('products')->get_many_by(array('user_id'=>$id));
     }
 
     public function create_new()
@@ -34,7 +38,7 @@ class Posts extends MY_Controller {
         // Check is there is post id to update else insert new record
         if($post_id)
         {
-            $this->data['post'] = $this->post->select($columns)->match_products()->get_by('posts.id',$post_id);
+            $this->data['post'] = $this->post->select($columns)->join('products')->get_by('posts.id',$post_id);
             // $this->data['photos'] = $this->photo->get_many_by('post_id',$post_id);
             if($this->input->post())
             {

@@ -27,7 +27,7 @@ class Posts extends MY_Controller
 	{
 		$columns = 'posts.*,product_name,username,phone';
 		// List Posts
-		$this->data['posts'] = $this->post->select($columns)->user()->status($status)->match_products()->order_by('posts.id','desc')->get_all();
+		$this->data['posts'] = $this->post->select($columns)->join('users')->status($status)->join('products')->order_by('posts.id','desc')->get_all();
 	}
 
 	public function show($id)
@@ -48,7 +48,7 @@ class Posts extends MY_Controller
 	public function show_many($id,$product_id)
 	{
 		$columns = 'posts.*,product_name,username,phone';
-		$this->data['posts'] = $this->post->select($columns)->user()->match_products()->get_many_by(array('aggregator'=>$id,'product_id'=>$product_id));
+		$this->data['posts'] = $this->post->select($columns)->join('users')->join('products')->get_many_by(array('aggregator'=>$id,'product_id'=>$product_id));
 	}
 
 	public function create_new()
@@ -75,7 +75,7 @@ class Posts extends MY_Controller
 		$this->data['products'] = $this->product->dropdown('product_name');
 		if($post_id)
 		{
-			$this->data['post'] = $this->post->select($columns)->match_products()->get_by('posts.id',$post_id);
+			$this->data['post'] = $this->post->select($columns)->join('products')->get_by('posts.id',$post_id);
 			// $this->data['photos'] = $this->photo->get_many_by('post_id',$post_id);
 			if($this->input->post())
 			{
@@ -231,7 +231,7 @@ class Posts extends MY_Controller
 	{
 		$this->view = 'admin/posts/index';
 		$columns = 'posts.*,product_name,username,phone';
-		$this->data['posts'] = $this->post->select($columns)->user()->status($status)->match_products()->order_by('posts.id','desc')->get_all();
+		$this->data['posts'] = $this->post->select($columns)->join('users')->status($status)->join('products')->order_by('posts.id','desc')->get_all();
 	}
 }
 

@@ -33,7 +33,7 @@ class Site extends MY_Controller
 		$product = ($this->uri->segment(2)) ? $this->uri->segment(2) : $this->input->post('search');
 		$this->data['search'] = $product;
 		$this->data['page_title'] = 'Marketplace';
-		$this->data['posts'] = $this->post->select($select)->live()->match_products()->product($product)->order_by('posts.id','desc')->get_all();
+		$this->data['posts'] = $this->post->select($select)->live()->join('products')->product($product)->order_by('posts.id','desc')->get_all();
 		// Check if products exists on search
 		if($product && ($this->data['posts'] == null))
 		{
@@ -303,7 +303,7 @@ class Site extends MY_Controller
 
 	public function classifieds($limit = '')
 	{
-		 return $this->post->live()->with_order_details()->match_products()->order_by('posts.id','desc')->limit($limit)->get_all();
+		 return $this->post->live()->with_order_details()->join('products')->order_by('posts.id','desc')->limit($limit)->get_all();
 	}
 
 	public function related_posts($slug, $category, $limit = 5)
