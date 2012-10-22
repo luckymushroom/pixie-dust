@@ -8,7 +8,7 @@
                 type: "POST",
                 url: "{site_url('aggregator/products/trends')}",
                 data: crop,
-                success: function(data) { window.location = "{site_url('aggregator/products/trends/index')}/" + crop }
+                success: function(data) { window.location = "{site_url('aggregator/products/trends')}/" + crop }
             });
         });
 $(function () {
