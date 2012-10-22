@@ -20,8 +20,8 @@
     <!-- Dark Theme in the works -->
     <!-- <link href="{base_url}media/css/darkstrap.css" rel="stylesheet"> -->
     <!-- jQuery -->
-    <script src="{base_url}media/js/jquery.min.js"></script>
-    <script src="{base_url}media/js/modernizr-2.5.3.min.js"></script>
+    <script src="{base_url}media/js/jquery.min-ck.js"></script>
+    <script src="{base_url}media/js/modernizr-2.5.3.min-ck.js"></script>
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="{base_url}favicon.ico">
     <link rel="apple-touch-icon" href="{base_url}media/img/apple-touch-icon.png">
@@ -115,15 +115,15 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{base_url}media/js/widgets.js"></script>
-    <script src="{base_url}media/js/bootstrap.min.js"></script>
-    <script src="{base_url}media/js/bootstrap-datepicker.js"></script>
-    <script src="{base_url}media/js/jquery.dataTables.js"></script>
-    <script src="{base_url}media/js/dt_bootstrap.js"></script>
-    <script src="{site_url('media/js/highcharts/js/highcharts.js')}"></script>
-    <script src="{site_url('media/js/highcharts/js/modules/exporting.js')}"></script>
-    <script src="{site_url('media/js/jquery-cookie.js')}"></script>
-    <script src="{base_url}media/js/site.js"></script>
+    <script src="{base_url}media/js/widgets-ck.js"></script>
+    <script src="{base_url}media/js/bootstrap.min-ck.js"></script>
+    <script src="{base_url}media/js/bootstrap-datepicker-ck.js"></script>
+    <script src="{base_url}media/js/jquery.dataTables-ck.js"></script>
+    <script src="{base_url}media/js/dt_bootstrap-ck.js"></script>
+    <script src="{site_url('media/js/highcharts/js/highcharts-ck.js')}"></script>
+    <script src="{site_url('media/js/highcharts/js/modules/exporting-ck.js')}"></script>
+    <script src="{site_url('media/js/jquery-cookie-ck.js')}"></script>
+    <script src="{base_url}media/js/site-ck.js"></script>
     {if (ENVIRONMENT == 'production')}
     <script type="text/javascript">
 
