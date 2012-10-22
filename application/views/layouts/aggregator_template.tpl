@@ -51,7 +51,7 @@
               <li><a href="{base_url}aggregator/settings/tips"><i class="icon-leaf icon-white"></i>  Tips</a></li>
             </ul>
             <ul class="nav pull-right">
-              <!-- <li><a href="#"><span class="badge badge-inverse">A3555</span></a></li> -->
+              <li><a href="#"><span class="label label-inverse">{$ci->ion_auth->profile()->is_aggregator}</span></a></li>
               <li><a href="{base_url}aggregator/settings/"><i class="icon-cog icon-white"></i>  Settings</a></li>
               <li><a href="{base_url}auth/logout"><i class="icon-off icon-white"></i>  Logout</a></li>
             </ul>
