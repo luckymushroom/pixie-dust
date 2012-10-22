@@ -76,6 +76,7 @@ $route['blog/post/(:any)']                         = 'site/post/$1';
 $route['index']                                    = 'site/blog';
 $route['blog/page']                                = 'site/blog';
 $route['blog/page/(:num)']                         = 'site/blog/$1';
+$route['admin/blog/(:num)/edit']                   = 'admin/blog/edit/$1';
 $route['farmers/page']                             = 'farmers/index';
 $route['farmers/page/(:num)']                      = 'farmers/index/$1';
 $route['faq']                                      = 'site/faq';
