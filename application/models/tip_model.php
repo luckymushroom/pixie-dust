@@ -2,7 +2,8 @@
 
 class Tip_model extends MY_Model
 {
-	protected $soft_delete = TRUE;
+	public $before_create = array( 'created_at' );
+    public $before_update = array( 'created_at', 'updated_at' );
 
 	function __construct()
 	{
