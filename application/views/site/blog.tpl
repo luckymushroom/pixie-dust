@@ -6,7 +6,7 @@
                 <img src='{base_url("media/blog_photos/{$post->image|default:"default-thumb.gif"}")}' alt="" class="imgborder2" />
             </div>
             <div class="post-content2">
-                <h5><a href="{site_url("blog/post/{$post->slug}")}">{$post->title}</a></h5>
+                <h5><a href='{site_url("blog/post/{$post->slug}")}'>{$post->title}</a></h5>
                 <div class="post-info2">
                     <span><img src="{base_url}media/site/images/blog-author.png" alt="" /></span> <span><a href="#">{$post->username}</a> &nbsp;&nbsp;|&nbsp;&nbsp; </span>
                     <span><img src="{base_url()}media/site/images/blog-date.png" alt="" /></span> <span>{date('F, d Y',strtotime($post->created_at))}</span>
