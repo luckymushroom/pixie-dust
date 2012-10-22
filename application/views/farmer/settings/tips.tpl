@@ -10,7 +10,7 @@
 	<blockquote>
 	  <a href="{base_url}farmer/settings/delete_tip/{$tip->id}" class="close close-tip" onclick="return confirm('Are you sure you want to delete?')">×</a>
 	  <p>{$tip->tip}</p>
-	  <small>{$tip->username} {twitter_time_format($tip->date_added)}</small>
+	  <small>{$tip->username} {date('d M, Y', strtotime($tip->created_at))}</small>
 	</blockquote>
 {/foreach}
 {else}

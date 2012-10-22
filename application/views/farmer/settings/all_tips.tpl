@@ -12,7 +12,7 @@
 		<a href='{site_url("farmer/settings/delete_tip/{$tip->id}")}' class="close close-tip" onclick="return confirm('Are you sure you want to delete?')">×</a>
 	{/if}
 	  <p>{$tip->tip}</p>
-	  <small>{$tip->username} {twitter_time_format($tip->date_added)}</small>
+	  <small>{$tip->username} {twitter_time_format($tip->created_at)}</small>
 	</blockquote>
 {/foreach}
 {else}
