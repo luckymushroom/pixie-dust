@@ -6,5 +6,7 @@
 */third_party/Smarty/compiled/*
 */third_party/!index.html
 */media
+application/third_party/Smarty/compiled/*.tpl.php
+application/third_party/Smarty/compiled/9db865216b41cdbec4722f013cf47a0769b93314.file.admin_template.tpl.php
 
-application/third_party/Smarty/compiled/82ff27c27ec75a55c3e48251e5556d1b3040dc9b.file.farmer_template.tpl.php
+application/third_party/Smarty/compiled/39825c1c5659086ff6dccead277d8ba32cda0afc.file.manage_tips.tpl.php
