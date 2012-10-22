@@ -18,7 +18,7 @@
     {foreach $blogs as $blog}
     <div class="span3">
         <div class="project thumbnail">
-            <h5><a href='{site_url("admin/blog/edit/{$blog->id}")}'>{character_limiter($blog->title,20)}</a></h5>
+            <h5><a href='{site_url("admin/blog/{$blog->id}/edit")}'>{character_limiter($blog->title,20)}</a></h5>
             <p class="sub">{character_limiter($blog->intro,129)}</p>
             <span class="label">
                 created: {date('F, d Y',strtotime($blog->created_at))}
