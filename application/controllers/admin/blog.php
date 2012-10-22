@@ -14,7 +14,7 @@
 class Blog extends MY_Controller
 {
 
-	protected $models = array('blog','blog_category','post','crop_report');
+	protected $models = array('blog','blog_category','post','crop_report','photo');
 	public function __construct()
 	{
 		parent::__construct();
@@ -26,7 +26,6 @@ class Blog extends MY_Controller
 	 */
 	public function index($category = '')
 	{
-		$this->ion_auth->logged_in_check();
 		$blogs = ($category) ?
 		$this->blog->category($category)->get_all() : $this->blog->order_by('id','desc')->get_all();
 		$this->data['blogs'] = $blogs;
@@ -49,6 +48,7 @@ class Blog extends MY_Controller
 	{
 		$this->data['post'] = $this->blog->get($id);
 		$this->data['categories'] = $this->blog_category->dropdown('title');
+		$this->data['photos'] = $this->photo->get_photos($id);
 		$this->form_validation->set_rules('title', 'Blog Title', 'required|trim');
 		$slug = strtolower(url_title($this->input->post('title', TRUE), '-', TRUE));
 		$post = array(
@@ -91,7 +91,6 @@ class Blog extends MY_Controller
 
 	public function upload_photo($blog_id='')
 	{
-		$this->ion_auth->logged_in_check();
 		if(!$blog_id)
 		{
 			redirect('admin/blog/add_post/','refresh');
@@ -166,7 +165,6 @@ class Blog extends MY_Controller
 	 */
 	public function delete_photo($post_id)
 	{
-		$this->ion_auth->logged_in_check();
 		$photo_data = array('thumbnail' =>'', 'image' =>'');
 		$this->blog->update($post_id, $photo_data);
 		if($this->db->affected_rows())
@@ -180,7 +178,6 @@ class Blog extends MY_Controller
 			redirect("admin/blog/edit/{$post_id}");
 		}
 	}
-
 
 	public function add_category()
 	{
