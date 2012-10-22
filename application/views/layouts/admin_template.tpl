@@ -141,9 +141,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{site_url('media/js/widgets.js')}"></script>
-    <script src="{site_url('media/js/wysihtml5.js')}"></script>
     <script src="{site_url('media/js/bootstrap.min.js')}"></script>
-    <script src="{site_url('media/js/bootstrap-wysihtml5.min.js')}"></script>
     <script src="{site_url('media/js/bootstrap-datepicker.js')}"></script>
     <script src="{site_url('media/js/jquery.dataTables.js')}"></script>
     <script src='{base_url("media/js/Scroller.js")}'></script>
