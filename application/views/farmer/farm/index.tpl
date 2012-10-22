@@ -1,29 +1,5 @@
-<div class="page-header">
-    {if $aggregator}
-    <div class="pull-right">
-        <div class="btn-group">
-            <a href='{site_url("users/{$user_session}/farmers")}' class="btn">
-                <i class="icon-user"></i>
-                Profiles
-            </a>
-            <a href="#" class="btn">{$username}</a>
-            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href='{site_url("settings/profile/{$seg_three}")}'><i class="pull-right icon-eye-open"></i> Profile</a>
-                </li>
-                <li>
-                    <a href='{site_url("users/{$seg_three}/posts")}'><i class="pull-right icon-download"></i> Posts</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    {/if}
-    <h3>Shamba Location</h3>
-</div>
-<form action="{site_url('farm/details')}" method="post" class="form-horizontal well">
+<form action="{site_url('farm/details')}" method="post" class="form-horizontal">
+    <legend>Shamba Details</legend>
     <fieldset>
         <div class="control-group">
             <label class="control-label">County</label>
