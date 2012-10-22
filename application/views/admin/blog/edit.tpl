@@ -7,7 +7,7 @@
 			<input type='submit' value='update post' class='btn btn-small btn-warning'>
 		</div>
 		<h3>Publish Post</h3></div>
-		
+
 		<div class="control-group">
 			<div class="controls">
 				<select name="status">

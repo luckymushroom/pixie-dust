@@ -47,7 +47,7 @@
               <li><a href="{site_url('admin/prices/index/')}" title="Prices"><i class="icon-eye-open icon-white"></i>  Prices</a></li>
               <li><a href="{site_url('admin/sms/')}" title="SMS"><i class="icon-comment icon-white"></i>  Sms</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Accounts 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i>  Accounts
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{site_url('admin/users/status/active')}"><i class="icon-plus"></i>  Active Accounts</a></li>
@@ -97,13 +97,14 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-<!-- Le javascript
+    <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{site_url('media/js/widgets.js')}"></script>
-    <script src="{site_url('media/js/wysihtml5.js')}"></script>
+    <script src="{site_url('media/js/wysihtml5-0.3.0.js')}"></script>
+    <script src="{site_url('media/js/prettify.js')}"></script>
     <script src="{site_url('media/js/bootstrap.min.js')}"></script>
-    <script src="{site_url('media/js/bootstrap-wysihtml5.min.js')}"></script>
+    <script src="{site_url('media/js/bootstrap-wysihtml5.js')}"></script>
     <script src="{site_url('media/js/bootstrap-datepicker.js')}"></script>
     <script src="{site_url('media/js/jquery.dataTables.js')}"></script>
     <script src="{site_url('media/js/dt_bootstrap.js')}"></script>
@@ -111,12 +112,12 @@
     <script src="{site_url('media/js/highcharts/js/modules/exporting.js')}"></script>
     <script src="{site_url('media/js/jquery-cookie.js')}"></script>
     <script src="{site_url('media/js/site.js')}"></script>
-    <script type="text/javascript">
-      jQuery(document).ready(function() {
+    <script>
         $('#textarea').wysihtml5();
         $('#textarea1').wysihtml5();
-      });
-
+    </script>
+    <script type="text/javascript" charset="utf-8">
+      $(prettyPrint);
     </script>
   </body>
 </html>
