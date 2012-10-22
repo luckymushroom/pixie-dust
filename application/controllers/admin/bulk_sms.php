@@ -8,11 +8,11 @@ class Bulk_sms extends MY_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->ion_auth->logged_in_check();
     }
 
     function index()
     {
-        $this->output->enable_profiler(true);
         // List Numbers
         $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 
