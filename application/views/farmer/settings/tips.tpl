@@ -1,10 +1,13 @@
-<ul class="nav nav-pills">
-	<li class="active"><a href="{base_url}farmer/settings/tips">My Tips</a></li>
-	<li><a href="{base_url}farmer/settings/all_tips">All Tips</a></li>
-</ul>
-<h2><legend>Tips</legend></h2>
-<p><a class="btn btn-success" data-toggle="modal" href="#myModal">Give A Tip</a></p>
-<br>
+<div class="page-header">
+    <div class="pull-right">
+        <a class="btn btn-success" data-toggle="modal" href="#myModal">Give A Tip</a>
+    </div>
+    <ul class="nav nav-pills">
+        <li class="active"><a href="{base_url}farmer/settings/tips">My Tips</a></li>
+        <li><a href="{base_url}farmer/settings/all_tips">All Tips</a></li>
+    </ul>
+    <h2><legend>My Tips</legend></h2>
+</div>
 {if ($tips)}
 {foreach $tips as $tip}
 	<blockquote>

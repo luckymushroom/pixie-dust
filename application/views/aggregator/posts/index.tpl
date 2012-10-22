@@ -29,7 +29,11 @@
             <td>{$post->product_name}</td>
             <form name="prices" id="prices" method="post" action='{site_url("aggregator/posts/edit/{$post->id}")}'>
             <td>
+                {if $post->approved_product_weight}
+                <input type='text' class='input-small' name='approved_product_weight' value='{$post->approved_product_weight|default:$post->product_weight} {$post->weight_unit}' disabled="disabled">
+                {else}
                 <input type='text' class='input-small' name='approved_product_weight' value='{$post->approved_product_weight|default:$post->product_weight} {$post->weight_unit}'>
+                {/if}
             </td>
             <td>
                 <ul class="btn-group">

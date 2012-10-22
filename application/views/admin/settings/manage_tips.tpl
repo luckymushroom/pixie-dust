@@ -3,7 +3,7 @@
     {foreach $tips as $tip}
     	<blockquote>
     		<p>{$tip->tip}</p>
-    		<small>{$tip->username} {twitter_time_format($tip->created_at)}</small>
+    		<small>{$tip->username} {date('d M,Y', strtotime($tip->created_at))}</small>
     	</blockquote>
     {/foreach}
 {else}

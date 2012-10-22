@@ -6,7 +6,7 @@
 <ul class="thumbnails">
 {foreach $farmers as $farmer}
     <li class="span3">
-      <div class="thumbnail">
+      <div class="thumbnail box-shadow">
       <img src='{site_url("media/avatars/{$farmer->avatar}")}' alt="">
       <div class="caption">
           <h4>{$farmer->username}</h4>
