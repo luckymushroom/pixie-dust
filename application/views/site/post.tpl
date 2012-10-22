@@ -107,9 +107,9 @@
                 <ul class="popular-list">
                     {foreach $recent as $row }
                     <li>
-                        <img src="{base_url("media/blog_photos/{$post->image}")}" alt="" class="imgborder2" />
-                        <p class="popular-title"><a href='{site_url("blog/post/{$post->slug}")}'>{$post->title}</a></p>
-                        <p>{date('F, m Y',strtotime($post->created_at))}</p>
+                        <img src='{base_url("media/blog_photos/{$row->image}")}' alt="mfarm post photo" class="imgborder2" />
+                        <p class="popular-title"><a href='{site_url("blog/post/{$row->slug}")}'>{$row->title}</a></p>
+                        <p>{date('F, m Y',strtotime($row->created_at))}</p>
                     </li>
                     {/foreach}
                 </ul>

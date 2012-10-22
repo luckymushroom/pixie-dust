@@ -50,7 +50,7 @@ class Site extends MY_Controller
 		$this->data['page_title'] = 'Our Thoughts';
 		$this->data['page_subtitle'] = 'Sometimes Great Ideas Come From a Story';
 		// Recent Posts
-		$this->data['recent'] = $this->blog->live()->order_by('blogs.updated_at','desc')->limit(1)->get_all();
+		$this->data['recent'] = $this->blog->live()->order_by('blogs.updated_at','desc')->limit(3)->get_all();
 		$this->data['classifieds'] = self::classifieds(3);
 		$this->data['blog_categories'] = $this->blog_category->get_all();
 
@@ -85,7 +85,7 @@ class Site extends MY_Controller
 			$this->data['page_title']      = $post->title;
 			$this->data['page_subtitle']   = '';
 			$this->data['post']            = $post;
-			$this->data['recent']          = $this->blog->live()->order_by('blogs.id','desc')->limit(1)->get_all(); // Recent Posts
+			$this->data['recent'] = $this->blog->live()->order_by('blogs.updated_at','desc')->limit(3)->get_all(); // Recent Posts
 			$this->data['classifieds']     = self::classifieds(3);
 			$this->data['blog_categories'] = $this->blog_category->get_all();
 			$this->data['disqus']          = $this->disqus->get_html();
