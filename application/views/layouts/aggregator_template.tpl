@@ -48,7 +48,7 @@
               <li>
                 <a href='{site_url("aggregator/users/{$user_session}")}'><i class="icon-user icon-white"></i>  Farmers</a>
               </li>
-              <li><a href="{base_url}aggregator/settings/tips"><i class="icon-leaf icon-white"></i>  Tips</a></li>
+              <li><a href="{base_url}aggregator/tips"><i class="icon-leaf icon-white"></i>  Tips</a></li>
             </ul>
             <ul class="nav pull-right">
               <li><a href="#"><span class="label label-inverse">{$ci->ion_auth->profile()->is_aggregator}</span></a></li>
