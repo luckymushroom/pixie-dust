@@ -208,7 +208,7 @@ class Settings extends MY_Controller
 	 */
 	public function tips($params = array())
 	{
-		$this->data['tips'] = $this->tip->match_user()->order_by('tips.id','DESC')->get_many_by('user_id',$this->current_user);
+		$this->data['tips'] = $this->tip->join('users')->order_by('tips.id','DESC')->get_many_by('user_id',$this->current_user);
 
 		$this->form_validation->set_rules('tip','Tip','required|xss_clean');
 
@@ -238,7 +238,7 @@ class Settings extends MY_Controller
 	 */
 	public function all_tips($params = array())
 	{
-		$this->data['tips'] = $this->tip->match_user()->order_by('tips.id','DESC')->get_all();
+		$this->data['tips'] = $this->tip->join('users')->order_by('tips.id','DESC')->get_all();
 	}
 	/**
 	 * delete a user tips
@@ -266,7 +266,7 @@ class Settings extends MY_Controller
 
 	public function manage_tips()
 	{
-		$this->data['tips'] = $this->tip->match_user()->order_by('tips.id','DESC')->get_all();
+		$this->data['tips'] = $this->tip->join('users')->order_by('tips.id','DESC')->get_all();
 	}
 
 }
