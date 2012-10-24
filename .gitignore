@@ -1,0 +1,9 @@
+*/config/development
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
+*/third_party/Smarty/compiled/*
+*/third_party/!index.html
+*/media
+*/compiled/*
