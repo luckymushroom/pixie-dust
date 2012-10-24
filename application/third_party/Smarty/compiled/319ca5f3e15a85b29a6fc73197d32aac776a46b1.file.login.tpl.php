@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:56:28
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-24 14:39:57
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/auth/login.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:154204095075b6cc030309-28601843%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:8227228495087e19dd40474-27746533%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '154204095075b6cc030309-28601843',
+  'nocache_hash' => '8227228495087e19dd40474-27746533',
   'function' => 
   array (
   ),
@@ -22,9 +22,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b6cc190af',
+  'unifunc' => 'content_5087e19defe52',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5075b6cc190af')) {function content_5075b6cc190af($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
+<?php if ($_valid && !is_callable('content_5087e19defe52')) {function content_5087e19defe52($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 ?><div class='page-header'>
     <a href="<?php echo site_url('auth/create_user');?>
 " class="btn btn-small pull-right" title="Create Account">Create Account</a>

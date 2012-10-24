@@ -17,13 +17,15 @@
 // Account Creation
 $lang['account_creation_successful'] 	  	 = 'Account Successfully Created';
 $lang['account_creation_unsuccessful'] 	 	 = 'Unable to Create Account';
-$lang['account_creation_duplicate_email'] 	 = 'Email Already Used or Invalid. ';
+$lang['account_creation_duplicate_email']    = 'Email Already Used or Invalid. ';
+$lang['account_creation_duplicate_phone'] 	 = 'Phone Already Used or Invalid. ';
 $lang['account_creation_duplicate_username'] = 'Username Already Used or Invalid';
 
 // Invitation Creation
 $lang['invitation_creation_successful'] 	  	 = 'Invitation Successfully Sent';
 $lang['invitation_creation_unsuccessful'] 	 	 = 'Problem Sending Invitation';
-$lang['invitation_creation_duplicate_email'] 	 = 'Email Already Used or Invalid';
+$lang['invitation_creation_duplicate_email']     = 'Email Already Used or Invalid';
+$lang['invitation_creation_duplicate_phone'] 	 = 'Phone Already Used or Invalid';
 $lang['invitation_creation_duplicate_username'] = 'Username Already Used or Invalid';
 
 // Password

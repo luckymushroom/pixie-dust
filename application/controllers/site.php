@@ -80,7 +80,7 @@ class Site extends MY_Controller
 		if($slug)
 		{
 			$post = $this->blog->join('users')->get_by('slug', $slug);
-			$category = $post->blog_category_id;
+			$category = ($post->blog_category_id) ? $post->blog_category_id : 1;
 			$this->data['related_posts']   = self::related_posts($slug, $category);
 			$this->data['page_title']      = $post->title;
 			$this->data['page_subtitle']   = '';

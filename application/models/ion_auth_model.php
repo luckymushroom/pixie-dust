@@ -467,6 +467,28 @@ class Ion_auth_model extends CI_Model
 	}
 
 	/**
+	 * Checks phone
+	 *
+	 * @return bool
+	 * @author Mogetutu
+	 **/
+	public function phone_check($phone = '')
+	{
+		$this->trigger_events('phone_check');
+
+		if (empty($phone))
+		{
+			return FALSE;
+		}
+
+		$this->trigger_events('extra_where');
+
+		return $this->db->where('phone', $phone)
+						->where('deleted',0)
+		                ->count_all_results($this->tables['users']) > 0;
+	}
+
+	/**
 	 * Identity check
 	 *
 	 * @return bool
@@ -569,6 +591,11 @@ class Ion_auth_model extends CI_Model
 		if ($this->identity_column == 'email' && $this->email_check($email))
 		{
 			$this->set_error('account_creation_duplicate_email');
+			return FALSE;
+		}
+		elseif($this->phone_check($additional_data['phone']))
+		{
+			$this->set_error('account_creation_duplicate_phone');
 			return FALSE;
 		}
 		elseif ($this->identity_column == 'username' && $this->username_check($username))

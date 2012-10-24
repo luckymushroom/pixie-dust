@@ -13,7 +13,7 @@
 
 
     <!-- Le styles -->
-    <!-- <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'> -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <style type="text/css">body { padding-top: 75px;padding-bottom: 40px; }</style>
     <link href="{base_url}media/css/bootstrap.min.css" rel="stylesheet">
     <link href="{base_url}media/css/site.css" rel="stylesheet">

@@ -25,16 +25,16 @@
                 <div class="share-social">
                 <ul class="sharesocial-bloglist">
                     <li class="social">
-                        <a href="http://www.facebook.com/share.php?u={site_url("blog/post/{$post->slug}")}">
+                        <a href='http://www.facebook.com/share.php?u={site_url("blog/post/{$post->slug}")}'>
                             <img src="{base_url}media/site/images/social-icons/blog-social/social1.png" alt="" />
                         </a>
                     </li>
                     <li class="social">
-                        <a href="https://plus.google.com/share?url={site_url("blog/post/{$post->slug}")}" alt="Share on Google+"/>
+                        <a href='https://plus.google.com/share?url={site_url("blog/post/{$post->slug}")}' alt="Share on Google+"/>
                             <img src="{base_url}media/site/images/social-icons/blog-social/social2.png" alt="" /></a>
                     </li>
                     <li class="social">
-                        <a href="http://twitter.com/share?text={$post->title}&url={site_url("blog/post/{$post->slug}")}" class="social">
+                        <a href='http://twitter.com/share?text={$post->title}&url={site_url("blog/post/{$post->slug}")}' class="social">
                             <img src="{base_url}media/site/images/social-icons/blog-social/social3.png" alt="" />
                         </a>
                     </li>

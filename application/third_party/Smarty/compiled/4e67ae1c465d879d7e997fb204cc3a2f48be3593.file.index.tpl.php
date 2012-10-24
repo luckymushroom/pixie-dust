@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-19 07:29:38
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-24 14:41:18
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/farmer/dashboard/index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6321492205080e54286fa62-05016926%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20772001785087e1eedba992-93219889%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6321492205080e54286fa62-05016926',
+  'nocache_hash' => '20772001785087e1eedba992-93219889',
   'function' => 
   array (
   ),
@@ -24,9 +24,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5080e542955b1',
+  'unifunc' => 'content_5087e1eee4ec5',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5080e542955b1')) {function content_5080e542955b1($_smarty_tpl) {?><div class="hero-unit">
+<?php if ($_valid && !is_callable('content_5087e1eee4ec5')) {function content_5087e1eee4ec5($_smarty_tpl) {?><div class="hero-unit">
 	<h1>Welcome to Mfarm</h1>
 </div>
 <hr>

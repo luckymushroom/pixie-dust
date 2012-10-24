@@ -18,10 +18,7 @@
       <div class="control-group">
       <label class="control-label">Phone:</label>
         <div class="controls">
-            <div class="input-prepend">
-            <span class="add-on">+254</span>
-                {form_input($phone)}
-            </div>
+          {form_input($phone)}
         </div>
       </div>
 

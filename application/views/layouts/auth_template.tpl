@@ -55,8 +55,7 @@
           <a class="close" data-dismiss="alert">&times;</a>
           {$flash_message}
         </div>
-      {/if}
-      {if ($message)}
+      {elseif ($message)}
         <div class="alert alert-success">
         <a class="close" data-dismiss="alert">&times;</a>
           {$message}
@@ -84,7 +83,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{base_url}media/js/widgets.js"></script>
     <script src="{base_url}media/js/bootstrap.min.js"></script>
-    <script src="{base_url}media/js/site.js"></script>
     {if (ENVIRONMENT == 'production')}
     <script type="text/javascript">
 

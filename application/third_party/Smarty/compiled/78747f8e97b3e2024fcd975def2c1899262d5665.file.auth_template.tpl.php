@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:56:28
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-24 14:39:57
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/layouts/auth_template.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:4938443815075b6cc197ba5-55531069%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:17748587215087e19df04d09-20752222%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '78747f8e97b3e2024fcd975def2c1899262d5665' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/layouts/auth_template.tpl',
-      1 => 1347556146,
+      1 => 1350987004,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '4938443815075b6cc197ba5-55531069',
+  'nocache_hash' => '17748587215087e19df04d09-20752222',
   'function' => 
   array (
   ),
@@ -23,9 +23,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b6cc243c9',
+  'unifunc' => 'content_5087e19e044f7',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5075b6cc243c9')) {function content_5075b6cc243c9($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
+<?php if ($_valid && !is_callable('content_5087e19e044f7')) {function content_5087e19e044f7($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -95,8 +95,7 @@ media/img/apple-touch-icon-114x114.png">
           <?php echo $_smarty_tpl->tpl_vars['flash_message']->value;?>
 
         </div>
-      <?php }?>
-      <?php if (($_smarty_tpl->tpl_vars['message']->value)){?>
+      <?php }elseif(($_smarty_tpl->tpl_vars['message']->value)){?>
         <div class="alert alert-success">
         <a class="close" data-dismiss="alert">&times;</a>
           <?php echo $_smarty_tpl->tpl_vars['message']->value;?>
@@ -128,8 +127,6 @@ media/img/apple-touch-icon-114x114.png">
 media/js/widgets.js"></script>
     <script src="<?php echo smarty_function_base_url(array(),$_smarty_tpl);?>
 media/js/bootstrap.min.js"></script>
-    <script src="<?php echo smarty_function_base_url(array(),$_smarty_tpl);?>
-media/js/site.js"></script>
     <?php if (('ENVIRONMENT'=='production')){?>
     <script type="text/javascript">
 

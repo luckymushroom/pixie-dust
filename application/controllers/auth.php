@@ -37,13 +37,13 @@ class Auth extends MY_Controller
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == true)
-        { 
+        {
             //check to see if the user is logging in
             //check for "remember me"
             $remember = (bool) $this->input->post('remember');
 
             if ($this->ion_auth->login($this->input->post('email'), $this->input->post('password'), $remember))
-            { 
+            {
                 //if the login is successful
                 //redirect them back to the home page
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
@@ -59,10 +59,10 @@ class Auth extends MY_Controller
                 {
                     redirect('farmer/dashboard');
                 }
-                
+
             }
             else
-            { 
+            {
                 //if the login was un-successful
                 //redirect them back to the login page
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -70,7 +70,7 @@ class Auth extends MY_Controller
             }
         }
         else
-        {  
+        {
             //the user is not logging in so display the login page
             //set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : FALSE;
@@ -183,7 +183,7 @@ class Auth extends MY_Controller
             $forgotten = $this->ion_auth->forgotten_password($this->input->post('email'));
 
             if ($forgotten)
-            { 
+            {
                 //if there were no errors
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
                 redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
@@ -280,8 +280,8 @@ class Auth extends MY_Controller
 		//validate form input
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|xss_clean');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
-        $this->form_validation->set_rules('phone', 'Phone Number', 'required|xss_clean|min_length[9]|max_length[9]|numeric');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('phone', 'Phone Number', 'required|xss_clean|min_length[12]|max_length[12]|numeric|is_unique[users.phone]');
 		$this->form_validation->set_rules('company', 'Company Name', 'xss_clean');
 		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']
             |max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
@@ -300,7 +300,6 @@ class Auth extends MY_Controller
 				'company'    => $this->input->post('company'),
 				'phone'      => $phone,
 			);
-
 		}
 		if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data))
 		{
@@ -312,7 +311,6 @@ class Auth extends MY_Controller
 		{
             //set the flash data error message if there is one
 			$this->data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : false));
-
 			$this->data['first_name'] = array(
 				'name'  => 'first_name',
 				'id'    => 'first_name',
@@ -345,8 +343,8 @@ class Auth extends MY_Controller
 				'name'  => 'phone',
 				'id'    => 'phone',
 				'type'  => 'text',
-                'placeholder' => '722123456',
-                'style' => 'width:84.6%;*width:84.6%;',
+                'class' => 'span4',
+                'placeholder' => '254722123456',
 				'value' => $this->form_validation->set_value('phone'),
 			);
 			$this->data['password'] = array(
