@@ -10,9 +10,10 @@ class Tip_model extends MY_Model
 		parent::__construct();
 	}
 
-	public function match_user()
+	public function aggregator($user_id)
 	{
-		$this->db->join('users', 'users.id = tips.user_id', 'left');
+		$this->db->where('user_id', $user_id);
+		$this->join('users');
 		return $this;
 	}
 
