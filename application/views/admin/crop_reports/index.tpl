@@ -33,6 +33,7 @@
 	<thead>
 		<tr>
 			<th>Date</th>
+			<th>User</th>
 			<th>Crop</th>
 			<th>Report</th>
 			<th>Location</th>
@@ -42,6 +43,7 @@
 		{foreach $reports as $report}
 		<tr>
 			<td>{$report->created_at}</td>
+			<td>{$report->last_name}</td>
 			<td>{$report->product_name}</td>
 			<td>{character_limiter($report->remarks,70)}</td>
 			<td>{$report->location_name}</td>

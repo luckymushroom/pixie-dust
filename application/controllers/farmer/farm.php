@@ -38,7 +38,7 @@ class Farm extends MY_Controller
 				if($this->db->affected_rows())
 				{
 					$this->session->set_flashdata('message','Shamba detail has been updated');
-					redirect('/farm/details/', 'refresh');
+					redirect($this->router->directory . 'farm/index/' . $user_id, 'refresh');
 				}
 			}
 			else
@@ -49,11 +49,11 @@ class Farm extends MY_Controller
 				if($add)
 				{
 					$this->session->set_flashdata('message','Detail has been added');
-					redirect('/farm/details/'.$user_id, 'refresh');
+					redirect($this->router->directory . 'farm/index/' . $user_id, 'refresh');
 				}
 			}
 		}
-		
+
 	}
 	/**
 	 * List Add and Update crops grown by farmer

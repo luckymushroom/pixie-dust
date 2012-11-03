@@ -49,6 +49,7 @@
 	$config['admin_group']       = 'admin';
 	$config['default_group']     = 'farmers';
 	$config['buyers_group']      = 'buyers';
+	$config['buyer_group']      = 'buyers';
 	$config['aggregator_group']  = 'aggregators';
 	/**
 	 * Users table column and Group table column you want to join WITH.

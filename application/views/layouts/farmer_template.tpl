@@ -13,8 +13,8 @@
 
 
     <!-- Le styles -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style type="text/css">body { padding-top: 75px;padding-bottom: 40px; }</style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
+    <style type="text/css">body { padding-bottom: 40px; }</style>
     <link href="{base_url}media/css/bootstrap.min.css" rel="stylesheet">
     <link href="{base_url}media/css/site.css" rel="stylesheet">
     <!-- Dark Theme in the works -->
@@ -30,21 +30,25 @@
   </head>
 
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <!-- NAVBAR
+    ================================================== -->
+    <!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+    <div class="container navbar-wrapper">
+
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+          <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <i class="icon icon-reorder"></i> Menu
           </a>
           <a class="brand" href="{base_url}">MFarm App</a>
-          <div class="nav-collapse">
+          <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+          <div class="nav-collapse collapse">
             <ul class="nav">
               <li><a href="{site_url('farmer/dashboard')}"><i class="icon-home icon-white"></i>  Dashboard</a></li>
               <!-- <li><a href="{base_url}categories/" title="Categories">Categories</a></li> -->
               <li><a href="{base_url}farmer/products/" title="Products"><i class="icon-tags icon-white"></i>  Products</a></li>
-              <li><a href="{base_url}farmer/settings/tips"><i class="icon-leaf icon-white"></i>  Tips</a></li>
+              <li><a href="{base_url}farmer/settings/tips"><i class="icon-leaf icon-white"></i>  Farming Tips</a></li>
               <li><a href="{base_url}farmer/reports/"><i class="icon-print icon-white"></i>  Reports</a></li>
             </ul>
             <ul class="nav pull-right">
@@ -53,15 +57,19 @@
               <li><a href="{base_url}auth/logout"><i class="icon-off icon-white"></i>  Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+        </div><!-- /.navbar-inner -->
+      </div><!-- /.navbar -->
+
+    </div><!-- /.container -->
+
+
+
 
     <div class='container'>
       {if ($flash_message)}
         <div class="alert alert-success">
           <a class="close" data-dismiss="alert">&times;</a>
-          <strong>Karibu M-Farm!</strong> {$flash_message}
+          <strong>Hi There!</strong> {$flash_message}
         </div>
       {/if}
       <div class="row-fluid">

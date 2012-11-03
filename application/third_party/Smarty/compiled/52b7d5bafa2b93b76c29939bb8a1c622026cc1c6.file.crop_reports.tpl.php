@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:59:11
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-30 11:50:56
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/layouts/crop_reports.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2402543035075b76f6c1fe8-12674245%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '52b7d5bafa2b93b76c29939bb8a1c622026cc1c6' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/layouts/crop_reports.tpl',
-      1 => 1349682924,
+      1 => 1350631232,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5075b76f7b320',
   'variables' => 
   array (
     'flash_message' => 0,
     'yield' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b76f7b320',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5075b76f7b320')) {function content_5075b76f7b320($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 ?><!DOCTYPE html>
@@ -118,7 +118,7 @@ categories/" title="Categories">Categories</a></li> -->
     </div>
 
     <div id='hld'>
-      <div class='container-fluid'>
+      <div class='container'>
       <?php if (($_smarty_tpl->tpl_vars['flash_message']->value)){?>
         <div class="alert alert-success">
           <a class="close" data-dismiss="alert">&times;</a>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-15 15:48:16
+<?php /* Smarty version Smarty-3.1.7, created on 2012-11-03 10:06:33
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/admin/users/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:753880720507c1420882755-60405966%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'd2af3bd28de77d98869b526885352c1ed530279a' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/admin/users/index.tpl',
-      1 => 1347662444,
+      1 => 1351926392,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_507c1420a5901',
   'variables' => 
   array (
     'type' => 0,
@@ -22,14 +24,12 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'users' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_507c1420a5901',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_507c1420a5901')) {function content_507c1420a5901($_smarty_tpl) {?><div class="page-header">
 <h3>Accounts - <?php echo (($tmp = @$_smarty_tpl->tpl_vars['type']->value)===null||$tmp==='' ? 'All' : $tmp);?>
 </h3>
 </div>
-<table class='table table-bordered' id='example'>
+<table class='table table-bordered table-condensed' id='example'>
 	<thead>
 		<tr>
 			<th>Username</th>

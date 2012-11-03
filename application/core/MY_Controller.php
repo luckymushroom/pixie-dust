@@ -41,7 +41,7 @@ class MY_Controller extends CI_Controller
 	/**
 	 * A list of models to be autoloaded
 	 */
-	protected $models = array();
+	protected $models = array( 'outgoing_text' );
 
 	/**
 	 * A formatting string for the model autoloading feature.

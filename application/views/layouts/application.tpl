@@ -109,7 +109,7 @@
                             </ul>
                         </div>
                         <div id="top-slogan">
-                            <h4>Welcome to <span class="title-green">M-Farm</span>, we give you up-to-date <a href="{site_url('price')}">market information</a> <br/> link farmers to buyers through our <a href="{site_url('marketplace')}">marketplace</a>, and current <a href="{site_url('blog')}">agri-trends.</a></h4>
+                            <h4>Welcome to <span class="title-green">M-Farm</span>, we give you up-to-date <a href="{site_url('price')}">market information</a> <br/> link farmers to buyers through our <a href="{site_url('marketplace')}">marketplace</a> and current <a href="{site_url('blog')}">agri-trends.</a></h4>
                         </div>
                         <div id="mainmenu">
                             <ul id="menu">

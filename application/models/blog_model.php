@@ -31,6 +31,7 @@ class Blog_model extends MY_Model
 		$this->db->where('status', TRUE);
 		return $this;
 	}
+
 	/**
 	 * Join users to grab the author name
 	 * @author mogetutu

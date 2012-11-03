@@ -1,4 +1,4 @@
-<h1>Settings</h1>
+<div class="page-header"><h1>Settings</h1></div>
 <form class="form-horizontal" action="{site_url('farmer/settings/update_settings')}" method="post">
 	<fieldset>
 		<legend>Configure you Settings</legend>

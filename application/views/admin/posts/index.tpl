@@ -12,7 +12,7 @@
 
 <form name="prices" id="prices" method="post" action="{site_url('admin/posts/change_status')}">
 {if ($posts)}
-<table class="table table-bordered" id="example">
+<table class="table table-bordered table-condensed" id="example">
 	<thead>
 		<tr>
 			<td><input type="checkbox" id="checkall" value="check all"></td>
@@ -34,7 +34,7 @@
 			<td>{$post->product_name}</td>
 			<td>{$post->product_weight} {$post->weight_unit}</td>
 			<td>KES {$post->unit_price}</td>
-			<td>{$post->username}</td>
+			<td>{$post->last_name}</td>
 			<td>{$post->phone}</td>
 			<td>{$post->post_status}</td>
 			<td>

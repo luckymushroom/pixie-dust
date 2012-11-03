@@ -476,6 +476,15 @@ class Ion_auth
 		return $this->in_group($aggregator_group);
 	}
 
+	public function is_buyer()
+	{
+		$this->ion_auth_model->trigger_events('is_buyer');
+
+		$buyer_group = $this->config->item('buyer_group', 'ion_auth');
+
+		return $this->in_group($buyer_group);
+	}
+
 	/**
 	 * in_group
 	 *

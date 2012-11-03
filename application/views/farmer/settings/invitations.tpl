@@ -1,4 +1,4 @@
-<h1>Invitations</h1>
+<div class="page-header"><h1>Invitations</h1></div>
 <form action="invitations" method="post" action="{base_url}farmer/settings/invitations" class="form-inline well">
 	<fieldset>
 		<Legend>Invite a Friend to Mfarm</Legend>

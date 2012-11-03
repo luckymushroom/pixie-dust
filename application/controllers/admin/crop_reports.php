@@ -25,7 +25,7 @@ class Crop_reports extends MY_Controller
 		$filter = $this->input->post();
 		if(isset($filter))
 		{
-			foreach ($filter as $key => $value) 
+			foreach ($filter as $key => $value)
 			{
 				$this->data[$key] = $value;
 			}
@@ -33,7 +33,12 @@ class Crop_reports extends MY_Controller
 
 		$this->data['locations'] = $this->location->current_markets();
 		$this->data['products'] = $this->product->dropdown('product_name');
-		$this->data['reports'] = $this->crop_report->match('locations')->match('products')->filter($filter)->get_all();
+		$this->data['reports'] = $this->crop_report
+									  ->join('users')
+									  ->join('locations')
+									  ->join('products')
+									  ->filter($filter)
+									  ->get_all();
 	}
 
 }

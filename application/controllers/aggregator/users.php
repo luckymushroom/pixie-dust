@@ -6,6 +6,7 @@ class Users extends MY_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->ion_auth->logged_in_check();
     }
 
     public function index($user)

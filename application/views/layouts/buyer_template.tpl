@@ -43,43 +43,40 @@
           </button>
           <a class="brand" href="{base_url}">MFarm App</a>
           <div class="nav-collapse">
+            <ul class="nav">
+              <li><a href="{site_url('buyer/dashboard')}" title="Dashboard">Dashboard</a></li>
+              <li><a href="{site_url('buyer/orders')}" title="Orders">Orders</a></li>
+            </ul>
             <ul class="nav pull-right">
-              <li><a href="{base_url}"><i class="icon-home icon-white"></i>  Back To Site</a></li>
+              <li><a href="{base_url}"><i class="icon-home icon-white"></i>  Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
 
     </div>
-
-      <div class='container'>
-      {if ($flash_message)}
-        <div class="alert alert-success">
-          <a class="close" data-dismiss="alert">&times;</a>
-          {$flash_message}
+    <div class='container'>
+        {if ($flash_message)}
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert">&times;</a>
+                <strong>Hi There!</strong> {$flash_message}
+            </div>
+        {/if}
+        <div class="row-fluid">
+            <!-- Yield goes here -->
+            {$yield}
+            <!-- yield end here -->
         </div>
-      {elseif ($message)}
-        <div class="alert alert-success">
-        <a class="close" data-dismiss="alert">&times;</a>
-          {$message}
-        </div>
-      {/if}
-      <div class="row">
-        <div class="span4 offset4 well">
-          <!-- Yield goes here -->
-          {$yield}
-          <!-- yield end here -->
-        </div>
-      </div>
-
+    </div><!-- /container -->
+    <div id="push"></div>
     <!-- Footer
       ================================================== -->
-      <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a></p>
+      <footer class='footer'>
+        <div class="container">
+          <p class="pull-right"><a href="#">Back to top</a></p>
+          <p class="muted credit">Designed and built with all the love in the world <a href="http://twitter.com/mfarm_ke" target="_blank">@mfarm_ke</a></p>
+        </div>
       </footer>
-
-    </div><!-- /container -->
 
     <!-- Le javascript
     ================================================== -->

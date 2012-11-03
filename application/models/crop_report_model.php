@@ -25,19 +25,19 @@ class Crop_report_model extends MY_Model
 
 	public function report_date($start_date, $end_date)
 	{
-		$this->db->where('`created_at` BETWEEN "'.$start_date.'" and "'.$end_date.'"', NULL, FALSE); 
+		$this->db->where('`created_at` BETWEEN "'.$start_date.'" and "'.$end_date.'"', NULL, FALSE);
 		return $this;
 	}
 
 	public function location($location_id)
 	{
-		$this->db->where('location_id', $location_id);
+		$this->db->where('crop_reports.location_id', $location_id);
 		return $this;
 	}
 
 	public function product($product_id)
 	{
-		$this->db->where('product_id', $product_id);
+		$this->db->where('crop_reports.product_id', $product_id);
 		return $this;
 	}
 
@@ -63,7 +63,7 @@ class Crop_report_model extends MY_Model
 		}
 		if(isset($product))
 		{
-			$this->product($product);			
+			$this->product($product);
 		}
 
 		return $this;

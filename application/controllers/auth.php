@@ -55,6 +55,10 @@ class Auth extends MY_Controller
                 {
                     redirect('aggregator/posts');
                 }
+                elseif($this->ion_auth->is_buyer())
+                {
+                    redirect('buyer/dashboard');
+                }
                 else
                 {
                     redirect('farmer/dashboard');

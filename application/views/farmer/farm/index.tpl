@@ -1,5 +1,7 @@
-<form action="{site_url('farm/details')}" method="post" class="form-horizontal">
-    <legend>Shamba Details</legend>
+<div class="page-header">
+    <h2>Shamba Details</h2>
+</div>
+<form action='{site_url("farmer/farm/index/$user_session")}' method="post" class="form-horizontal">
     <fieldset>
         <div class="control-group">
             <label class="control-label">County</label>

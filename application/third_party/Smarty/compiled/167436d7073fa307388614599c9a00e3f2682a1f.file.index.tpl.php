@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-15 20:28:05
+<?php /* Smarty version Smarty-3.1.7, created on 2012-11-01 15:49:31
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/site/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1265330331507c55b532a027-69041984%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '167436d7073fa307388614599c9a00e3f2682a1f' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/site/index.tpl',
-      1 => 1349416203,
+      1 => 1351774143,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_507c55b555683',
   'variables' => 
   array (
     'posts' => 0,
@@ -22,8 +24,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'search' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_507c55b555683',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_507c55b555683')) {function content_507c55b555683($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 ?><div class="maincontent">
@@ -53,7 +53,7 @@ market/item/<?php echo $_smarty_tpl->tpl_vars['row']->value->id;?>
                 </a>
                 <ul class="details clearfix">
                     <li class="price"><sup>KES</sup><?php echo $_smarty_tpl->tpl_vars['row']->value->unit_price;?>
-<sup>per <?php echo singular($_smarty_tpl->tpl_vars['row']->value->packaging);?>
+<sup>per <?php echo singular($_smarty_tpl->tpl_vars['row']->value->weight_unit);?>
 </sup></li>
                 </ul><!-- / -->
                 <p><?php echo $_smarty_tpl->tpl_vars['row']->value->description;?>
@@ -69,7 +69,7 @@ market/item/<?php echo $_smarty_tpl->tpl_vars['row']->value->id;?>
         </ul><!-- /list -->
     </div>
     <!-- END LEFT CONTENT -->
-    
+
     <!-- BEGIN OF SIDEBAR -->
     <div class="col-3 sidebar">
         <div class="sidebar-content">
@@ -142,7 +142,7 @@ function()
             var key = e.charCode || e.keyCode || 0;
             // allow backspace, tab, delete, arrows, numbers and keypad numbers ONLY
             return (
-                key == 8 || 
+                key == 8 ||
                 key == 9 ||
                 key == 46 ||
                 (key >= 37 && key <= 40) ||

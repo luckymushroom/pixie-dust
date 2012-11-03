@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:58:18
+<?php /* Smarty version Smarty-3.1.7, created on 2012-11-03 10:04:55
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:12428698445075b73aee61f8-04380435%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '522cb93fa5336a2ccb5245e833d6691e5d3aef0d' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/index.tpl',
-      1 => 1348732577,
+      1 => 1351926294,
       2 => 'file',
     ),
   ),
@@ -15,14 +15,14 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5075b73b0f307',
   'variables' => 
   array (
     'posts' => 0,
     'post' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b73b0f307',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5075b73b0f307')) {function content_5075b73b0f307($_smarty_tpl) {?><div class="page-header">
 	<div class="pull-right">
@@ -43,7 +43,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <form name="prices" id="prices" method="post" action="<?php echo site_url('admin/posts/change_status');?>
 ">
 <?php if (($_smarty_tpl->tpl_vars['posts']->value)){?>
-<table class="table table-bordered" id="example">
+<table class="table table-bordered table-condensed" id="example">
 	<thead>
 		<tr>
 			<td><input type="checkbox" id="checkall" value="check all"></td>
@@ -75,7 +75,7 @@ $_smarty_tpl->tpl_vars['post']->_loop = true;
 </td>
 			<td>KES <?php echo $_smarty_tpl->tpl_vars['post']->value->unit_price;?>
 </td>
-			<td><?php echo $_smarty_tpl->tpl_vars['post']->value->username;?>
+			<td><?php echo $_smarty_tpl->tpl_vars['post']->value->last_name;?>
 </td>
 			<td><?php echo $_smarty_tpl->tpl_vars['post']->value->phone;?>
 </td>

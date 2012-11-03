@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-11 15:32:28
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-24 19:26:12
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/site/blog.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:4777951305076ca6cca1484-28681192%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ad030b25e4f32e3a94cc131e33b237e00814774d' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/site/blog.tpl',
-      1 => 1349416135,
+      1 => 1350908506,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5076ca6cf2eca',
   'variables' => 
   array (
     'posts' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'recent' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5076ca6cf2eca',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5076ca6cf2eca')) {function content_5076ca6cf2eca($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 ?><div class="maincontent">
@@ -44,8 +44,8 @@ $_smarty_tpl->tpl_vars['post']->_loop = true;
 ' alt="" class="imgborder2" />
             </div>
             <div class="post-content2">
-                <h5><a href="<?php echo site_url("blog/post/".($_smarty_tpl->tpl_vars['post']->value->slug));?>
-"><?php echo $_smarty_tpl->tpl_vars['post']->value->title;?>
+                <h5><a href='<?php echo site_url("blog/post/".($_smarty_tpl->tpl_vars['post']->value->slug));?>
+'><?php echo $_smarty_tpl->tpl_vars['post']->value->title;?>
 </a></h5>
                 <div class="post-info2">
                     <span><img src="<?php echo smarty_function_base_url(array(),$_smarty_tpl);?>

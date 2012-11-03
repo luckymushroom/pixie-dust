@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:59:09
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-30 11:50:51
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/admin/blog/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:5764830025075b76d596521-76691046%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e40a9e53eba1fef230cfc57d2978ddef3d277e0c' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/admin/blog/index.tpl',
-      1 => 1347952872,
+      1 => 1350908530,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5075b76d6aebb',
   'variables' => 
   array (
     'blogs' => 0,
@@ -23,8 +25,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'row' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b76d6aebb',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5075b76d6aebb')) {function content_5075b76d6aebb($_smarty_tpl) {?><div class='page-header'>
     <div class='pull-right'>
@@ -52,7 +52,7 @@ $_smarty_tpl->tpl_vars['blog']->_loop = true;
 ?>
     <div class="span3">
         <div class="project thumbnail">
-            <h5><a href='<?php echo site_url("admin/blog/edit/".($_smarty_tpl->tpl_vars['blog']->value->id));?>
+            <h5><a href='<?php echo site_url("admin/blog/".($_smarty_tpl->tpl_vars['blog']->value->id)."/edit");?>
 '><?php echo character_limiter($_smarty_tpl->tpl_vars['blog']->value->title,20);?>
 </a></h5>
             <p class="sub"><?php echo character_limiter($_smarty_tpl->tpl_vars['blog']->value->intro,129);?>

@@ -13,8 +13,8 @@
 
 
     <!-- Le styles -->
-    <!-- <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'> -->
-    <style type="text/css">body { padding-top: 75px;padding-bottom: 40px; }</style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600' rel='stylesheet' type='text/css'>
+    <style type="text/css">body { padding-bottom: 40px; }</style>
     <link href="{base_url}media/css/bootstrap.min.css" rel="stylesheet">
     <link href="{base_url}media/css/daterangepicker.css" rel="stylesheet">
 
@@ -43,13 +43,12 @@
     </div>
   </div> -->
 
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <div class="container navbar-wrapper">
+
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <i class="icon icon-reorder"></i> Menu
           </a>
           <a class="brand" href="{base_url}">MFarm App</a>
           <div class="nav-collapse">
@@ -81,7 +80,7 @@
       </div>
     </div>
 
-    <div class='container-fluid'>
+    <div class='container'>
       {if ($flash_message)}
         <div class="alert alert-success">
           <a class="close" data-dismiss="alert">&times;</a>

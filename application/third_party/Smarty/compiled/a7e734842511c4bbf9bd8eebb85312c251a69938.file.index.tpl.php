@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-10 19:59:11
+<?php /* Smarty version Smarty-3.1.7, created on 2012-10-30 11:53:37
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/admin/crop_reports/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:2223891105075b76f58cfe8-90552364%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'a7e734842511c4bbf9bd8eebb85312c251a69938' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/admin/crop_reports/index.tpl',
-      1 => 1349682966,
+      1 => 1351587216,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_5075b76f6aca0',
   'variables' => 
   array (
     'locations' => 0,
@@ -31,8 +33,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'report' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_5075b76f6aca0',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_5075b76f6aca0')) {function content_5075b76f6aca0($_smarty_tpl) {?><div class="row-fluid">
 <div class='page-header'>
@@ -81,6 +81,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 	<thead>
 		<tr>
 			<th>Date</th>
+			<th>User</th>
 			<th>Crop</th>
 			<th>Report</th>
 			<th>Location</th>
@@ -94,6 +95,8 @@ $_smarty_tpl->tpl_vars['report']->_loop = true;
 ?>
 		<tr>
 			<td><?php echo $_smarty_tpl->tpl_vars['report']->value->created_at;?>
+</td>
+			<td><?php echo $_smarty_tpl->tpl_vars['report']->value->last_name;?>
 </td>
 			<td><?php echo $_smarty_tpl->tpl_vars['report']->value->product_name;?>
 </td>

@@ -11,7 +11,7 @@
                     <img src={base_url("media/crops/{$row->post_photo|default:'default-thumb.gif'}")} alt="{$row->image}" width="120" height="120">
                 </a>
                 <ul class="details clearfix">
-                    <li class="price"><sup>KES</sup>{$row->unit_price}<sup>per {singular($row->packaging)}</sup></li>
+                    <li class="price"><sup>KES</sup>{$row->unit_price}<sup>per {singular($row->weight_unit)}</sup></li>
                 </ul><!-- / -->
                 <p>{$row->description}</p>
                 <p>Delivered: {($row->delivered)?'YES':'NO'}</p>
@@ -23,7 +23,7 @@
         </ul><!-- /list -->
     </div>
     <!-- END LEFT CONTENT -->
-    
+
     <!-- BEGIN OF SIDEBAR -->
     <div class="col-3 sidebar">
         <div class="sidebar-content">
@@ -90,7 +90,7 @@ function()
             var key = e.charCode || e.keyCode || 0;
             // allow backspace, tab, delete, arrows, numbers and keypad numbers ONLY
             return (
-                key == 8 || 
+                key == 8 ||
                 key == 9 ||
                 key == 46 ||
                 (key >= 37 && key <= 40) ||

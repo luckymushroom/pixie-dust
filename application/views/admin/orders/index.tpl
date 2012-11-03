@@ -1,7 +1,7 @@
 <div class="page-header">
     <h2>Orders List</h2>
 </div>
-<table class='table table-bordered' id='example'>
+<table class='table table-bordered table-condensed' id='example'>
 <thead>
     <th>Farmer</th>
     <th>Number</th>

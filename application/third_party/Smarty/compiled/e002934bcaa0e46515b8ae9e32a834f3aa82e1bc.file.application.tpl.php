@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.7, created on 2012-10-11 12:14:59
+<?php /* Smarty version Smarty-3.1.7, created on 2012-11-01 17:11:38
          compiled from "/Library/WebServer/Documents/mfarm-web/application/views/layouts/application.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1402792050769c23203432-37168635%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'e002934bcaa0e46515b8ae9e32a834f3aa82e1bc' => 
     array (
       0 => '/Library/WebServer/Documents/mfarm-web/application/views/layouts/application.tpl',
-      1 => 1348728425,
+      1 => 1351776623,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.7',
+  'unifunc' => 'content_50769c23edb40',
   'variables' => 
   array (
     'page_title' => 0,
@@ -26,8 +28,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'yield' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.7',
-  'unifunc' => 'content_50769c23edb40',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_50769c23edb40')) {function content_50769c23edb40($_smarty_tpl) {?><?php if (!is_callable('smarty_function_base_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.base_url.php';
 if (!is_callable('smarty_function_url')) include '/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/plugins/function.url.php';
@@ -178,7 +178,7 @@ media/site/images/social-icons/top-social/social3.png" alt="mfarm-twitter" /></a
                         <div id="top-slogan">
                             <h4>Welcome to <span class="title-green">M-Farm</span>, we give you up-to-date <a href="<?php echo site_url('price');?>
 ">market information</a> <br/> link farmers to buyers through our <a href="<?php echo site_url('marketplace');?>
-">marketplace</a>, and current <a href="<?php echo site_url('blog');?>
+">marketplace</a> and current <a href="<?php echo site_url('blog');?>
 ">agri-trends.</a></h4>
                         </div>
                         <div id="mainmenu">
