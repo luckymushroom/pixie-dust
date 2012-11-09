@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"this",
+				"thisdata	thisdata"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"agg",
+				"aggregator"
+			],
+			[
+				"va",
+				"var_dump"
+			],
+			[
+				"fore",
+				"foreach	foreach …"
+			],
+			[
 				"nav",
 				"navbar-inverse"
 			],
@@ -14,10 +34,6 @@
 			[
 				"thiswher",
 				"this->db->where	\\$this->db->where"
-			],
-			[
-				"va",
-				"validemail	Valid Email"
 			],
 			[
 				"outgoing",
@@ -210,10 +226,6 @@
 			[
 				"sustr",
 				"substr"
-			],
-			[
-				"agg",
-				"aggregator_code"
 			],
 			[
 				"thislang",
@@ -444,10 +456,6 @@
 				"filename"
 			],
 			[
-				"font",
-				"font-size"
-			],
-			[
 				"pr",
 				"products"
 			],
@@ -506,14 +514,6 @@
 			[
 				"crop",
 				"crop_price"
-			],
-			[
-				"with",
-				"without_date"
-			],
-			[
-				"end",
-				"enddate"
 			]
 		]
 	},
@@ -676,21 +676,65 @@
 	},
 	"file_history":
 	[
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/posts.php",
+		"/Library/WebServer/Documents/mfarm-web/application/models/post_model.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/posts.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/posts/index.tpl",
 		"/Users/mogetutu/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/application.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/buyer/dashboard.php",
+		"/Library/WebServer/Documents/mfarm-web/application/config/routes.php",
+		"/Library/WebServer/Documents/mfarm-web/media/js/script.js",
+		"/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/admin/users/show.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/buyer/welcome/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/buyer/welcome.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/buyer_template.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/auth_template.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/buyer/orders.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/buyer/orders/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/users.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/admin_template.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/details.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/farm.php",
+		"/Library/WebServer/Documents/mfarm-web/media/css/site.css",
+		"/Library/WebServer/Documents/mfarm-web/application/models/user_model.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/admin/users/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/models/user_group_model.php",
+		"/Library/WebServer/Documents/mfarm-web/application/config/ion_auth.php",
+		"/Library/WebServer/Documents/mfarm-web/application/models/user_group.php",
+		"/Library/WebServer/Documents/mfarm-web/application/models/process_step_model.php",
+		"/Library/WebServer/Documents/mfarm-web/application/core/MY_Model.php",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/users.php",
+		"/Library/WebServer/Documents/mfarm-web/application/libraries/Ion_auth.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/application.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/auth.php",
+		"/Library/WebServer/Documents/mfarm-web/media/css/bootstrap.min.css",
+		"/Library/WebServer/Documents/mfarm-web/media/site/js/jquery.js",
+		"/Library/WebServer/Documents/mfarm-web/media/js/jquery.min.js",
+		"/Users/mogetutu/.osx",
+		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/farm/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/farm.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/admin/orders/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/farmer_template.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/help/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/settings/invitations.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/settings/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/dashboard.php",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/buyer/dashboard.php",
+		"/Library/WebServer/Documents/mfarm-web/application/views/buyer/dashboard/index.tpl",
+		"/Library/WebServer/Documents/mfarm-web/application/core/MY_Controller.php",
+		"/private/etc/php.ini.default",
+		"/private/etc/php.ini",
+		"/Library/WebServer/Documents/mfarm-web/application/config/development/config.php",
+		"/Library/WebServer/Documents/mfarm-web/application/logs/log-2012-11-01.php",
+		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/dashboard.php",
+		"/Library/WebServer/Documents/mfarm-web/application/models/ion_auth_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/buyer/settings.php",
+		"/Library/WebServer/Documents/mfarm-web/index.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/buyer/dashboard/dashboard.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/buyer/settings/settings.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/buyer_template.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/site/index.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/site/post.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/auth_template.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/admin_template.tpl",
-		"/Library/WebServer/Documents/mfarm-web/media/css/site.css",
-		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/farmer_template.tpl",
-		"/Library/WebServer/Documents/mfarm-web/media/css/bootstrap.min.css",
 		"/Library/WebServer/Documents/mfarm-web/application/models/order_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/buyer_template.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/buyers_template.php",
@@ -704,24 +748,18 @@
 		"/Library/WebServer/Documents/mfarm-web/media/site/js/jquery.twitter-ck.js",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/site.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/site/about.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/users.php",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/users.php",
 		"/Library/WebServer/Documents/mfarm-web/application/models/tip_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/tips/index.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/tips.php",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/dashboard.php",
 		"/Library/WebServer/Documents/mfarm-web/application/models/blog_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/site/blog.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/core/MY_Controller.php",
 		"/Library/WebServer/Documents/mfarm-web/.gitignore",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/sms.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/settings/all_tips.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/settings.php",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/settings.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/details.tpl",
 		"/Library/WebServer/Documents/mfarm-web/media/css/bootstrap.css",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/auth.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/ion_auth_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/auth/create_user.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/aggregator_template.tpl",
 		"/Library/WebServer/Documents/mfarm-web/media/js/site.js",
@@ -733,7 +771,6 @@
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/blog.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/blog/edit.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/blog/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/config/routes.php",
 		"/Library/WebServer/Documents/mfarm-web/application/models/trend_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/products.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/products/index.tpl",
@@ -742,15 +779,10 @@
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/trends/index.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/prices.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/dashboard/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/index.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/users/index.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/dashboard/index.php",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/posts.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/user_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/crops.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/create_new.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/farm.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/post_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/blog.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/settings/manage_tips.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/settings/all_tips.tpl",
@@ -758,8 +790,6 @@
 		"/Library/WebServer/Documents/mfarm-web/application/views/admin/settings/tips.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/posts.php",
 		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/bulk_sms.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/farm/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/config/development/config.php",
 		"/Library/WebServer/Documents/mfarm-web/application/config/production/config.php",
 		"/Library/WebServer/Documents/mfarm-web/system/libraries/Cache/Cache.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/settings/profile.tpl",
@@ -769,41 +799,11 @@
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/new.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/users/show.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/farmer/farm.php",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/aggregator/posts.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/marketplace/index.php",
 		"/Library/WebServer/Documents/mfarm-web/application/models/farm_detail_model.php",
 		"/Library/WebServer/Documents/mfarm-web/application/views/layouts/crop_reports.tpl",
 		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/_sidebar.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/libraries/Ion_auth.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/site/services.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/config/database.php",
-		"/Library/WebServer/Documents/mfarm-web/application/config/ion_auth.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/user_group.php",
-		"/Library/WebServer/Documents/mfarm-web/application/core/MY_Model.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/errors/error_404.php",
-		"/Users/mogetutu/Desktop/file.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/planting_plan_model.php",
-		"/Library/WebServer/Documents/mfarm-web/application/third_party/Smarty/compiled/44cd777f8504f0c7eca9fa61044e646840630444.file.details.tpl.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/farm/details.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/farm/details.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/location_model.php",
-		"/Library/WebServer/Documents/mfarm-web/application/models/price_model.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/show.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/admin/sms/test_sms.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/edit.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/show.tp",
-		"/Library/WebServer/Documents/mfarm-web/application/controllers/admin/sms.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/show.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/admin/posts/edit.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/farmer/posts/index.tpl",
-		"/Library/WebServer/Documents/mfarm-web/media/img/portfolio-thumb/sms.php",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/user_posts.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/models/order_detail_model.php",
-		"/Users/mogetutu/.osx",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/posts/header.tpl",
-		"/Library/WebServer/Documents/mfarm-web/application/views/aggregator/users/_sidebar.tpl"
+		"/Library/WebServer/Documents/mfarm-web/application/views/site/services.tpl"
 	],
 	"find":
 	{
@@ -822,6 +822,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"{$farm->user_id}",
+			"{$farm->id}",
+			" placeholder=\"\"",
+			"li",
+			"http://static.ak.facebook.com/connect/",
+			"http://static.ak.facebook.com/connect/xd_arbiter.php?version=12",
+			"Hidden",
+			"navbar-inner",
+			"timezone",
+			"Timezone",
+			"include_path",
 			"1b1b1b",
 			"#1b1b1b",
 			"background-color",
@@ -938,18 +949,7 @@
 			"date_created",
 			"before_dropdown",
 			"seller_template",
-			"farmernavbar",
-			"farmernavebar",
-			"{base_url}",
-			"manage",
-			"base_url",
-			"save_post",
-			"\"{$link}",
-			"{$seg_one}/{$seg_two}/",
-			"{current_url()}",
-			"{$link}",
-			"')}",
-			"{site_url('"
+			"farmernavbar"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1060,6 +1060,150 @@
 		"selected_items":
 		[
 			[
+				"routes",
+				"application/config/routes.php"
+			],
+			[
+				"pm",
+				"application/models/post_model.php"
+			],
+			[
+				"aggregatorpostsin",
+				"application/views/aggregator/posts/index.tpl"
+			],
+			[
+				"farm",
+				"application/controllers/aggregator/farm.php"
+			],
+			[
+				"aggregfarmde",
+				"application/views/aggregator/farm/details.tpl"
+			],
+			[
+				"admin",
+				"application/views/layouts/admin_template.tpl"
+			],
+			[
+				"userm",
+				"application/models/user_model.php"
+			],
+			[
+				"mm",
+				"application/core/MY_Model.php"
+			],
+			[
+				"adminusers",
+				"application/controllers/admin/users.php"
+			],
+			[
+				"users",
+				"application/controllers/aggregator/users.php"
+			],
+			[
+				"ion",
+				"application/libraries/Ion_auth.php"
+			],
+			[
+				"appli",
+				"application/views/layouts/application.tpl"
+			],
+			[
+				"buyerorder",
+				"application/controllers/buyer/orders.php"
+			],
+			[
+				"auth",
+				"application/views/layouts/auth_template.tpl"
+			],
+			[
+				"buyer",
+				"application/views/layouts/buyer_template.tpl"
+			],
+			[
+				"jquer",
+				"media/site/js/jquery.js"
+			],
+			[
+				"jque",
+				"media/js/jquery.min.js"
+			],
+			[
+				"boots",
+				"media/css/bootstrap.min.css"
+			],
+			[
+				"site",
+				"media/css/site.css"
+			],
+			[
+				"adminposts",
+				"application/views/admin/posts/index.tpl"
+			],
+			[
+				"adminorder",
+				"application/views/admin/orders/index.tpl"
+			],
+			[
+				"farmer",
+				"application/views/layouts/farmer_template.tpl"
+			],
+			[
+				"vfs",
+				"application/views/farmer/settings/invitations.tpl"
+			],
+			[
+				"vfsi",
+				"application/views/farmer/settings/index.tpl"
+			],
+			[
+				"farmerhel",
+				"application/views/farmer/help/index.tpl"
+			],
+			[
+				"farmerfa",
+				"application/controllers/farmer/farm.php"
+			],
+			[
+				"viewsfarmerfarmind",
+				"application/views/farmer/farm/index.tpl"
+			],
+			[
+				"ddash",
+				"application/controllers/admin/dashboard.php"
+			],
+			[
+				"welcome",
+				"application/controllers/buyer/welcome.php"
+			],
+			[
+				"configio",
+				"application/config/ion_auth.php"
+			],
+			[
+				"libraion",
+				"application/libraries/Ion_auth.php"
+			],
+			[
+				"mc",
+				"application/core/MY_Controller.php"
+			],
+			[
+				"devel",
+				"application/config/development/config.php"
+			],
+			[
+				"buyerdas",
+				"application/controllers/buyer/dashboard.php"
+			],
+			[
+				"io",
+				"application/models/ion_auth_model.php"
+			],
+			[
+				"my",
+				"application/core/MY_Controller.php"
+			],
+			[
 				"app",
 				"application/views/layouts/application.tpl"
 			],
@@ -1076,24 +1220,8 @@
 				"media/css/bootstrap.min.css"
 			],
 			[
-				"site",
-				"media/css/site.css"
-			],
-			[
-				"admin",
-				"application/views/layouts/admin_template.tpl"
-			],
-			[
 				"boost",
 				"media/css/bootstrap.min.css"
-			],
-			[
-				"farm",
-				"application/views/layouts/farmer_template.tpl"
-			],
-			[
-				"auth",
-				"application/views/layouts/auth_template.tpl"
 			],
 			[
 				"crop",
@@ -1116,10 +1244,6 @@
 				"application/controllers/admin/users.php"
 			],
 			[
-				"mc",
-				"application/core/MY_Controller.php"
-			],
-			[
 				"tip",
 				"application/models/tip_model.php"
 			],
@@ -1138,10 +1262,6 @@
 			[
 				"create",
 				"application/views/auth/create_user.tpl"
-			],
-			[
-				"ion",
-				"application/models/ion_auth_model.php"
 			],
 			[
 				"",
@@ -1178,14 +1298,6 @@
 			[
 				"blogedit",
 				"application/views/admin/blog/edit.tpl"
-			],
-			[
-				"routes",
-				"application/config/routes.php"
-			],
-			[
-				"my",
-				"application/core/MY_Controller.php"
 			],
 			[
 				"adminte",
@@ -1232,10 +1344,6 @@
 				"media/css/site.css"
 			],
 			[
-				"farmer",
-				"application/views/layouts/farmer_template.tpl"
-			],
-			[
 				"farmerpr",
 				"application/views/farmer/settings/profile.tpl"
 			],
@@ -1264,10 +1372,6 @@
 				"application/controllers/aggregator/users.php"
 			],
 			[
-				"users",
-				"application/views/aggregator/users/show.tpl"
-			],
-			[
 				"um",
 				"application/models/user_model.php"
 			],
@@ -1282,10 +1386,6 @@
 			[
 				"aggregatorpostsind",
 				"application/views/aggregator/posts/index.tpl"
-			],
-			[
-				"pm",
-				"application/models/post_model.php"
 			],
 			[
 				"posts",
@@ -1320,10 +1420,6 @@
 				"application/views/site/services.tpl"
 			],
 			[
-				"mm",
-				"application/core/MY_Model.php"
-			],
-			[
 				"aggrepostsin",
 				"application/views/aggregator/posts/index.tpl"
 			],
@@ -1342,10 +1438,6 @@
 			[
 				"user",
 				"application/controllers/admin/users.php"
-			],
-			[
-				"userm",
-				"application/models/user_model.php"
 			],
 			[
 				"sms",
@@ -1424,10 +1516,6 @@
 				"application/controllers/admin/posts.php"
 			],
 			[
-				"adminposts",
-				"application/views/admin/posts/index.tpl"
-			],
-			[
 				"odm",
 				"application/models/order_detail_model.php"
 			],
@@ -1460,10 +1548,6 @@
 				"application/views/site/index.tpl"
 			],
 			[
-				"appli",
-				"application/views/layouts/application.tpl"
-			],
-			[
 				"adminprices",
 				"application/controllers/admin/prices.php"
 			],
@@ -1486,101 +1570,21 @@
 			[
 				"adminedit",
 				"application/views/admin/blog/edit.tpl"
-			],
-			[
-				"admindash",
-				"application/controllers/admin/dashboard.php"
-			],
-			[
-				"dash",
-				"application/controllers/aggregator/dashboard.php"
-			],
-			[
-				"agger",
-				"application/views/layouts/aggregator_template.tpl"
-			],
-			[
-				"authlogin",
-				"application/views/auth/login.tpl"
-			],
-			[
-				"prod",
-				"application/config/production/database.php"
-			],
-			[
-				"test",
-				"application/views/admin/sms/test_sms.tpl"
-			],
-			[
-				"farmersetting",
-				"application/views/farmer/settings/index.tpl"
-			],
-			[
-				"farmersettingspr",
-				"application/views/farmer/settings/profile.tpl"
-			],
-			[
-				"farmerset",
-				"application/controllers/farmer/settings.php"
-			],
-			[
-				"adminorde",
-				"application/controllers/admin/orders.php"
-			],
-			[
-				"farmerpostsin",
-				"application/views/farmer/posts/index.tpl"
-			],
-			[
-				"authlog",
-				"application/views/auth/login.tpl"
-			],
-			[
-				"team",
-				"application/views/site/team.tpl"
-			],
-			[
-				"farmerprofile",
-				"application/views/farmer/settings/profile.tpl"
-			],
-			[
-				"farmerfarmde",
-				"application/views/farmer/farm/index.tpl"
-			],
-			[
-				"farmerorde",
-				"application/controllers/farmer/orders.php"
-			],
-			[
-				"farmerdash",
-				"application/controllers/farmer/dashboard.php"
-			],
-			[
-				"dashboar",
-				"application/views/farmer/dashboard/index.tpl"
-			],
-			[
-				"ap",
-				"application/views/layouts/application.tpl"
-			],
-			[
-				"applic",
-				"application/views/layouts/application.tpl"
-			],
-			[
-				"application",
-				"application/config/application.php"
 			]
 		],
 		"width": 0.0
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/Library/WebServer/Documents/getwork/getwork.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,
