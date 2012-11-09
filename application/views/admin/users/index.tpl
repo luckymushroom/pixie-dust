@@ -32,8 +32,9 @@
 			<td>{$user->phone}</td>
 			<td>{date('Y-m-d',$user->created_on)}</td>
 			<td class='btn-group'>
-                <a href='{site_url("admin/users/index/{$user->id}")}' class='user-card btn btn-small' data-toggle="modal" id="{$user->id}" data-target="#user-card">
+                <a href='{site_url("admin/users/{$user->id}")}' class='user-card btn btn-small' id="{$user->id}">
                     <i class='icon-eye-open'></i></a>
+                <a href='{site_url("admin/users/aggregator_code/{$user->id}")}' class='btn btn-small'><i class='icon-barcode'></i></a>
                 <a href='{site_url("admin/users/delete/{$user->id}")}' class='btn btn-small'><i class='icon-remove delete'></i></a>
 			</td>
 		</tr>
