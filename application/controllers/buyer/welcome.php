@@ -9,6 +9,10 @@ class Welcome extends MY_Controller {
         $this->ion_auth->logged_in_check();
     }
 
-    function index() {}
+    function index() {
+        foreach ($classes as $class => $value) {
+            echo "something";
+        }
+    }
 
 }
