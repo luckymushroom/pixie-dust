@@ -34,7 +34,7 @@ class Posts extends MY_Controller {
     {
         $columns = 'posts.*,product_name,product_id';
         $this->data['products'] = $this->product->dropdown('product_name');
-        $this->data['weight_unit'] = array('KGs'=>'KGs','Crates'=>'Crates');
+        $this->data['weight_unit'] = array('KGs'=>'KGs', 'Crates'=>'Crates');
         // Check is there is post id to update else insert new record
         if($post_id)
         {
@@ -43,7 +43,7 @@ class Posts extends MY_Controller {
             if($this->input->post())
             {
                 // Update existing Post
-                $update = $this->post->update($post_id,$this->input->post());
+                $update = $this->post->update($post_id, $this->input->post());
                 if($this->db->affected_rows())
                 {
                     $this->session->set_flashdata('message', 'Post had been Updated!');
@@ -51,7 +51,7 @@ class Posts extends MY_Controller {
                 }
                 else
                 {
-                    $this->session->set_flashdata('message','Nothing to update here!');
+                    $this->session->set_flashdata('message', 'Nothing to update here!');
                     redirect("farmer/posts/edit/{$post_id}");
                 }
             }
@@ -71,14 +71,14 @@ class Posts extends MY_Controller {
                 $post_id = $this->post->insert($post);
                 if($post_id)
                 {
-                    $this->session->set_flashdata('message','New Post Created');
+                    $this->session->set_flashdata('message', 'New Post Created');
                     redirect("farmer/posts/edit/{$post_id}");
                 }
             }
 
         }
-
     }
+
     public function delete_post($post_id)
     {
         if($this->post->delete($post_id))
