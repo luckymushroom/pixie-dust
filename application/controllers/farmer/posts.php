@@ -46,8 +46,8 @@ class Posts extends MY_Controller {
                 $update = $this->post->update($post_id,$this->input->post());
                 if($this->db->affected_rows())
                 {
-                    $this->session->set_flashdata('message','Post had been Updated!');
-                    redirect("farmer/posts/edit/{$post_id}");
+                    $this->session->set_flashdata('message', 'Post had been Updated!');
+                    redirect("farmer/posts/");
                 }
                 else
                 {
