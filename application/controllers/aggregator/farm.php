@@ -20,7 +20,6 @@ class Farm extends MY_Controller
     {
         $this->data['counties'] = $this->county->dropdown('id','county_name');
         $this->data['username'] = $this->user->get($user_id)->username;
-        $this->data['farm'] = $this->farm_detail->get_by('user_id', $user_id);
         $this->data['farm'] = $farm = $this->farm_detail->get_by('user_id', $user_id);
         if($farm == null)
         {
@@ -78,7 +77,6 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops something went wrong.');
         }
-        redirect("{$this->router->directory}{$this->router->class}/crops/" . $user_id );
         redirect("{$this->router->directory} {$this->router->class}/crops/" . $user_id );
     }
     /**
@@ -112,7 +110,6 @@ class Farm extends MY_Controller
         {
             $this->session->set_flashdata('message', 'Oops! Something went wrong.');
         }
-        redirect("{$this->router->directory}{$this->router->class}/details/" . $user_id);
         redirect("{$this->router->directory}{$this->router->class}/details/{$user_id}");
     }
 }
