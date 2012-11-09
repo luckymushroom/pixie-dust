@@ -485,6 +485,15 @@ class Ion_auth
 		return $this->in_group($buyer_group);
 	}
 
+	public function is_farmer()
+	{
+		$this->ion_auth_model->trigger_events('is_farmer');
+
+		$farmer_group = $this->config->item('farmer_group', 'ion_auth');
+
+		return $this->in_group($farmer_group);
+	}
+
 	/**
 	 * in_group
 	 *
