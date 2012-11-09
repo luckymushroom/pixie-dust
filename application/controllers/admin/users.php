@@ -2,7 +2,7 @@
 
 class Users extends MY_Controller {
 
-	protected $models = array('user');
+	protected $models = array('user', 'user_group');
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,33 +10,14 @@ class Users extends MY_Controller {
 		if(!$this->ion_auth->is_admin()) $this->ion_auth->logout();
 	}
 
-	public function index($id = null)
+	public function index()
 	{
-		($id) ? $this->data['user'] = $this->user->get($id) : $this->data['users'] = $this->user->with_deleted()->get_all();
-		if($this->input->is_ajax_request())
-		{
-			echo json_encode("<div id='user-card' class='modal hide fade'>
-				    <div class='modal-header'>
-				      <a class='close' data-dismiss='modal' >&times;</a>
-				      <h3>User Profile:</h3>
-				    </div>
-				    <div class='modal-body'>
-				    	<p>Name: Isaak Mogetutu</p>
-				    	<p>Email: mogetutu@mogetutu.com</p>
-				    	<hr>
-				    	<p>Bio: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				    	quis nostrud exercitation ullamco.</p>
-				    </div>
-				    <div class='modal-footer'>
-				        <div class='btn-group'>
-				            <a href='#' class='btn'>Reset Password</a>
-				            <a href='#' class='btn'>Make Aggregator</a>
-				            <a href='#' class='btn'>Make Administrator</a>
-				        </div>
-				    </div>
-				</div>");
-		}
+		$this->data['users'] = $this->user->get_all();
+	}
+
+	public function show($id)
+	{
+		$this->data['user'] = $user = $this->user->get($id);
 	}
 
 	public function status($state)
@@ -54,12 +35,12 @@ class Users extends MY_Controller {
 		if ($this->user->delete($id))
 		{
 			$this->session->set_flashdata('message', 'User Account was deleted!');
-			redirect('users','refresh');
+			redirect('admin/users','refresh');
 		}
 		else
 		{
 			$this->session->set_flashdata('message', 'Ooops Something Went Wrong!');
-			redirect('users/index','refresh');
+			redirect('admin/users/index','refresh');
 		}
 	}
 
@@ -68,6 +49,7 @@ class Users extends MY_Controller {
 	 */
 	public function aggregator_code($id)
 	{
+		$view = 'false';
 		$characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 		$random_string_length = 5;
 
@@ -78,11 +60,12 @@ class Users extends MY_Controller {
 		}
 
 		$check = $this->user->aggregator_exists($string);
-
-		if ($check === FALSE)
+		$aggregator = $this->user->get($id)->is_aggregator;
+		if ($check === FALSE && $aggregator == 0)
 		{
 			$this->user->update($id, array('is_aggregator' => $string));
-			$this->user_group->update_by(array('user_id'=> $id), array('group_id' => 4));
+			$this->user_group->delete_by('user_id', $id);
+			$this->user_group->insert(array('user_id'=> $id, 'group_id' => 4));
 			$this->session->set_flashdata('message', 'Aggregator Code Generated');
 		}
 		else
