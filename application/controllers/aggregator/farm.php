@@ -21,6 +21,12 @@ class Farm extends MY_Controller
         $this->data['counties'] = $this->county->dropdown('id','county_name');
         $this->data['username'] = $this->user->get($user_id)->username;
         $this->data['farm'] = $this->farm_detail->get_by('user_id', $user_id);
+        $this->data['farm'] = $farm = $this->farm_detail->get_by('user_id', $user_id);
+        if($farm == null)
+        {
+            $farm = $this->farm_detail->insert(array('user_id' => $user_id));
+            $this->data['farm'] = $this->farm_detail->get($farm);
+        }
     }
     /**
      * List Planted crops | Default: Planted
