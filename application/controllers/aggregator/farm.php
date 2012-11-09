@@ -79,6 +79,7 @@ class Farm extends MY_Controller
             $this->session->set_flashdata('message', 'Oops something went wrong.');
         }
         redirect("{$this->router->directory}{$this->router->class}/crops/" . $user_id );
+        redirect("{$this->router->directory} {$this->router->class}/crops/" . $user_id );
     }
     /**
      * Delete farmer crop
@@ -112,6 +113,7 @@ class Farm extends MY_Controller
             $this->session->set_flashdata('message', 'Oops! Something went wrong.');
         }
         redirect("{$this->router->directory}{$this->router->class}/details/" . $user_id);
+        redirect("{$this->router->directory}{$this->router->class}/details/{$user_id}");
     }
 }
 /* End of file farm.php */
