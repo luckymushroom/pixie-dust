@@ -14,7 +14,7 @@
 
     <!-- Le styles -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <style type="text/css">body { padding-top: 75px;padding-bottom: 40px; }</style>
+    <style type="text/css">body { padding-bottom: 40px; }</style>
     <link href="{base_url}media/css/bootstrap.min.css" rel="stylesheet">
     <link href="{base_url}media/css/site.css" rel="stylesheet">
     <!-- Dark Theme in the works -->
@@ -30,9 +30,13 @@
   </head>
 
   <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
+    <!-- NAVBAR
+    ================================================== -->
+    <!-- Wrap the .navbar in .container to center it on the page and provide easy way to target it with .navbar-wrapper. -->
+    <div class="container navbar-wrapper">
+
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
