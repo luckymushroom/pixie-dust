@@ -1,18 +1,36 @@
-/* CUSTOM STYLES
-    -------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+
+/*
+** Theme Name: Mfarm Admin
+** Theme Author: @mogetutu
+*/
+
+/******************************************************************
+    base styles
+******************************************************************/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700);
 body {
-  background-color: #fff;
-  background-repeat: repeat-x;
-  background-position: 0 40px;
-  background: #FBFBFB url(bg5.png) 0 0 repeat;
+  background: #EEE url(bg5.png) 0 0 repeat;
+  /*background: #EEE url('bg-body-2.png') center top repeat-x;*/
   margin:0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 14px;
+  font-weight: 400;
   line-height: 18px;
   /*color:#333333;*/
-  padding-bottom: 40px;
   color: #5a5a5a;
+}
+
+.wrapper {
+    padding: 25px 20px 20px;
+    background: #FFF;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+       -moz-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
 }
 
 
