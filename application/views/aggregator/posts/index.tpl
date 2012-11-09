@@ -38,9 +38,9 @@
             <td>
                 <ul class="btn-group">
                 {if $post->approved_product_weight}
-                <a class='btn btn-small' href="#"><i class='icon-lock'></i> Approved</a>
+                    <a class='btn btn-small' href="#"><i class='icon-lock'></i> Approved</a>
                 {else}
-                <button type="submit" class="btn btn-small"><i class="icon-ok"></i> Accept</button>
+                    <button type="submit" class="btn btn-small"><i class="icon-ok"></i> Accept</button>
                 {/if}
                 </ul>
             </td>

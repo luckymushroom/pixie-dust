@@ -90,7 +90,11 @@
                                 <li><a class="" href="{site_url('admin/dashboard/')}" title="dashboard here">
                                     <img src="{base_url}media/site/images/top-login.png" alt="Logout" /></a>
                                 </li>
-                                {elseif !$ci->ion_auth->is_admin()}
+                                {elseif $ci->ion_auth->is_buyer()}
+                                <li><a class="" href="{site_url('buyer/dashboard/')}" title="dashboard here">
+                                    <img src="{base_url}media/site/images/top-login.png" alt="Logout" /></a>
+                                </li>
+                                {elseif $ci->ion_auth->is_farmer()}
                                 <li><a class="" href="{site_url('farmer/dashboard/')}" title="dashboard here">
                                     <img src="{base_url}media/site/images/top-login.png" alt="Logout" /></a>
                                 </li>
@@ -134,8 +138,10 @@
                 {if $user_session}
                     {if $ci->ion_auth->is_admin()}
                         <a class='button-helios alt-green' id='homepage' href="{url type="site" url="admin/dashboard"}">
-                    {else}
+                    {elseif $ci->ion_auth->is_farmer()}
                         <a class='button-helios alt-green' id='homepage' href="{url type="site" url="farmer/dashboard"}">
+                    {elseif $ci->ion_auth->is_buyer()}
+                        <a class='button-helios alt-green' id='homepage' href="{url type="site" url="buyer/dashboard"}">
                     {/if}
                         <span>profile</span>
                         </a>

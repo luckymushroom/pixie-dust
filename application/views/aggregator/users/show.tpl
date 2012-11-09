@@ -1,12 +1,13 @@
 <div class="page-header">
     <div class="btn-group pull-right">
-        <a href='{site_url("aggregator/users/{$user_session}")}' class='btn btn-small'><i class='icon-chevron-left'></i> All Profiles</a>
+        <a href='{site_url("aggregator/users/{$user_session}")}' class='btn btn-small'><i class='icon-chevron-left'></i> All Farmers</a>
         <a href="{base_url}aggregator/farm/details/{$seg_four}" class='btn btn-small'><i class='icon-th-large'></i> Farm Details</a>
-        <a href="#" class='btn btn-small'><i class='icon-leaf'></i> Planted</a>
-        <a href="#" class='btn btn-small'>Harvested</a>
+        <a href='{site_url("aggregator/farm/crops/{$farmer->id}")}' class='btn btn-small'><i class='icon-leaf'></i> Planted</a>
+        <a href='{site_url("aggregator/farm/crops/{$farmer->id}/harvested")}' class='btn btn-small'>Harvested</a>
     </div>
     <h2>Profile</h2>
 </div>
+
 <div class="span3">
     {if $farmer->avatar != 'default_avatar.jpg'}
         <img src="{base_url}media/avatars/{$farmer->avatar}" alt="{$farmer->avatar}" class="thumbnail">
