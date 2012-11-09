@@ -12,9 +12,13 @@
     <li class="span3">
         <div class="thumbnail box-shadow">
         <h4>New Farmers ({count($farmers)})</h4>
+        <ul>
         {foreach $farmers as $farmer}
-        <label class='label'>{$farmer->username}</label>
+            <li><label class='label'>{$farmer->username}</label></li>
         {/foreach}
+        </ul>
+
+        <br>
         <div class='btn-group'>
             <a href='{site_url("aggregator/users/{$user_session}")}' class='btn btn-small'>Go To Farmers</a>
         </div>
@@ -24,11 +28,17 @@
     <li class="span3">
         <div class="thumbnail box-shadow">
         <h4>Recent Posts ({count($posts)})</h4>
+        <ul>
         {foreach $posts as $post}
-        <label class='label'>{$post->product_name} - {$post->product_weight} {$post->weight_unit}</label>
+            <li>
+                <label class='label'>{$post->product_name} - {$post->product_weight} {$post->weight_unit}</label>
+            </li>
         {/foreach}
+        </ul>
+
+        <br>
         <div class='btn-group'>
-            <a href="#" title="" class='btn btn-small'>Go To Posts</a>
+            <a href='{site_url("aggregator/posts")}' title="" class='btn btn-small'>Go To Posts</a>
         </div>
         </div>
     </li>
